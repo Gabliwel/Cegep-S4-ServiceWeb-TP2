@@ -4,19 +4,19 @@ Ceci est le travail pratique 2 du cours de Services Web du Cégep de Sainte-Foy.
 
 # Coéquipiers
 
-1. [nom coéquipier1]
-2. [nom coéquipier2]
+1. [Gabriel Bertrand]
+2. [Zachary Gingras]
 
 # URL de déploiement de chaque coéquipier sur Héroku
 
-1. [nom coéquipier1]: [url coéquipier1]
-2. [nom coéquipier2]: [url coéquipier2]
+1. [Gabriel Bertrand]: [url coéquipier1]
+2. [Zachary Gingras]: [url coéquipier2]
 
 # Certification
 ## Contribution
 Nous, les membres de l’équipe, certifions que :
-- [nom coéquipier1] a contribué au travail pratique dans une proportion de [pourcentage].
-- [nom coéquipier2] a contribué au travail pratique dans une proportion de [pourcentage].
+- [Gabriel Bertrand] a contribué au travail pratique dans une proportion de [pourcentage].
+- [Zachary Gingras] a contribué au travail pratique dans une proportion de [pourcentage].
 ## Exemples de proportion
 | Situation                                                             | Coéquipier **Foo** | Coéquipier **Bar** |
 |-----------------------------------------------------------------------|--------------------|--------------------|
