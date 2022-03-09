@@ -2,14 +2,27 @@ package ca.csfoy.servicesweb.camarchedoc.domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+
+@Entity
 public class Trail {
 
+    @Id
     private String id;
+    @Column(length = 50, nullable = false)
     private String name;
+    @Column(length = 50, nullable = false)
     private String description;
+    @Column(length = 50, nullable = false)
     private String city;
+    @Enumerated
     private TrailDifficulty difficulty;
+    @Column(nullable = false)
     private LocalDate openingDate;
+    @Column(nullable = true)
     private LocalDate lastMaintenanceDate;
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {

@@ -3,13 +3,27 @@ package ca.csfoy.servicesweb.camarchedoc.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Event {
 
+    @Id
     private String id;
+    @Column(length = 50, nullable = false)
     private String name;
+    @Column(length = 50, nullable = false)
     private String description;
+    @Column(nullable = false)
     private LocalDate startDate;
+    @OneToOne
+    @JoinColumn(name = "trail") 
     private Trail trail;
+    @Column(length = 50, nullable = false)
     private String organizer;
 
     public Event(String name, String description, LocalDate startDate, Trail trail, String organizer) {

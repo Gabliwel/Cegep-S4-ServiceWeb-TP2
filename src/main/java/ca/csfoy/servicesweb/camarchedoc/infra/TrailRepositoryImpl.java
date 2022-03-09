@@ -18,8 +18,8 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public Trail getById(String id) {
-        if (trailDao.doesExist(id)) {
-            return trailDao.selectById(id);
+        if (trailDao.findById(id).isPresent()) {
+            return trailDao.getById(id);
         } else {
             throw new ObjectNotFoundException("The trail with id (" + id.toString() + ") does not exist.");
         }
@@ -27,13 +27,13 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public List<Trail> getAll() {
-        return trailDao.selectAll();
+        return trailDao.findAll();
     }
 
     @Override
     public Trail create(Trail trail) {
-        if (!trailDao.doesExist(trail.getName(), trail.getCity())) {
-            return trailDao.insert(trail);
+        if (trailDao.doesExist(trail.getName(), trail.getCity()).isEmpty()) {
+            return trailDao.save(trail);
         } else {
             throw new ObjectAlreadyExistsException("A trail named \'" + trail + "\' in city \'" + trail.getCity() + "\' already exists.");
         }
@@ -41,8 +41,8 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public void modify(String id, Trail trail) {
-        if (trailDao.doesExist(id)) {
-            trailDao.update(id, trail);
+        if (!trailDao.findById(id).isEmpty()) {
+            trailDao.save(trail);
         } else {
             throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist, and therefore cannot be modified.");
         }
@@ -50,8 +50,9 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public void delete(String id) {
-        if (trailDao.doesExist(id)) {
-            trailDao.delete(id);
+        if (!trailDao.findById(id).isEmpty()) {
+            Trail t = trailDao.getById(id);
+            trailDao.delete(t);
         } else {
             throw new ObjectNotFoundException("The trail with id (" + id.toString() + ") does not exist, and therefore cannot be deleted.");
         }
