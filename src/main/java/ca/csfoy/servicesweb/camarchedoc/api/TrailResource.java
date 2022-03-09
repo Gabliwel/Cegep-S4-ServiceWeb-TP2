@@ -32,6 +32,7 @@ public interface TrailResource {
     String PATH_WITH_ID = "/{" + PATH_VARIABLE_ID + "}";
     String QUERY_PARAM_CITY = "city";
     String QUERY_PARAM_DIFFICULTY = "difficulty";
+    String READY_PATH = "/ready" + PATH_WITH_ID;
 
     @Operation(summary = "Obtient un sentier de marche par son identifiant.")
     @ApiResponses(value = { @ApiResponse(responseCode = "200",
@@ -85,4 +86,12 @@ public interface TrailResource {
     @DeleteMapping(TrailResource.PATH_WITH_ID)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(@PathVariable(TrailResource.PATH_VARIABLE_ID) String id);
+    
+    @Operation(summary = "Modifie un sentier de marche existant pour le rendre prêt.")
+    @ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Sentier créé", content = @Content), @ApiResponse(responseCode = "400",
+            description = "Sentier invalide",
+            content = @Content), @ApiResponse(responseCode = "404", description = "Sentier introuvable", content = @Content) })
+    @PutMapping(TrailResource.READY_PATH)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void updateToReady(@PathVariable(TrailResource.PATH_VARIABLE_ID) String id);
 }

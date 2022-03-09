@@ -10,4 +10,6 @@ public interface TrailDao extends Dao<Trail, String> {
     boolean doesExist(String name, String city);
 
     List<Trail> search(SearchTrailCriteria criteria);
+    
+    void setTrailReady(String id);
 }

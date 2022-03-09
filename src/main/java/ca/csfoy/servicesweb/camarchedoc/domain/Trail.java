@@ -11,6 +11,7 @@ public class Trail {
     private TrailDifficulty difficulty;
     private LocalDate openingDate;
     private LocalDate lastMaintenanceDate;
+    private TrailStatus status;
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {
         this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now());
@@ -32,6 +33,7 @@ public class Trail {
         this.difficulty = difficulty;
         this.openingDate = openingDate;
         this.lastMaintenanceDate = lastMaintenanceDate;
+        this.status = TrailStatus.IN_PREPARATION;
     }
 
     public String getId() {
@@ -60,5 +62,13 @@ public class Trail {
 
     public LocalDate getLastMaintenanceDate() {
         return lastMaintenanceDate;
+    }
+    
+    public TrailStatus getStatus() {
+        return status;
+    }
+    
+    public void setTrailready() {
+        this.status = TrailStatus.READY;
     }
 }

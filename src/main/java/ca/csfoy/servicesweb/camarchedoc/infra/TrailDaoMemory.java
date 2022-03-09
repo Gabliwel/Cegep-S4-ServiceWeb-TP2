@@ -60,4 +60,9 @@ public class TrailDaoMemory implements TrailDao {
     public void delete(String id) {
         trails.remove(id);
     }
+
+    @Override
+    public void setTrailReady(String id) {
+        trails.get(id).setTrailready();
+    }
 }

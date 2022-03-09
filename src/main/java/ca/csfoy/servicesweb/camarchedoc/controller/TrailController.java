@@ -50,4 +50,9 @@ public class TrailController implements TrailResource {
     public void delete(String id) {
         repository.delete(id);
     }
+    
+    @Override
+    public void updateToReady(String id) {
+        repository.setTrailToReady(id);
+    }
 }

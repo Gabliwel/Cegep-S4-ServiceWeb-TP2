@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 
 public class TrailConverter {
 
@@ -18,7 +19,7 @@ public class TrailConverter {
 
     public TrailDto convertToTrailDtoFrom(Trail trail) {
         return new TrailDto(trail.getId(), trail.getName(), trail.getDescription(), 
-                trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail.getLastMaintenanceDate());
+                trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail.getLastMaintenanceDate(), trail.getStatus());
     }
 
     public List<TrailDto> convertTrailListFrom(List<Trail> trails) {
