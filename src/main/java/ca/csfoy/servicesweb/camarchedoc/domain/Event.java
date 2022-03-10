@@ -21,10 +21,12 @@ public class Event {
     @Column(nullable = false)
     private LocalDate startDate;
     @OneToOne
-    @JoinColumn(name = "trail") 
+    @JoinColumn(name = "TRAIL") 
     private Trail trail;
     @Column(length = 50, nullable = false)
     private String organizer;
+    
+    public Event(){}
 
     public Event(String name, String description, LocalDate startDate, Trail trail, String organizer) {
         this.id = IdentifiantGenerator.getNextIdAsString();

@@ -57,7 +57,7 @@ public interface TrailResource {
             content = { @Content(mediaType = "application/json", schema = @Schema(implementation = TrailDto.class)) }) })
     @GetMapping(TrailResource.SEARCH_PATH)
     @ResponseStatus(HttpStatus.OK)
-    List<TrailDto> search(@RequestParam(value = QUERY_PARAM_CITY, required = false) String city,
+    List<SearchTrailDto> search(@RequestParam(value = QUERY_PARAM_CITY, required = false) String city,
             @RequestParam(value = QUERY_PARAM_DIFFICULTY, required = false) TrailDifficulty difficulty);
 
     @Operation(summary = "Crée un nouveau sentier de marche avec les informations données.")

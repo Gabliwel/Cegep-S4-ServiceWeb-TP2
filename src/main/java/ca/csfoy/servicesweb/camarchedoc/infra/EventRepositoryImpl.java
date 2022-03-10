@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
+import java.util.Optional;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
@@ -19,10 +20,10 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event getById(String id) {
-        Event event = eventDao.getById(id);
+        Optional<Event> event = eventDao.findById(id);
 
-        if (event != null) {
-            return event;
+        if (event.isPresent()) {
+            return event.get();
         } else {
             throw new ObjectNotFoundException("The event with id (" + id + ") does not exist.");
         }
@@ -49,7 +50,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void modify(String id, Event event) {
-        if (eventDao.findById(id).isEmpty()) {
+        if (!eventDao.findById(id).isEmpty()) {
             eventDao.save(event);
         } else {
             throw new ObjectNotFoundException("The event with id (" + id + ") does not exist, and therefore cannot be modified.");

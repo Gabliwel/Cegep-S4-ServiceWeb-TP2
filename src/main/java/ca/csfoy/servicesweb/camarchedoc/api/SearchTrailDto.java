@@ -1,13 +1,15 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
+import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+
 public class SearchTrailDto {
 
-    public final Integer id;
+    public final String id;
     public final String name;
     public final String city;
-    public final Integer difficulty;
+    public final TrailDifficulty difficulty;
 
-    public SearchTrailDto(Integer id, String name, String city, Integer difficulty) {
+    public SearchTrailDto(String id, String name, String city, TrailDifficulty difficulty) {
         this.id = id;
         this.name = name;
         this.city = city;

@@ -37,7 +37,8 @@ class EventRepositoryImplTest {
     @Test
     void whenGetByIdWithExistingIdThenEventWithCorrespondingIdIsReturned() {
         Event event = Mockito.mock(Event.class);
-        Mockito.when(eventDao.getById(ANY_ID)).thenReturn(event);
+        Optional<Event> lst = Optional.of(event);
+        Mockito.when(eventDao.findById(ANY_ID)).thenReturn(lst);
 
         Event eventReturned = repo.getById(ANY_ID);
 
@@ -46,7 +47,8 @@ class EventRepositoryImplTest {
 
     @Test
     void whenGetByIdWithNonExistingIdThenEventWithCorrespondingIdIsReturned() {
-        Mockito.when(eventDao.getById(ANY_ID)).thenReturn(null);
+        Optional<Event> lst = Optional.empty();
+        Mockito.when(eventDao.findById(ANY_ID)).thenReturn(lst);
 
         Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.getById(ANY_ID));
     }
@@ -104,7 +106,7 @@ class EventRepositoryImplTest {
     @Test
     void whenModifyExistingEventThenEventIsModified() {
         Event event1 = Mockito.mock(Event.class);
-        Optional<Event> lst = Optional.empty();
+        Optional<Event> lst = Optional.of(event1);
         Mockito.when(eventDao.findById(ANY_ID)).thenReturn(lst);
 
         repo.modify(ANY_ID, event1);
@@ -115,7 +117,7 @@ class EventRepositoryImplTest {
     @Test
     void whenModifyNonExistingEventThenEventIsNotModified() {
         Event event1 = Mockito.mock(Event.class);
-        Optional<Event> lst = Optional.of(event1);
+        Optional<Event> lst = Optional.empty();
         Mockito.when(eventDao.findById(ANY_ID)).thenReturn(lst);
 
         Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.modify(ANY_ID, event1));

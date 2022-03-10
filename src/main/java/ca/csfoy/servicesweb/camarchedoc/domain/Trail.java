@@ -24,6 +24,8 @@ public class Trail {
     private LocalDate openingDate;
     @Column(nullable = true)
     private LocalDate lastMaintenanceDate;
+    
+    public Trail(){}
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {
         this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now());

@@ -59,7 +59,19 @@ public class TrailRepositoryImpl implements TrailRepository {
     }
 
     @Override
-    public List<Trail> getBySearchCriteria(SearchTrailCriteria criteria) {        
-        return trailDao.search(criteria);
+    public List<Trail> getBySearchCriteria(SearchTrailCriteria criteria) { 
+        if (criteria.getCity() != "") {
+            if(criteria.getDifficulty() != null) {
+                return trailDao.fullSearch(criteria.getCity(), criteria.getDifficulty());
+            } else {
+                return trailDao.searchOnlyWithCity(criteria.getCity());
+            }
+        } else {
+            if(criteria.getDifficulty() != null) {
+                return trailDao.searchOnlyWithDifficulty(criteria.getDifficulty());
+            } else {
+                return this.getAll();
+            }
+        }
     }
 }
