@@ -15,7 +15,7 @@ class TrailConverterTest {
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenTrailCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
-        TrailDto dto = new TrailDto(null, "name", "description", "city", TrailDifficulty.BEGINNER, null, null);
+        TrailDto dto = new TrailDto(null, "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null);
         TrailConverter converter = new TrailConverter();
 
         Trail trail = converter.convertToTrailAtCreationFrom(dto);
@@ -29,7 +29,7 @@ class TrailConverterTest {
 
     @Test
     void whenConvertingDtoWithIdThenTrailCreatedWithGivenFieldsIncludingId() {
-        TrailDto dto = new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null);
+        TrailDto dto = new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null);
         TrailConverter converter = new TrailConverter();
 
         Trail trail = converter.convertToTrailFrom(dto);

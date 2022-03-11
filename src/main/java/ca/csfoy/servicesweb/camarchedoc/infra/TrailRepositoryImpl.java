@@ -2,6 +2,7 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
 
+import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.SearchTrailCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
@@ -60,5 +61,14 @@ public class TrailRepositoryImpl implements TrailRepository {
     @Override
     public List<Trail> getBySearchCriteria(SearchTrailCriteria criteria) {        
         return trailDao.search(criteria);
+    }
+
+    @Override
+    public void setTrailToReady(String id) {
+        if (trailDao.doesExist(id)) {
+            trailDao.setTrailReady(id);
+        } else {
+            throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist, and therefore cannot be modified.");
+        }
     }
 }
