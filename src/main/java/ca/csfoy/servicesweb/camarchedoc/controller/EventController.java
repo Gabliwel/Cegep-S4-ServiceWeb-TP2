@@ -1,5 +1,6 @@
 package ca.csfoy.servicesweb.camarchedoc.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
@@ -7,6 +8,7 @@ import ca.csfoy.servicesweb.camarchedoc.api.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.SearchEventCriteria;
 
 public class EventController implements EventResource {
 
@@ -42,5 +44,10 @@ public class EventController implements EventResource {
     @Override
     public void delete(String id) {
         repository.delete(id);
+    }
+
+    @Override
+    public List<EventDto> search(String trailId, LocalDate startDate) {
+        return converter.convertEventListFrom(repository.getBySearchCriteria(new SearchEventCriteria(trailId, startDate)));
     }
 }
