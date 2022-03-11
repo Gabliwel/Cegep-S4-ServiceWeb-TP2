@@ -3,6 +3,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import ca.csfoy.servicesweb.camarchedoc.api.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
@@ -21,8 +22,16 @@ public class TrailConverter {
         return new TrailDto(trail.getId(), trail.getName(), trail.getDescription(), 
                 trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail.getLastMaintenanceDate(), trail.getStatus());
     }
+    
+    public SearchTrailDto convertToSearchTrailDtoFrom(Trail trail) {
+        return new SearchTrailDto(trail.getId(), trail.getName(), trail.getCity(), trail.getDifficulty());
+    }
 
     public List<TrailDto> convertTrailListFrom(List<Trail> trails) {
         return trails.stream().map(this::convertToTrailDtoFrom).collect(Collectors.toList());
+    }
+
+    public List<SearchTrailDto> convertSearchTrailListFrom(List<Trail> trails) {
+        return trails.stream().map(this::convertToSearchTrailDtoFrom).collect(Collectors.toList());
     }
 }

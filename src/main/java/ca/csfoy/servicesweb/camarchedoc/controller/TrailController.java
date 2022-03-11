@@ -2,6 +2,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
+import ca.csfoy.servicesweb.camarchedoc.api.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
@@ -31,8 +32,8 @@ public class TrailController implements TrailResource {
     }
 
     @Override
-    public List<TrailDto> search(String city, TrailDifficulty difficulty) {
-        return converter.convertTrailListFrom(repository.getBySearchCriteria(new SearchTrailCriteria(city, difficulty)));
+    public List<SearchTrailDto> search(String city, TrailDifficulty difficulty) {
+        return converter.convertSearchTrailListFrom(repository.getBySearchCriteria(new SearchTrailCriteria(city, difficulty)));
     }
 
     @Override
