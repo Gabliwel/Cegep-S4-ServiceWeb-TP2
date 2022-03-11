@@ -1,5 +1,6 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
 import io.swagger.v3.oas.annotations.Operation;
 
 @RequestMapping(value = EventResource.RESOURCE_PATH, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 public interface EventResource {
 
     String RESOURCE_PATH = "/events";
+    String SEARCH_PATH = "/search";
     String PATH_VARIABLE_ID = "id";
     String PATH_WITH_ID = "/{" + PATH_VARIABLE_ID + "}";
 
@@ -48,4 +49,9 @@ public interface EventResource {
     @DeleteMapping(EventResource.PATH_WITH_ID)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(@PathVariable(EventResource.PATH_VARIABLE_ID) String id);
+    
+    @Operation(summary = "Obtient tout les évenemnts selon le sentier et/ou la date.")
+    @GetMapping(EventResource.SEARCH_PATH)
+    @ResponseStatus(HttpStatus.OK)
+    List<EventDto> search(String trailId, LocalDate startDate);
 }
