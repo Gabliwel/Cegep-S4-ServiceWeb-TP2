@@ -37,8 +37,8 @@ public class EventRepositoryImpl implements EventRepository {
     @Override
     public Event create(Event event) {
         String id = event.getTrailId();
-        if (!eventDao.doesExist(event.getStartDate(), id).isEmpty()) {
-            if (trailDao.findById(id).isEmpty()) {
+        if (eventDao.doesExist(event.getStartDate(), id).isEmpty()) {
+            if (!trailDao.findById(id).isEmpty()) {
                 return eventDao.save(event);
             } else {
                 throw new ObjectNotFoundException("The trail for this event (id:" + id + ") does not exist.");
