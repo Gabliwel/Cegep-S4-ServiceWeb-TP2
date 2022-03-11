@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
+import java.util.Optional;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
@@ -19,10 +20,10 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public Event getById(String id) {
-        Event event = eventDao.selectById(id);
+        Optional<Event> event = eventDao.findById(id);
 
-        if (event != null) {
-            return event;
+        if (event.isPresent()) {
+            return event.get();
         } else {
             throw new ObjectNotFoundException("The event with id (" + id + ") does not exist.");
         }
@@ -30,15 +31,15 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public List<Event> getAll() {
-        return eventDao.selectAll();
+        return eventDao.findAll();
     }
 
     @Override
     public Event create(Event event) {
         String id = event.getTrailId();
-        if (!eventDao.doesExist(event.getStartDate(), id)) {
-            if (trailDao.doesExist(id)) {
-                return eventDao.insert(event);
+        if (eventDao.doesExist(event.getStartDate(), id).isEmpty()) {
+            if (!trailDao.findById(id).isEmpty()) {
+                return eventDao.save(event);
             } else {
                 throw new ObjectNotFoundException("The trail for this event (id:" + id + ") does not exist.");
             }
@@ -49,8 +50,8 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void modify(String id, Event event) {
-        if (eventDao.doesExist(id)) {
-            eventDao.update(id, event);
+        if (!eventDao.findById(id).isEmpty()) {
+            eventDao.save(event);
         } else {
             throw new ObjectNotFoundException("The event with id (" + id + ") does not exist, and therefore cannot be modified.");
         }
@@ -58,8 +59,9 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public void delete(String id) {
-        if (eventDao.doesExist(id)) {
-            eventDao.delete(id);
+        if (eventDao.findById(id).isPresent()) {
+            Event e = eventDao.getById(id);
+            eventDao.delete(e);
         } else {
             throw new ObjectNotFoundException("The event with id (" + id + ") does not exist, and therefore cannot be deleted.");
         }
