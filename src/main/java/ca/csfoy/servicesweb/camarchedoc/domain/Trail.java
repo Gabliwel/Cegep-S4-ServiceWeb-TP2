@@ -30,18 +30,18 @@ public class Trail {
     public Trail(){}
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {
-        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now());
+        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now(), TrailStatus.IN_PREPARATION);
     }
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate) {
-        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, openingDate, lastMaintenanceDate);
+        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, openingDate, lastMaintenanceDate, TrailStatus.IN_PREPARATION);
     }
 
-    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty) {
-        this(id, name, description, city, difficulty, LocalDate.now(), LocalDate.now());
+    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, TrailStatus status) {
+        this(id, name, description, city, difficulty, LocalDate.now(), LocalDate.now(), status);
     }    
 
-    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate) {
+    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate, TrailStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,7 +49,7 @@ public class Trail {
         this.difficulty = difficulty;
         this.openingDate = openingDate;
         this.lastMaintenanceDate = lastMaintenanceDate;
-        this.status = TrailStatus.IN_PREPARATION;
+        this.status = status;
     }
 
     public String getId() {

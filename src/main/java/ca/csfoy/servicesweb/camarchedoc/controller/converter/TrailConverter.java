@@ -15,7 +15,7 @@ public class TrailConverter {
     }
 
     public Trail convertToTrailFrom(TrailDto dto) {
-        return new Trail(dto.id, dto.name, dto.description, dto.city, dto.difficulty, dto.openingDate, dto.lastMaintenanceDate);
+        return new Trail(dto.id, dto.name, dto.description, dto.city, dto.difficulty, dto.openingDate, dto.lastMaintenanceDate, dto.status);
     }
 
     public TrailDto convertToTrailDtoFrom(Trail trail) {

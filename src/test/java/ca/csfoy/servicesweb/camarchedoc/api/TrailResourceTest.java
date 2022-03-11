@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -23,7 +24,7 @@ public class TrailResourceTest {
     
     private static final String PATH_TO_TEST = "/trails";
     
-    private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31));
+    private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY);
 
     @Autowired
     private MockMvc mockMvc;
@@ -48,7 +49,7 @@ public class TrailResourceTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                   .contentType("application/json")
-                  .content(objectMapper.writeValueAsString(new TrailDto("t3", "name3", "a", "city3", TrailDifficulty.FAMILY, LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1)))))
+                  .content(objectMapper.writeValueAsString(new TrailDto("t3", "name3", "a", "city3", TrailDifficulty.FAMILY, LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.READY))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();     
 

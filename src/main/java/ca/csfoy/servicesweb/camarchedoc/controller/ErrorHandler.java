@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import ca.csfoy.servicesweb.camarchedoc.api.ErrorMessageDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
 
 @ControllerAdvice
 @ResponseBody
@@ -30,6 +31,17 @@ public class ErrorHandler {
                 + ex.getMessage() 
                 + ExceptionUtils.getStackTrace(ex));
         return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.NOT_FOUND.toString(), errorIdentifier.toString(), ex.getMessage());
+    }
+    
+    @ExceptionHandler(ObjetAlreadySetToDesiredValue.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorMessageDto resourceAlreadySetToDesiredValue(ObjetAlreadySetToDesiredValue ex) {
+        String errorIdentifier = ex.hashCode() + "";
+        logger.error(LocalDateTime.now().toString() 
+                + " [" + errorIdentifier + "]: " 
+                + ex.getMessage() 
+                + ExceptionUtils.getStackTrace(ex));
+        return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.BAD_REQUEST.toString(), errorIdentifier.toString(), ex.getMessage());
     }
     
     @ExceptionHandler(ObjectAlreadyExistsException.class)
