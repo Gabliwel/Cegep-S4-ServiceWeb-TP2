@@ -70,7 +70,7 @@ class EventRepositoryImplTest {
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
         Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
         List<Event> lst = List.of();
-        Mockito.when(eventDao.doesExist(event1.getStartDate(), ANY_ID)).thenReturn(lst);
+        Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
         Optional<Trail> lst2 = Optional.of(Mockito.mock(Trail.class));;
         Mockito.when(trailDao.findById(ANY_ID)).thenReturn(lst2);
 
@@ -85,7 +85,7 @@ class EventRepositoryImplTest {
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
         Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
         List<Event> lst = List.of();
-        Mockito.when(eventDao.doesExist(event1.getStartDate(), ANY_ID)).thenReturn(lst);
+        Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
         Optional<Trail> lst2 = Optional.empty();
         Mockito.when(trailDao.findById(ANY_ID)).thenReturn(lst2);
 
@@ -98,7 +98,7 @@ class EventRepositoryImplTest {
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
         Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
         List<Event> lst = List.of(Mockito.mock(Event.class));
-        Mockito.when(eventDao.doesExist(event1.getStartDate(), ANY_ID)).thenReturn(lst);
+        Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
 
         Assertions.assertThrows(ObjectAlreadyExistsException.class, () -> repo.create(event1));
     }
