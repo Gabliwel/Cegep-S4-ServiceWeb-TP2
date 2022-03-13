@@ -9,8 +9,8 @@ Ceci est le travail pratique 2 du cours de Services Web du Cégep de Sainte-Foy.
 
 # URL de déploiement de chaque coéquipier sur Héroku
 
-1. [Gabriel Bertrand]: [url coéquipier1]
-2. [Zachary Gingras]: [url coéquipier2]
+1. [Gabriel Bertrand]: [https://csfoy-services-web-tp2.herokuapp.com/]
+2. [Zachary Gingras]: [non fonctionnel, comme parlé en classe]
 
 # Certification
 ## Contribution
