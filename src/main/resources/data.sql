@@ -14,4 +14,4 @@ INSERT INTO EVENT(ID, DESCRIPTION, NAME, ORGANIZER, START_DATE, TRAIL)
 VALUES('2', 'un endroit incroyaaable', 'event de bob2', 'bob2', parseDatetime('2022-01-02', 'yyyy-mm-dd'), '2');
 
 INSERT INTO EVENT(ID, DESCRIPTION, NAME, ORGANIZER, START_DATE, TRAIL)
-VALUES('3', 'jsp', 'event de bob2', 'bob2', parseDatetime('2022-01-02', 'yyyy-mm-dd'), '3');
+VALUES('3', 'jsp', 'event de bob2', 'bob2', parseDatetime('2022-03-14', 'yyyy-mm-dd'), '3');
