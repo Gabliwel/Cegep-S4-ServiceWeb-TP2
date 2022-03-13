@@ -23,6 +23,8 @@ import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 public class TrailResourceTest {
     
     private static final String PATH_TO_TEST = "/trails";
+    private static final String GET_ID = "1";
+    private static final String PATH_TO_PUBLISH = PATH_TO_TEST + "/ready" + "/" + GET_ID + "/";
     
     private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY);
 
@@ -68,5 +70,29 @@ public class TrailResourceTest {
 
         String responseAsString = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseAsString.contains("already exist"));
+    }
+    
+    @Test
+    void validPreparationPublishTrailReturn204NoContent() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .put(PATH_TO_PUBLISH)
+                  .contentType("application/json"))
+                  .andExpect(MockMvcResultMatchers.status().isBadRequest())           
+                  .andReturn();     
+
+        String responseAsString = result.getResponse().getContentAsString();
+        Assertions.assertTrue(responseAsString.contains("already set to ready"));
+    }
+    
+    @Test
+    void validReadyPublishTrailReturn400BadRequest() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .put(PATH_TO_PUBLISH)
+                  .contentType("application/json"))
+                  .andExpect(MockMvcResultMatchers.status().isNoContent())           
+                  .andReturn();     
+
+        String responseAsString = result.getResponse().getContentAsString();
+        Assertions.assertEquals("", responseAsString);
     }
 }

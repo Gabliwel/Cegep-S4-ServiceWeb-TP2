@@ -23,7 +23,8 @@ import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException
 class EventRepositoryImplTest {
 
     public static final String ANY_ID = "1";
-    public static final LocalDate ANY_DATE = LocalDate.now();
+    public static final LocalDate ANY_AFTER_DATE = LocalDate.now().plusDays(1);
+    public static final LocalDate ANY_BEFORE_DATE = LocalDate.now().minusDays(1);
 
     @Mock
     private EventDao eventDao;
@@ -54,21 +55,35 @@ class EventRepositoryImplTest {
     }
 
     @Test
-    void whenGetAllEventsThenAllEventsReturned() {
+    void whenGetAllEventsThenAllEventsAfterCurrentDateReturned() {
         Event event1 = Mockito.mock(Event.class);
         Event event2 = Mockito.mock(Event.class);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_AFTER_DATE);
         Mockito.when(eventDao.findAll()).thenReturn(List.of(event1, event2));
 
         List<Event> events = repo.getAll();
 
         Assertions.assertEquals(List.of(event1, event2), events);
     }
+    
+    void whenGetAllEventsThenAllEventsBeforeCurrentDateNotReturned() {
+        Event event1 = Mockito.mock(Event.class);
+        Event event2 = Mockito.mock(Event.class);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        Mockito.when(eventDao.findAll()).thenReturn(List.of(event1, event2));
+
+        List<Event> events = repo.getAll();
+
+        Assertions.assertNotEquals(List.of(), events);
+    }
 
     @Test
     void whenCreateEventWithExistingTrailThenEventIsCreated() {
         Event event1 = Mockito.mock(Event.class);
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
-        Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
         List<Event> lst = List.of();
         Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
         Optional<Trail> lst2 = Optional.of(Mockito.mock(Trail.class));;
@@ -83,7 +98,7 @@ class EventRepositoryImplTest {
     void whenCreateEventWithNonExistingTrailThenEventIsNotCreated() {
         Event event1 = Mockito.mock(Event.class);
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
-        Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
         List<Event> lst = List.of();
         Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
         Optional<Trail> lst2 = Optional.empty();
@@ -96,7 +111,7 @@ class EventRepositoryImplTest {
     void whenCreateEventWithExistingTrailAndDateInRepoThenEventIsNotCreated() {
         Event event1 = Mockito.mock(Event.class);
         Mockito.when(event1.getTrailId()).thenReturn(ANY_ID);
-        Mockito.when(event1.getStartDate()).thenReturn(ANY_DATE);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
         List<Event> lst = List.of(Mockito.mock(Event.class));
         Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
 

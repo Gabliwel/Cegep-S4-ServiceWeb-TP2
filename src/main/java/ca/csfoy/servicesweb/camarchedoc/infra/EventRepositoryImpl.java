@@ -1,5 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.infra;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +34,16 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public List<Event> getAll() {
-        return eventDao.findAll();
+        List<Event> notPassedEvents = new ArrayList<Event>();
+        List<Event> eventsDaos = eventDao.findAll();
+        for (Event eventDao : eventsDaos) {
+            if(eventDao.getStartDate().isAfter(LocalDate.now()))
+             {
+                notPassedEvents.add(eventDao);
+            }
+        }
+        
+        return notPassedEvents;
     }
 
     @Override
