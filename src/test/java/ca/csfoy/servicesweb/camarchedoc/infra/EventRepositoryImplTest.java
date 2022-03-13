@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.SearchEventCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
@@ -58,13 +59,15 @@ class EventRepositoryImplTest {
     void whenGetAllEventsThenAllEventsAfterCurrentDateReturned() {
         Event event1 = Mockito.mock(Event.class);
         Event event2 = Mockito.mock(Event.class);
+        List<Event> lst = List.of(event1, event2);
         Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
         Mockito.when(event2.getStartDate()).thenReturn(ANY_AFTER_DATE);
-        Mockito.when(eventDao.findAll()).thenReturn(List.of(event1, event2));
+        Mockito.when(eventDao.findAll()).thenReturn(lst);
 
         List<Event> events = repo.getAll();
 
-        Assertions.assertEquals(List.of(event1, event2), events);
+        Mockito.verify(eventDao).findAll();
+        Assertions.assertEquals(lst, events);
     }
     
     void whenGetAllEventsThenAllEventsBeforeCurrentDateNotReturned() {
@@ -76,7 +79,8 @@ class EventRepositoryImplTest {
 
         List<Event> events = repo.getAll();
 
-        Assertions.assertNotEquals(List.of(), events);
+        Mockito.verify(eventDao).findAll();
+        Assertions.assertEquals(0, events.size());
     }
 
     @Test
@@ -157,4 +161,74 @@ class EventRepositoryImplTest {
 
         Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.delete(ANY_ID));
     }
+    
+    @Test
+    void whenSearchWithNotingReturnsEveryNotPassedEvents() {
+        SearchEventCriteria criteria = new SearchEventCriteria("", null);
+        Event event1 = Mockito.mock(Event.class);
+        Event event2 = Mockito.mock(Event.class);
+        List<Event> lst = List.of(event1, event2);
+        Mockito.when(eventDao.findAll()).thenReturn(lst);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        
+        List<Event> result = repo.getBySearchCriteria(criteria);
+        
+        Mockito.verify(eventDao).findAll();
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertSame(event1, result.get(0));
+    }
+    
+    @Test
+    void whenSearchWithOnlyTrailIdReturnsNotPassedEvents() {
+        SearchEventCriteria criteria = new SearchEventCriteria("a", null);
+        Event event1 = Mockito.mock(Event.class);
+        Event event2 = Mockito.mock(Event.class);
+        List<Event> lst = List.of(event1, event2);
+        Mockito.when(eventDao.searchOnlyWithTrailId(criteria.getTrailId())).thenReturn(lst);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        
+        List<Event> result = repo.getBySearchCriteria(criteria);
+        
+        Mockito.verify(eventDao).searchOnlyWithTrailId(criteria.getTrailId());
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertSame(event1, result.get(0));
+    }
+    
+    @Test
+    void whenSearchWithOnlyStartDatedReturnsNotPassedEvents() {
+        SearchEventCriteria criteria = new SearchEventCriteria("", LocalDate.now());
+        Event event1 = Mockito.mock(Event.class);
+        Event event2 = Mockito.mock(Event.class);
+        List<Event> lst = List.of(event1, event2);
+        Mockito.when(eventDao.searchOnlyWithStartDate(criteria.getStartDate())).thenReturn(lst);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        
+        List<Event> result = repo.getBySearchCriteria(criteria);
+        
+        Mockito.verify(eventDao).searchOnlyWithStartDate(criteria.getStartDate());
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertSame(event1, result.get(0));
+    }
+    
+    @Test
+    void whenSearchWithStartDatedAndTrailIdReturnsNotPassedEvents() {
+        SearchEventCriteria criteria = new SearchEventCriteria("a", LocalDate.now());
+        Event event1 = Mockito.mock(Event.class);
+        Event event2 = Mockito.mock(Event.class);
+        List<Event> lst = List.of(event1, event2);
+        Mockito.when(eventDao.searchAndWithDateAndTrailId(criteria.getStartDate(), criteria.getTrailId())).thenReturn(lst);
+        Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
+        Mockito.when(event2.getStartDate()).thenReturn(ANY_BEFORE_DATE);
+        
+        List<Event> result = repo.getBySearchCriteria(criteria);
+        
+        Mockito.verify(eventDao).searchAndWithDateAndTrailId(criteria.getStartDate(), criteria.getTrailId());
+        Assertions.assertEquals(1, result.size());
+        Assertions.assertSame(event1, result.get(0));
+    }
 }
+
+

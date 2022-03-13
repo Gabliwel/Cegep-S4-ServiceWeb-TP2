@@ -35,11 +35,11 @@ public class EventRepositoryImpl implements EventRepository {
     @Override
     public List<Event> getAll() {
         List<Event> notPassedEvents = new ArrayList<Event>();
-        List<Event> eventsDaos = eventDao.findAll();
-        for (Event eventDao : eventsDaos) {
-            if(eventDao.getStartDate().isAfter(LocalDate.now()))
+        List<Event> events = eventDao.findAll();
+        for (Event event : events) {
+            if(event.getStartDate().isAfter(LocalDate.now()))
              {
-                notPassedEvents.add(eventDao);
+                notPassedEvents.add(event);
             }
         }
         
@@ -81,19 +81,29 @@ public class EventRepositoryImpl implements EventRepository {
 
     @Override
     public List<Event> getBySearchCriteria(SearchEventCriteria criteria) {
+        List<Event> notPassedEvents = new ArrayList<Event>();
+        List<Event> searchedEvent = List.of();
         if (criteria.getTrailId() != "") {
             if(criteria.getStartDate() != null) {
-                return eventDao.searchAndWithDateAndTrailId(criteria.getStartDate(), criteria.getTrailId());
+                searchedEvent = eventDao.searchAndWithDateAndTrailId(criteria.getStartDate(), criteria.getTrailId());
             } else {
-                return eventDao.searchOnlyWithTrailId(criteria.getTrailId());
+                searchedEvent = eventDao.searchOnlyWithTrailId(criteria.getTrailId());
             }
         } else {
             if(criteria.getStartDate() != null) {
-                return eventDao.searchOnlyWithStartDate(criteria.getStartDate());
-                
-            } else {
-                return this.getAll();
+                searchedEvent = eventDao.searchOnlyWithStartDate(criteria.getStartDate());
+            }
+            else {
+                searchedEvent = eventDao.findAll();
             }
         }
+        for (Event event : searchedEvent) {
+            if(event.getStartDate().isAfter(LocalDate.now()))
+             {
+                notPassedEvents.add(event);
+            }
+        }
+        
+        return notPassedEvents;
     }
 }
