@@ -90,7 +90,7 @@ class EventRepositoryImplTest {
         Mockito.when(event1.getStartDate()).thenReturn(ANY_AFTER_DATE);
         List<Event> lst = List.of();
         Mockito.when(eventDao.searchAndWithDateAndTrailId(event1.getStartDate(), ANY_ID)).thenReturn(lst);
-        Optional<Trail> lst2 = Optional.of(Mockito.mock(Trail.class));;
+        Optional<Trail> lst2 = Optional.of(Mockito.mock(Trail.class));
         Mockito.when(trailDao.findById(ANY_ID)).thenReturn(lst2);
 
         repo.create(event1);

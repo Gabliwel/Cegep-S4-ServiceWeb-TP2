@@ -15,3 +15,12 @@ VALUES('2', 'un endroit incroyaaable', 'event de bob2', 'bob2', parseDatetime('2
 
 INSERT INTO EVENT(ID, DESCRIPTION, NAME, ORGANIZER, START_DATE, TRAIL)
 VALUES('3', 'jsp', 'event de bob2', 'bob2', parseDatetime('2022-03-14', 'yyyy-MM-dd'), '3');
+
+INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL)
+VALUES('1', 'ark!', 1, '2');
+
+INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL)
+VALUES('2', 'bof.....', 2, '1');
+
+INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL)
+VALUES('3', 'Incroyable!!!!!!!!!!!!!!!!!!!', 5, '3');
