@@ -26,7 +26,7 @@ public class Event {
     @Column(length = 50, nullable = false)
     private String organizer;
     
-    public Event(){}
+    public Event() {}
 
     public Event(String name, String description, LocalDate startDate, Trail trail, String organizer) {
         this.id = IdentifiantGenerator.getNextIdAsString();
