@@ -27,8 +27,10 @@ public class EventResourceTest {
     private static final String DELETE_ID = "1";
     private static final String ANY_INVALID_ID = "9";
     
-    private TrailDto trailDto = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY);
-    private TrailDto trailDto2 = new TrailDto("2", "bonsoir2", "deuxieme trail", "montreal", TrailDifficulty.FAMILY, LocalDate.of(1998, 12, 31), LocalDate.of(2021, 12, 30), TrailStatus.READY);
+    private TrailDto trailDto = new TrailDto("1", "bonsoir1", "premier trail", "quebec", 
+            TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY);
+    private TrailDto trailDto2 = new TrailDto("2", "bonsoir2", "deuxieme trail", "montreal", TrailDifficulty.FAMILY, 
+            LocalDate.of(1998, 12, 31), LocalDate.of(2021, 12, 30), TrailStatus.READY);
     private EventDto dto1 = new EventDto("1", "event de bob1", "un endroit magnifiiiiique", LocalDate.of(2022, 01, 02), trailDto, "bob1");
     private EventDto dto2 = new EventDto("2", "event de bob2", "un endroit incroyaaable", LocalDate.of(2022, 01, 02), trailDto, "bob2");
     
@@ -80,7 +82,8 @@ public class EventResourceTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put(PATH_TO_TEST + "/" + ANY_INVALID_ID)
                   .contentType("application/json")
-                  .content(objectMapper.writeValueAsString(new EventDto("abcd", "event de bob1", "un endroit magnifiiiiique", LocalDate.of(2022, 01, 02), trailDto, "bob1"))))
+                  .content(objectMapper.writeValueAsString(new EventDto("abcd", "event de bob1", "un endroit magnifiiiiique", 
+                          LocalDate.of(2022, 01, 02), trailDto, "bob1"))))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
                   .andReturn();     
 

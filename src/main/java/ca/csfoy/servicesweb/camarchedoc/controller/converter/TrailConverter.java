@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import ca.csfoy.servicesweb.camarchedoc.api.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 
 public class TrailConverter {
 

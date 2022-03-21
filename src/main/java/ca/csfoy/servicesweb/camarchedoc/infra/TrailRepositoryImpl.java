@@ -2,7 +2,6 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
 
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.SearchTrailCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
@@ -63,14 +62,14 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public List<Trail> getBySearchCriteria(SearchTrailCriteria criteria) { 
-        if (criteria.getCity() != "") {
-            if(criteria.getDifficulty() != null) {
+        if (!criteria.getCity().isBlank()) {
+            if (criteria.getDifficulty() != null) {
                 return trailDao.fullSearch(criteria.getCity(), criteria.getDifficulty());
             } else {
                 return trailDao.searchOnlyWithCity(criteria.getCity());
             }
         } else {
-            if(criteria.getDifficulty() != null) {
+            if (criteria.getDifficulty() != null) {
                 return trailDao.searchOnlyWithDifficulty(criteria.getDifficulty());
             } else {
                 return this.getAll();
@@ -82,7 +81,7 @@ public class TrailRepositoryImpl implements TrailRepository {
     public void setTrailToReady(String id) {
         if (trailDao.existsById(id)) {
             Trail trailToSetReady = trailDao.getById(id);
-            if(trailToSetReady.getStatus() == TrailStatus.IN_PREPARATION) {
+            if (trailToSetReady.getStatus() == TrailStatus.IN_PREPARATION) {
                 trailToSetReady.setTrailready();
                 trailDao.save(trailToSetReady);
             } else {
