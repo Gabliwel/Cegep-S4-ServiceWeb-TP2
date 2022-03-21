@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
+import java.util.Optional;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
@@ -18,8 +19,9 @@ public class RatingRepositoryImpl implements RatingRepository {
     
     @Override
     public Rating getById(String id) {
-        if (ratingDao.findById(id).isPresent()) {
-            return ratingDao.getById(id);
+        Optional<Rating> rating = ratingDao.findById(id);
+        if (rating.isPresent()) {
+            return rating.get();
         } else {
             throw new ObjectNotFoundException("The rating with id (" + id + ") does not exist.");
         }

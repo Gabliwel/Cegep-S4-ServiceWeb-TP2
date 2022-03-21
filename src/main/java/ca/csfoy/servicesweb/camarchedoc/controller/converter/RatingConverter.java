@@ -7,9 +7,15 @@ import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
 
 public class RatingConverter {
+    
+private final TrailConverter trailConverter;
+    
+    public RatingConverter(TrailConverter trailConverter) {
+        this.trailConverter = trailConverter;
+    }
 
     public RatingDto convertToRatingDtoFrom(Rating rating) {
-        return new RatingDto(rating.getId(), rating.getTrail(), rating.getNote(), rating.getComment());
+        return new RatingDto(rating.getId(), trailConverter.convertToTrailDtoFrom(rating.getTrail()), rating.getNote(), rating.getComment());
     }
 
     public List<RatingDto> convertToRatingDtoListFrom(List<Rating> all) {
@@ -17,7 +23,7 @@ public class RatingConverter {
     }
 
     public Rating convertToRatingAtCreationFrom(RatingDto dto) {
-        return new Rating(dto.trail, dto.note, dto.comment);
+        return new Rating(trailConverter.convertToTrailFrom(dto.trail), dto.note, dto.comment);
     }
 
 }

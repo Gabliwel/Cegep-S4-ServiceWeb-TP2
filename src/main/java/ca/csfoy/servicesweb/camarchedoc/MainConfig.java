@@ -78,7 +78,7 @@ public class MainConfig {
     
     @Bean
     public RatingConverter ratingConverter() {
-        return new RatingConverter();
+        return new RatingConverter(trailConverter());
     }
     
     @Bean
