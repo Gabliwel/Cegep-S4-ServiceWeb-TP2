@@ -3,6 +3,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller.validation;
 import org.springframework.context.ApplicationContext;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 
 public class CustomValidatorFactory {
@@ -19,5 +20,9 @@ public class CustomValidatorFactory {
     
     public CustomValidator<EventDto, String> getEventValidator() {
         return (CustomValidator<EventDto, String>) applicationContext.getBean(EventCustomValidator.class);
+    }
+    
+    public CustomValidator<RatingDto, String> getRatingValidator() {
+        return (CustomValidator<RatingDto, String>) applicationContext.getBean(RatingCustomValidator.class);
     }
 }
