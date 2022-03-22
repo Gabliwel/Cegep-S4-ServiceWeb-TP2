@@ -10,6 +10,8 @@ import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 
 public class RatingDto {
 
+    public static final Double MIN_NOTE = 1.0;
+    public static final Double MAX_NOTE = 5.0;
     public static final String ID_VALID_PATTERN = "[0-9]+";
     public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 

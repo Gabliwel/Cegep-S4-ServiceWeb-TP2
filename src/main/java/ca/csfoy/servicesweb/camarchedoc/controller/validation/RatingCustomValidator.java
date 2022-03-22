@@ -33,10 +33,10 @@ public class RatingCustomValidator implements CustomValidator<RatingDto, String>
     public void validateId(String id) {
         if (Objects.isNull(id)) {
             this.errorMessages.add("ID must not be null.");
-        }
-        
-        if (!id.matches(RatingDto.ID_VALID_PATTERN)) {
-            this.errorMessages.add("ID must be numbers only.");
+        } else {
+            if (!id.matches(RatingDto.ID_VALID_PATTERN)) {
+                this.errorMessages.add("ID must be numbers only.");
+            }
         }
     }
     
@@ -48,7 +48,7 @@ public class RatingCustomValidator implements CustomValidator<RatingDto, String>
             violations.forEach(v -> this.errorMessages.add(v.getMessage()));
         }
         
-        if (object.note > 5 || object.note < 1) {
+        if (object.note > RatingDto.MAX_NOTE || object.note < RatingDto.MIN_NOTE) {
             this.errorMessages.add("Rating note must been between value 1 and 5");
         }
     }
