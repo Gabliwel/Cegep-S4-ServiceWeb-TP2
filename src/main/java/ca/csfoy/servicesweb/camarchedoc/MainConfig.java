@@ -48,6 +48,9 @@ public class MainConfig {
     @Autowired
     private EventDao eventDao;
     
+    @Autowired
+    private RatingDao ratingDao;
+    
     @Bean
     public CustomValidatorFactory validatorFactory() {
         return new CustomValidatorFactory(applicationContext);
@@ -69,9 +72,6 @@ public class MainConfig {
     public EventCustomValidator eventValidator() {
         return new EventCustomValidator(validator());
     }
-    
-    @Autowired
-    private RatingDao ratingDao;
 
     @Bean
     public HealthResource healthResource() {

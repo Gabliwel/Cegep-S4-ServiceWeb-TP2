@@ -37,7 +37,7 @@ public class EventCustomValidator implements CustomValidator<EventDto, String> {
             this.errorMessages.add("ID must not be null.");
         }
         
-        if(Objects.isNull(id) || !id.matches(EventDto.ID_VALID_PATTERN)) {
+        if (Objects.isNull(id) || !id.matches(EventDto.ID_VALID_PATTERN)) {
             this.errorMessages.add("ID must be numbers only.");
         }
         

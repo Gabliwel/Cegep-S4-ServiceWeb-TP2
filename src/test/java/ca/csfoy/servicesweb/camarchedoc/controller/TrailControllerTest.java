@@ -2,8 +2,6 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
-import javax.validation.Validator;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -27,7 +25,6 @@ class TrailControllerTest {
     
     private static final String ANY_ID = "1";
 
-    
     @Mock
     private TrailRepository repository;
     

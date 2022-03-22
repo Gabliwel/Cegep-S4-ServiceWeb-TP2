@@ -38,11 +38,11 @@ public class TrailDto {
     @NotNull (message = "Difficulty must not be null.", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDifficulty difficulty;
     @NotNull (message = "Opening date must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past (message = "Opening date must be a past date.", groups = {Default.class, CreateGroupValidation.class})
     public final LocalDate openingDate;
     @NotNull (message = "Last maintenance date must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past (message = "Last maintenance date must be a past date.", groups = {Default.class, CreateGroupValidation.class})
     public final LocalDate lastMaintenanceDate;
     public final TrailStatus status;

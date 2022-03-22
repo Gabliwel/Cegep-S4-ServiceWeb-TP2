@@ -49,7 +49,6 @@ public class TrailController implements TrailResource {
         validator.validate(dto);
         validator.verify("Trail cannot be created. Invalid information");
         
-        
         Trail trail = repository.create(converter.convertToTrailAtCreationFrom(dto));
         return converter.convertToTrailDtoFrom(trail);
     }

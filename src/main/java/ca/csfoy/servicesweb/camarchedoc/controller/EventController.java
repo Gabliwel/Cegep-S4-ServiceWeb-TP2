@@ -5,7 +5,6 @@ import java.util.List;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.EventResource;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;

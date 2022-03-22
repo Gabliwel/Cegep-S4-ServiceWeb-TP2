@@ -7,7 +7,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,7 +29,7 @@ public class EventDto {
     @NotEmpty (message = "Description must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Description must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String description;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Future (message = "Starting date must be a future date.", groups = {Default.class, CreateGroupValidation.class})
     @NotNull (message = "Starting date must not be null.", groups = {Default.class, CreateGroupValidation.class})
     public final LocalDate startDate;

@@ -12,12 +12,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
-import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
 

@@ -37,7 +37,7 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
             this.errorMessages.add("ID must not be null.");
         }
         
-        if(Objects.isNull(id) || !id.matches(TrailDto.ID_VALID_PATTERN)) {
+        if (Objects.isNull(id) || !id.matches(TrailDto.ID_VALID_PATTERN)) {
             this.errorMessages.add("ID must be numbers only.");
         }
         
@@ -68,7 +68,7 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
     
     private void validateCommonAttributes(TrailDto dto) {
         
-        if(dto.openingDate != null && dto.lastMaintenanceDate != null && dto.lastMaintenanceDate.isBefore(dto.openingDate)) {
+        if (dto.openingDate != null && dto.lastMaintenanceDate != null && dto.lastMaintenanceDate.isBefore(dto.openingDate)) {
             this.errorMessages.add("Last maintenance date cannot be before opening date");
         }
     }
