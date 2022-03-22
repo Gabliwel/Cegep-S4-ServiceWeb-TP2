@@ -23,6 +23,7 @@ import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.RatingCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
@@ -72,6 +73,12 @@ public class MainConfig {
     public EventCustomValidator eventValidator() {
         return new EventCustomValidator(validator());
     }
+    
+    @Bean
+    @Scope("prototype")
+    public RatingCustomValidator ratingValidator() {
+        return new RatingCustomValidator(validator());
+    }
 
     @Bean
     public HealthResource healthResource() {
@@ -120,6 +127,6 @@ public class MainConfig {
 
     @Bean
     public RatingResource ratingController() {
-        return new RatingController(ratingRepository(), ratingConverter());
+        return new RatingController(ratingRepository(), ratingConverter(), validatorFactory());
     }
 }

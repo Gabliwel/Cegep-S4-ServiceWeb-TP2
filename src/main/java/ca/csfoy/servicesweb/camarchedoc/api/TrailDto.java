@@ -18,7 +18,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 
 public class TrailDto {
     
-    public static final String ID_VALID_PATTERN = "^[0-9]$";
+    public static final String ID_VALID_PATTERN = "[0-9]+";
     public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 
     @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
