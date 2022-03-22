@@ -1,8 +1,12 @@
 package ca.csfoy.servicesweb.camarchedoc;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -17,6 +21,9 @@ import ca.csfoy.servicesweb.camarchedoc.controller.TrailController;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
@@ -33,10 +40,35 @@ import ca.csfoy.servicesweb.camarchedoc.infra.TrailRepositoryImpl;
 public class MainConfig {
     
     @Autowired
+    private ApplicationContext applicationContext;
+    
+    @Autowired
     private TrailDao trailDao;
     
     @Autowired
     private EventDao eventDao;
+    
+    @Bean
+    public CustomValidatorFactory validatorFactory() {
+        return new CustomValidatorFactory(applicationContext);
+    }
+    
+    @Bean
+    public Validator validator() {
+        return Validation.buildDefaultValidatorFactory().getValidator();
+    }
+    
+    @Bean
+    @Scope("prototype")
+    public TrailCustomValidator trailValidator() {
+        return new TrailCustomValidator(validator());
+    }
+    
+    @Bean
+    @Scope("prototype")
+    public EventCustomValidator eventValidator() {
+        return new EventCustomValidator(validator());
+    }
     
     @Autowired
     private RatingDao ratingDao;
@@ -58,7 +90,7 @@ public class MainConfig {
 
     @Bean
     public TrailResource trailController() {
-        return new TrailController(trailRepository(), trailConverter());
+        return new TrailController(trailRepository(), trailConverter(), validatorFactory());
     }
 
     @Bean
@@ -73,7 +105,7 @@ public class MainConfig {
 
     @Bean
     public EventResource eventController() {
-        return new EventController(eventRepository(), eventConverter());
+        return new EventController(eventRepository(), eventConverter(), validatorFactory());
     }
     
     @Bean

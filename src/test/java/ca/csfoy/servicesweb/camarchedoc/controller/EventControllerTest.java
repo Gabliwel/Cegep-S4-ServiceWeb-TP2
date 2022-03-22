@@ -12,7 +12,12 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
 
@@ -28,6 +33,12 @@ class EventControllerTest {
     @Mock
     private EventConverter converter;
     
+    @Mock
+    private CustomValidatorFactory validatorFactory;
+    
+    @Mock
+    private CustomValidator<EventDto, String> validator;
+    
     @InjectMocks
     private EventController controller;
 
@@ -37,6 +48,10 @@ class EventControllerTest {
         Event event = Mockito.mock(Event.class);
         Mockito.when(repository.getById(ANY_ID)).thenReturn(event);
         Mockito.when(converter.convertToEventDtoFrom(event)).thenReturn(dto);
+        
+        EventCustomValidator eventValidator = Mockito.mock(EventCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getEventValidator()).thenReturn(eventValidator);
         
         EventDto dtoReturned = controller.getById(ANY_ID);
         
@@ -70,6 +85,10 @@ class EventControllerTest {
         Mockito.when(converter.convertToEventAtCreationFrom(dto)).thenReturn(event);
         Mockito.when(converter.convertToEventDtoFrom(event)).thenReturn(returned);
         
+        EventCustomValidator eventValidator = Mockito.mock(EventCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getEventValidator()).thenReturn(eventValidator);
+        
         EventDto dtoCreated = controller.create(dto);
         
         Mockito.verify(repository).create(event);
@@ -83,6 +102,10 @@ class EventControllerTest {
         Event event = Mockito.mock(Event.class);
         Mockito.when(converter.convertToEventFrom(dto)).thenReturn(event);
         
+        EventCustomValidator eventValidator = Mockito.mock(EventCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getEventValidator()).thenReturn(eventValidator);
+        
         controller.update(ANY_ID, dto);
         
         Mockito.verify(repository).modify(ANY_ID, event);
@@ -90,6 +113,10 @@ class EventControllerTest {
     
     @Test
     void whenDeleteWithValidIdThenEventIsDeleted() {
+        
+        EventCustomValidator eventValidator = Mockito.mock(EventCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getEventValidator()).thenReturn(eventValidator);
         
         controller.delete(ANY_ID);
         
