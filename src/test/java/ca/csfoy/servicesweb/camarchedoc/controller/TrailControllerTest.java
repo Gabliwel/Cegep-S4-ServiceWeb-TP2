@@ -2,6 +2,8 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
+import javax.validation.Validator;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
 
@@ -22,11 +27,18 @@ class TrailControllerTest {
     
     private static final String ANY_ID = "1";
 
+    
     @Mock
     private TrailRepository repository;
     
     @Mock
     private TrailConverter converter;
+    
+    @Mock
+    private CustomValidatorFactory validatorFactory;
+    
+    @Mock
+    private CustomValidator<TrailDto, String> validator;
     
     @InjectMocks
     private TrailController controller;
@@ -35,9 +47,11 @@ class TrailControllerTest {
     void whenGetByIdWithValidIdThenDomainObjectReturnedAsConvertedDto() {
         TrailDto dto = Mockito.mock(TrailDto.class);
         Trail trail = Mockito.mock(Trail.class);
+        TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getTrailValidator()).thenReturn(trailValidator);
         Mockito.when(repository.getById(ANY_ID)).thenReturn(trail);
         Mockito.when(converter.convertToTrailDtoFrom(trail)).thenReturn(dto);
-        
         TrailDto dtoReturned = controller.getById(ANY_ID);
         
         Mockito.verify(repository).getById(ANY_ID);
@@ -67,6 +81,9 @@ class TrailControllerTest {
         TrailDto returned = Mockito.mock(TrailDto.class);
         Trail trail = Mockito.mock(Trail.class);
         Trail created = Mockito.mock(Trail.class);
+        TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getTrailValidator()).thenReturn(trailValidator);
         Mockito.when(converter.convertToTrailAtCreationFrom(dto)).thenReturn(trail);
         Mockito.when(repository.create(trail)).thenReturn(created);
         Mockito.when(converter.convertToTrailDtoFrom(created)).thenReturn(returned);
@@ -83,6 +100,9 @@ class TrailControllerTest {
     void whenUpdateWithValidEventThenEventIsUpdated() {
         TrailDto dto = Mockito.mock(TrailDto.class);
         Trail trail = Mockito.mock(Trail.class);
+        TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getTrailValidator()).thenReturn(trailValidator);
         Mockito.when(converter.convertToTrailFrom(dto)).thenReturn(trail);
         
         controller.update(ANY_ID, dto);
@@ -91,7 +111,10 @@ class TrailControllerTest {
     }
     
     @Test
-    void whenDeleteWithValidIdThenEventIsDeleted() {        
+    void whenDeleteWithValidIdThenEventIsDeleted() {      
+        TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
+        
+        Mockito.when(validatorFactory.getTrailValidator()).thenReturn(trailValidator);
         controller.delete(ANY_ID);
         
         Mockito.verify(repository).delete(ANY_ID);

@@ -1,6 +1,8 @@
 package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import ca.csfoy.servicesweb.camarchedoc.api.ErrorMessageDto;
+import ca.csfoy.servicesweb.camarchedoc.api.MutipleErrorMessageDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
 @ControllerAdvice
 @ResponseBody
@@ -31,6 +35,20 @@ public class ErrorHandler {
                 + ex.getMessage() 
                 + ExceptionUtils.getStackTrace(ex));
         return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.NOT_FOUND.toString(), errorIdentifier.toString(), ex.getMessage());
+    }
+    
+    @ExceptionHandler(InputValidationException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public MutipleErrorMessageDto inputValidationException(InputValidationException ex) {
+        String errorIdentifier = ex.hashCode() + "";
+        logger.error(LocalDateTime.now().toString() 
+                + " [" + errorIdentifier + "]: " 
+                + ex.getMessage() 
+                + ExceptionUtils.getStackTrace(ex));
+        
+        return new MutipleErrorMessageDto(LocalDateTime.now(), HttpStatus.UNPROCESSABLE_ENTITY.toString(),
+                errorIdentifier.toString(), ex.getMessage(), ex.getViolations());
+    
     }
     
     @ExceptionHandler(ObjetAlreadySetToDesiredValue.class)
