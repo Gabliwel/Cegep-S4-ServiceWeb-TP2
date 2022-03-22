@@ -7,7 +7,7 @@ public class SearchEventCriteria {
     private String trailId;
     private LocalDate startDate;
     
-    public SearchEventCriteria(String trailId,LocalDate startDate){
+    public SearchEventCriteria(String trailId, LocalDate startDate) {
         this.trailId = trailId;
         this.startDate = startDate;
     }

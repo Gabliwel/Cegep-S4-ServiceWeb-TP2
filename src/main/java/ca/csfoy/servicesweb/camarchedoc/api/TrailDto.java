@@ -47,7 +47,8 @@ public class TrailDto {
     public final LocalDate lastMaintenanceDate;
     public final TrailStatus status;
 
-    public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate, TrailStatus status) {
+    public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
+            LocalDate lastMaintenanceDate, TrailStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;

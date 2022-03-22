@@ -27,7 +27,7 @@ public class Trail {
     @Enumerated
     private TrailStatus status;
 
-    public Trail(){}
+    public Trail() {}
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {
         this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now(), TrailStatus.IN_PREPARATION);
@@ -41,7 +41,8 @@ public class Trail {
         this(id, name, description, city, difficulty, LocalDate.now(), LocalDate.now(), status);
     }    
 
-    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate, TrailStatus status) {
+    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
+            LocalDate lastMaintenanceDate, TrailStatus status) {
         this.id = id;
         this.name = name;
         this.description = description;

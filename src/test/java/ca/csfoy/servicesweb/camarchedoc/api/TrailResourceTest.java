@@ -2,7 +2,6 @@ package ca.csfoy.servicesweb.camarchedoc.api;
 
 import java.time.LocalDate;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,10 @@ public class TrailResourceTest {
     private static final String GOOD_PATH_TO_PUBLISH = PATH_TO_TEST + "/ready" + "/" + "1" + "/";
     private static final String BAD_PATH_TO_PUBLISH = PATH_TO_TEST + "/ready" + "/" + "2" + "/";
     
-    
-    private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.IN_PREPARATION);
-    private TrailDto dto2 = new TrailDto("2", "bonsoir2", "deuxieme trail", "montreal", TrailDifficulty.FAMILY, LocalDate.of(1998, 12, 31), LocalDate.of(2021, 12, 30), TrailStatus.READY);
+    private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), 
+            LocalDate.of(2021, 12, 31), TrailStatus.IN_PREPARATION);
+    private TrailDto dto2 = new TrailDto("2", "bonsoir2", "deuxieme trail", "montreal", TrailDifficulty.FAMILY, LocalDate.of(1998, 12, 31), 
+            LocalDate.of(2021, 12, 30), TrailStatus.READY);
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,7 +53,8 @@ public class TrailResourceTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                   .contentType("application/json")
-                  .content(objectMapper.writeValueAsString(new TrailDto("3", "name3", "a", "city3", TrailDifficulty.FAMILY, LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION))))
+                  .content(objectMapper.writeValueAsString(new TrailDto("t3", "name3", "a", "city3", TrailDifficulty.FAMILY, 
+                          LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();     
 

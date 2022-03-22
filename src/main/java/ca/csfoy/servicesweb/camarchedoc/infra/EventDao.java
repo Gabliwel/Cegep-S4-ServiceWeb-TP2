@@ -18,6 +18,4 @@ public interface EventDao extends JpaRepository<Event, String> {
 
     @Query("SELECT s FROM Event s WHERE s.startDate = ?1")
     List<Event> searchOnlyWithStartDate(LocalDate startDate);
-
-    
 }

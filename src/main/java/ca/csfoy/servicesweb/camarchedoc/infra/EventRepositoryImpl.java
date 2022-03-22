@@ -37,8 +37,7 @@ public class EventRepositoryImpl implements EventRepository {
         List<Event> notPassedEvents = new ArrayList<Event>();
         List<Event> events = eventDao.findAll();
         for (Event event : events) {
-            if(event.getStartDate().isAfter(LocalDate.now()))
-             {
+            if (event.getStartDate().isAfter(LocalDate.now())) {
                 notPassedEvents.add(event);
             }
         }
@@ -83,23 +82,21 @@ public class EventRepositoryImpl implements EventRepository {
     public List<Event> getBySearchCriteria(SearchEventCriteria criteria) {
         List<Event> notPassedEvents = new ArrayList<Event>();
         List<Event> searchedEvent = List.of();
-        if (criteria.getTrailId() != "") {
-            if(criteria.getStartDate() != null) {
+        if (!criteria.getTrailId().isBlank()) {
+            if (criteria.getStartDate() != null) {
                 searchedEvent = eventDao.searchAndWithDateAndTrailId(criteria.getStartDate(), criteria.getTrailId());
             } else {
                 searchedEvent = eventDao.searchOnlyWithTrailId(criteria.getTrailId());
             }
         } else {
-            if(criteria.getStartDate() != null) {
+            if (criteria.getStartDate() != null) {
                 searchedEvent = eventDao.searchOnlyWithStartDate(criteria.getStartDate());
-            }
-            else {
+            } else {
                 searchedEvent = eventDao.findAll();
             }
         }
         for (Event event : searchedEvent) {
-            if(event.getStartDate().isAfter(LocalDate.now()))
-             {
+            if (event.getStartDate().isAfter(LocalDate.now())) {
                 notPassedEvents.add(event);
             }
         }

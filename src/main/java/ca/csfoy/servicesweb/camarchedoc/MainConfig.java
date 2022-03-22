@@ -12,19 +12,25 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import ca.csfoy.servicesweb.camarchedoc.api.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.api.HealthResource;
+import ca.csfoy.servicesweb.camarchedoc.api.RatingResource;
 import ca.csfoy.servicesweb.camarchedoc.api.TrailResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.EventController;
 import ca.csfoy.servicesweb.camarchedoc.controller.HealthController;
+import ca.csfoy.servicesweb.camarchedoc.controller.RatingController;
 import ca.csfoy.servicesweb.camarchedoc.controller.TrailController;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
+import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventRepositoryImpl;
+import ca.csfoy.servicesweb.camarchedoc.infra.RatingDao;
+import ca.csfoy.servicesweb.camarchedoc.infra.RatingRepositoryImpl;
 import ca.csfoy.servicesweb.camarchedoc.infra.TrailDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.TrailRepositoryImpl;
 
@@ -63,6 +69,9 @@ public class MainConfig {
     public EventCustomValidator eventValidator() {
         return new EventCustomValidator(validator());
     }
+    
+    @Autowired
+    private RatingDao ratingDao;
 
     @Bean
     public HealthResource healthResource() {
@@ -97,5 +106,20 @@ public class MainConfig {
     @Bean
     public EventResource eventController() {
         return new EventController(eventRepository(), eventConverter(), validatorFactory());
+    }
+    
+    @Bean
+    public RatingConverter ratingConverter() {
+        return new RatingConverter(trailConverter());
+    }
+    
+    @Bean
+    public RatingRepository ratingRepository() {
+        return new RatingRepositoryImpl(ratingDao, trailDao);
+    }
+
+    @Bean
+    public RatingResource ratingController() {
+        return new RatingController(ratingRepository(), ratingConverter());
     }
 }
