@@ -53,7 +53,7 @@ public class TrailResourceTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                   .contentType("application/json")
-                  .content(objectMapper.writeValueAsString(new TrailDto("t3", "name3", "a", "city3", TrailDifficulty.FAMILY, LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION))))
+                  .content(objectMapper.writeValueAsString(new TrailDto("3", "name3", "a", "city3", TrailDifficulty.FAMILY, LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();     
 
