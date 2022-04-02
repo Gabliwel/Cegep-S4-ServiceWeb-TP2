@@ -3,9 +3,9 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 import java.util.List;
 import java.util.Optional;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
-import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 
 public class RatingRepositoryImpl implements RatingRepository {
 

@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.domain;
+package ca.csfoy.servicesweb.camarchedoc.domain.trail;
 
 import java.util.Objects;
 

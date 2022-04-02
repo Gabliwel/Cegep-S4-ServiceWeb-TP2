@@ -2,13 +2,13 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.SearchTrailCriteria;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.SearchTrailCriteria;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailRepositoryImpl implements TrailRepository {
 

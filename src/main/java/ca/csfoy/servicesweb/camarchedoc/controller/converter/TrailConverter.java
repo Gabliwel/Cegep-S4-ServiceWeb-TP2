@@ -1,11 +1,12 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import ca.csfoy.servicesweb.camarchedoc.api.SearchTrailDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 public class TrailConverter {
 
@@ -33,4 +34,13 @@ public class TrailConverter {
     public List<SearchTrailDto> convertSearchTrailListFrom(List<Trail> trails) {
         return trails.stream().map(this::convertToSearchTrailDtoFrom).collect(Collectors.toList());
     }
+    
+    public Set<TrailDto> convertTrailSetFrom(Set<Trail> trails) {
+        return trails.stream().map(this::convertToTrailDtoFrom).collect(Collectors.toSet());
+    }
+
+    public Set<Trail> convertTrailDtosSetFrom(Set<TrailDto> trails) {
+        return trails.stream().map(this::convertToTrailFrom).collect(Collectors.toSet());
+    }
+
 }

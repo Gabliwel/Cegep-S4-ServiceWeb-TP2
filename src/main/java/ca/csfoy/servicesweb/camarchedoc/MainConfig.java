@@ -10,30 +10,36 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.api.HealthResource;
-import ca.csfoy.servicesweb.camarchedoc.api.RatingResource;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailResource;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventResource;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingResource;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.EventController;
 import ca.csfoy.servicesweb.camarchedoc.controller.HealthController;
 import ca.csfoy.servicesweb.camarchedoc.controller.RatingController;
 import ca.csfoy.servicesweb.camarchedoc.controller.TrailController;
+import ca.csfoy.servicesweb.camarchedoc.controller.UserController;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
+import ca.csfoy.servicesweb.camarchedoc.controller.converter.UserConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.RatingCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
-import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventRepositoryImpl;
 import ca.csfoy.servicesweb.camarchedoc.infra.RatingDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.RatingRepositoryImpl;
 import ca.csfoy.servicesweb.camarchedoc.infra.TrailDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.TrailRepositoryImpl;
+import ca.csfoy.servicesweb.camarchedoc.infra.UserDao;
+import ca.csfoy.servicesweb.camarchedoc.infra.UserRepositoryImpl;
 
 @Configuration
 @EnableJpaAuditing
@@ -51,6 +57,9 @@ public class MainConfig {
     
     @Autowired
     private RatingDao ratingDao;
+    
+    @Autowired
+    private UserDao userDao;
     
     @Bean
     public CustomValidatorFactory validatorFactory() {
@@ -128,5 +137,20 @@ public class MainConfig {
     @Bean
     public RatingResource ratingController() {
         return new RatingController(ratingRepository(), ratingConverter(), validatorFactory());
+    }
+    
+    @Bean
+    public UserConverter userConverter() {
+        return new UserConverter(trailConverter());
+    }
+    
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepositoryImpl(userDao);
+    }
+
+    @Bean
+    public UserResource userController() {
+        return new UserController(userRepository(), userConverter(), trailConverter());
     }
 }

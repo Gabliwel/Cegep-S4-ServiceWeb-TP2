@@ -1,6 +1,6 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.trail;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class SearchTrailDto {
 

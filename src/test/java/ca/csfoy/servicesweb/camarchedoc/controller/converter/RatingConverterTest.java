@@ -5,12 +5,12 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class RatingConverterTest {
     

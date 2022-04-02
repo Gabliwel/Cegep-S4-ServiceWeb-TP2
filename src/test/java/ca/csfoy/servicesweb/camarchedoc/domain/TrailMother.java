@@ -4,7 +4,10 @@ import java.time.LocalDate;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailMother {
     

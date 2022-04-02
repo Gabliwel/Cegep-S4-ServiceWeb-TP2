@@ -12,9 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)

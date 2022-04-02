@@ -11,13 +11,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
-import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)

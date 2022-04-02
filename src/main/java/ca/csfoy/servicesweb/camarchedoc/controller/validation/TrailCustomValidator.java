@@ -9,7 +9,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 

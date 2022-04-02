@@ -11,13 +11,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)

@@ -11,12 +11,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.EventMother;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)
