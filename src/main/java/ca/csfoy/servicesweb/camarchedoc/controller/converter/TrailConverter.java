@@ -36,10 +36,16 @@ public class TrailConverter {
     }
     
     public Set<TrailDto> convertTrailSetFrom(Set<Trail> trails) {
+        if (trails == null || trails.isEmpty()) {
+            return null;
+        }
         return trails.stream().map(this::convertToTrailDtoFrom).collect(Collectors.toSet());
     }
 
     public Set<Trail> convertTrailDtosSetFrom(Set<TrailDto> trails) {
+        if (trails == null || trails.isEmpty()) {
+            return null;
+        }
         return trails.stream().map(this::convertToTrailFrom).collect(Collectors.toSet());
     }
 

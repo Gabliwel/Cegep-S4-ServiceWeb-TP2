@@ -22,5 +22,4 @@ public class UserDto {
         this.favoritesTrails = favoritesTrails;
         this.trailsToTry = trailsToTry;
     }
-
 }

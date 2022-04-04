@@ -16,6 +16,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void create(User user) {
+        System.out.println(user.id + " " + user.firstname);
         dao.save(user);
     }
 

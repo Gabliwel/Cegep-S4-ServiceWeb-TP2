@@ -26,14 +26,19 @@ public class User {
     public String lastname;
     @Enumerated
     public TrailDifficulty preferredDifficulty;
-    ///////////////////////////////////////////////////////////////qqqqqqqqqqqqqqqqqquuestion prof pour les join et inverse join
     @ManyToMany(targetEntity = Trail.class, fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_FAVORITE_TRAILS", joinColumns = @JoinColumn(name = "ID"), inverseJoinColumns = @JoinColumn(name = "TRAIL_ID"))
+    @JoinTable(name = "USER_FAVORITE_TRAILS", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "TRAIL_ID"))
     public Set<Trail> favoritesTrails;
     @ManyToMany(targetEntity = Trail.class, fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_TRAILS_TO_TRY", joinColumns = @JoinColumn(name = "ID"), inverseJoinColumns = @JoinColumn(name = "TRAIL_ID"))
+    @JoinTable(name = "USER_TRAILS_TO_TRY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "TRAIL_ID"))
     public Set<Trail> trailsToTry;
 
+    public User() {}
+    
+    public User(String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
+        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, preferredDifficulty, favoritesTrails, trailsToTry);
+    }
+    
     public User(String id, String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
         this.id = id;
         this.firstname = firstname;
@@ -41,10 +46,6 @@ public class User {
         this.preferredDifficulty = preferredDifficulty;
         this.favoritesTrails = favoritesTrails;
         this.trailsToTry = trailsToTry;
-    }
-
-    public User(String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
-        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, preferredDifficulty, favoritesTrails, trailsToTry);
     }
 
     public String getId() {

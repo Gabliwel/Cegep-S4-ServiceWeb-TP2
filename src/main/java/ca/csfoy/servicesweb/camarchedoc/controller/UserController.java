@@ -23,6 +23,7 @@ public class UserController implements UserResource {
 
     @Override
     public void createUser(UserDto user) {
+        System.out.println(user.firstname + " " + user.lastname + " " + user.id + " " + user.averageDifficulty );
         repo.create(converter.toUserForCreation(user));
     }
 
