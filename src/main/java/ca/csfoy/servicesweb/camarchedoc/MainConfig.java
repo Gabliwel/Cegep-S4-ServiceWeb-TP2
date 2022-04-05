@@ -146,11 +146,11 @@ public class MainConfig {
     
     @Bean
     public UserRepository userRepository() {
-        return new UserRepositoryImpl(userDao);
+        return new UserRepositoryImpl(userDao, trailDao);
     }
 
     @Bean
     public UserResource userController() {
-        return new UserController(userRepository(), userConverter(), trailConverter());
+        return new UserController(userRepository(), userConverter());
     }
 }
