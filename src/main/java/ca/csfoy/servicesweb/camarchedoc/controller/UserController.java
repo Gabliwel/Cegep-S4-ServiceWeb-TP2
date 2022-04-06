@@ -41,7 +41,7 @@ public class UserController implements UserResource {
         
         Set<TrailDto> trails = converter.fromUser(repo.get(userId)).favoritesTrails;
         if (trails != null && !trails.isEmpty()) {
-            return (converter.fromUser(repo.get(userId)).favoritesTrails).stream().collect(Collectors.toList());
+            return trails.stream().collect(Collectors.toList());
         }
         return new ArrayList<TrailDto>();
     }

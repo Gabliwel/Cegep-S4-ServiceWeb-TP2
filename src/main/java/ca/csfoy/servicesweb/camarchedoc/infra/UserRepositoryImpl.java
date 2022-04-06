@@ -20,10 +20,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void create(User user) {
-        if (!trailDoesExist(user.getFavoritesTrails())) {
-            throw new ObjectNotFoundException("Favorite(s) trail(s) dont exist for the user with id (" + user.id + "), and therefore cannot be created.");
-        } else if (!trailDoesExist(user.getTrailsToTry())) {
-            throw new ObjectNotFoundException("Trail(s) to try dont exist for the user with id (" + user.id + "), and therefore cannot be created.");
+        if (!trailDoesExist(user.getFavoritesTrails()) || !trailDoesExist(user.getTrailsToTry())) {
+            throw new ObjectNotFoundException("Trail(s) dont exist for the user with id (" + user.id + "), and therefore cannot be created.");
         } else {
             dao.save(user);
         }
@@ -32,10 +30,8 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void save(User user) {
         if (!dao.findById(user.id).isEmpty()) {
-            if (!trailDoesExist(user.getFavoritesTrails())) {
+            if (!trailDoesExist(user.getFavoritesTrails()) || !trailDoesExist(user.getTrailsToTry())) {
                 throw new ObjectNotFoundException("Favorite(s) trail(s) dont exist for the user with id (" + user.id + "), and therefore cannot be modified.");
-            } else if (!trailDoesExist(user.getTrailsToTry())) {
-                throw new ObjectNotFoundException("Trail(s) to try dont exist for the user with id (" + user.id + "), and therefore cannot be modified.");
             } else {
                 dao.save(user);
             }
