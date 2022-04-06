@@ -21,7 +21,7 @@ public class RatingConverterTest {
     void whenConvertingDtoWithoutIdOnCreationThenRatingCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
         RatingDto dto = new RatingDto(null, 
-                new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null),
+                new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
         Rating result = CONVERTER.convertToRatingAtCreationFrom(dto);
@@ -35,7 +35,7 @@ public class RatingConverterTest {
     @Test
     void whenConvertingDomainObjectThenDtoCreatedWithGivenFieldsIncludingId() {
         Rating rating = new Rating( 
-                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null),
+                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
         RatingDto result = CONVERTER.convertToRatingDtoFrom(rating);
@@ -49,10 +49,10 @@ public class RatingConverterTest {
     @Test
     void whenConvertingListOfDomainObjetsThenListOfDtosIsReturned() {
         Rating rating1 = new Rating(null, 
-                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null),
+                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
         Rating rating2 = new Rating(null, 
-                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null),
+                new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
         List<RatingDto> result = CONVERTER.convertToRatingDtoListFrom(List.of(rating1, rating2));

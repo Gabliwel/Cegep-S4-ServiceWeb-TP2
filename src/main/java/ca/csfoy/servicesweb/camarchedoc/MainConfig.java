@@ -31,6 +31,8 @@ import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidat
 import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailServiceImpl;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventDao;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventRepositoryImpl;
@@ -106,7 +108,12 @@ public class MainConfig {
 
     @Bean
     public TrailResource trailController() {
-        return new TrailController(trailRepository(), trailConverter(), validatorFactory());
+        return new TrailController(trailRepository(), trailConverter(), validatorFactory(), trailService());
+    }
+    
+    @Bean
+    public TrailService trailService() {
+        return new TrailServiceImpl(trailRepository());
     }
 
     @Bean

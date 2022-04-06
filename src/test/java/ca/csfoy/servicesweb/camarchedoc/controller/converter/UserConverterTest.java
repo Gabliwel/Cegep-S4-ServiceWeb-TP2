@@ -17,7 +17,7 @@ public class UserConverterTest {
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenUserCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
-        Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null));
+        Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null, null));
         UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
         UserConverter converter = new UserConverter(new TrailConverter());
 
@@ -33,7 +33,7 @@ public class UserConverterTest {
     
     @Test
     void whenConvertingDtoWithIdThenUserCreatedWithGivenFields() {
-        Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null));
+        Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null, null));
         UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
         UserConverter converter = new UserConverter(new TrailConverter());
 
@@ -49,7 +49,7 @@ public class UserConverterTest {
     
     @Test
     void whenConvertingUserThenzDtoCreatedWithGivenFields() {
-        Set<Trail> set = Set.of(new Trail("5", null, null, null, null, null, null, null));
+        Set<Trail> set = Set.of(new Trail("5", null, null, null, null, null, null, null, null));
         User user = new User("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
         UserConverter converter = new UserConverter(new TrailConverter());
 
