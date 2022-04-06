@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
-import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.SearchEventCriteria;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.SearchEventCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 

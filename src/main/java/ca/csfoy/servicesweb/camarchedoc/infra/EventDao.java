@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
 
 public interface EventDao extends JpaRepository<Event, String> {
     

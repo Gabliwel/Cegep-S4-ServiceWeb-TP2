@@ -1,10 +1,13 @@
-package ca.csfoy.servicesweb.camarchedoc.domain;
+package ca.csfoy.servicesweb.camarchedoc.domain.rating;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 @Entity
 public class Rating {

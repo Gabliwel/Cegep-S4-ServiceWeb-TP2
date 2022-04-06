@@ -2,16 +2,16 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
-import ca.csfoy.servicesweb.camarchedoc.api.SearchTrailDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailResource;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
-import ca.csfoy.servicesweb.camarchedoc.domain.SearchTrailCriteria;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.SearchTrailCriteria;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 
 public class TrailController implements TrailResource {
 

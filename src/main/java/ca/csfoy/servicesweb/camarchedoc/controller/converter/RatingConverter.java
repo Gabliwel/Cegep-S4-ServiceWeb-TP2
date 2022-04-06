@@ -3,8 +3,8 @@ package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 
 public class RatingConverter {
     

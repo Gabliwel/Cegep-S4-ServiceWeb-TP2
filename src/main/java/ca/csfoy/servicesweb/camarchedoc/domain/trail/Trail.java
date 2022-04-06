@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.domain;
+package ca.csfoy.servicesweb.camarchedoc.domain.trail;
 
 import java.time.LocalDate;
 
@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+
+import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 
 @Entity
 public class Trail {

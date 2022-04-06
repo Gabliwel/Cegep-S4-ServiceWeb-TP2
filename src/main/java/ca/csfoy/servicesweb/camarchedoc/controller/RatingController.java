@@ -2,13 +2,13 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
-import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
-import ca.csfoy.servicesweb.camarchedoc.api.RatingResource;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
-import ca.csfoy.servicesweb.camarchedoc.domain.RatingRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 
 public class RatingController implements RatingResource {
     

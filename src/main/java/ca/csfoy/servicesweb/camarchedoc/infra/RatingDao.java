@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Rating;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 
 public interface RatingDao extends JpaRepository<Rating, String> {
 

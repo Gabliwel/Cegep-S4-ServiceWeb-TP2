@@ -8,7 +8,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import ca.csfoy.servicesweb.camarchedoc.api.RatingDto;
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 

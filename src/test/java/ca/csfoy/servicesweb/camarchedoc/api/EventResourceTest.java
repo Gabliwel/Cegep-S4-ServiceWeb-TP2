@@ -14,8 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 @SpringBootTest
 @AutoConfigureMockMvc
