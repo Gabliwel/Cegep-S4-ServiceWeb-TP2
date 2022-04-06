@@ -1,5 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -99,10 +104,24 @@ public class RatingResourceTest {
     @Test
     void cantPassValidationCreateRatingEventReturn422UnprocessableEntity() throws Exception {        
         mockMvc.perform(MockMvcRequestBuilders
-                .get(PATH_TO_TEST + SEARCH_PATH + "/" + GET_BAD_ID_RATING)
+                .post(PATH_TO_TEST)
                  .contentType("application/json")
-                 .content(objectMapper.writeValueAsString(new RatingDto("", null, null, 5.0, null))))
+                 .content(objectMapper.writeValueAsString(new RatingDto("", null, null, 5.0, ""))))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
+    }
+    
+    @Test
+    void validCreateRatingEventReturn201Created() throws Exception {        
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .post(PATH_TO_TEST)
+                 .contentType("application/json")
+                 .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of()), 
+                         new TrailDto("1", "bonsoir1", null, null, null, null, null, null, null), 4.0, "WoooooooooooW"))))
+                  .andExpect(MockMvcResultMatchers.status().isCreated())           
+                  .andReturn();
+        
+        String responseAsString = result.getResponse().getContentAsString();
+        Assertions.assertTrue(responseAsString.contains("WoooooooooooW"));
     }
 }

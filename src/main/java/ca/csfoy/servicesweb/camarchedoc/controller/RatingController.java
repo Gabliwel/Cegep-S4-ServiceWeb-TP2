@@ -50,6 +50,12 @@ public class RatingController implements RatingResource {
     public RatingDto create(RatingDto dto) {
         CustomValidator<RatingDto, String> validator = validatorFactory.getRatingValidator();
         validator.validate(dto);
+        if (dto.trail != null) { 
+            validator.validateId(dto.trail.id); 
+        }
+        if (dto.user != null) {
+            validator.validateId(dto.user.id);
+        }
         validator.verify("Rating cannot be created. Invalid format");
         Rating rating = ratingService.createRating(converter.convertToRatingAtCreationFrom(dto));
         return converter.convertToRatingDtoFrom(rating);
