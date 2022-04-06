@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.trail;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

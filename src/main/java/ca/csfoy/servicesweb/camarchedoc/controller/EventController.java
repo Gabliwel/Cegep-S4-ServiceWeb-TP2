@@ -3,14 +3,14 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
-import ca.csfoy.servicesweb.camarchedoc.api.EventResource;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
-import ca.csfoy.servicesweb.camarchedoc.domain.EventRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.SearchEventCriteria;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.SearchEventCriteria;
 
 public class EventController implements EventResource {
 

@@ -4,8 +4,10 @@ import java.time.LocalDate;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 public class EventMother {
     

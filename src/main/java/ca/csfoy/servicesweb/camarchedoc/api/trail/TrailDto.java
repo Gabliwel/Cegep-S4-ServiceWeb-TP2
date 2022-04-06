@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.trail;
 
 import java.time.LocalDate;
 
@@ -13,8 +13,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailStatus;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailDto {
     

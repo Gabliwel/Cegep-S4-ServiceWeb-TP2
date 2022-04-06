@@ -13,11 +13,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.Event;
-import ca.csfoy.servicesweb.camarchedoc.domain.SearchEventCriteria;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
+import ca.csfoy.servicesweb.camarchedoc.domain.event.SearchEventCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)

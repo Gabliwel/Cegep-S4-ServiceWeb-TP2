@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.event;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
 import io.swagger.v3.oas.annotations.Operation;
 
 @RequestMapping(value = EventResource.RESOURCE_PATH, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

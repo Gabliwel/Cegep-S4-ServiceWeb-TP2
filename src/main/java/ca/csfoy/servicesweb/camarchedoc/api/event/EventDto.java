@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.event;
 
 import java.time.LocalDate;
 
@@ -12,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 
 public class EventDto {

@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import ca.csfoy.servicesweb.camarchedoc.domain.Trail;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public interface TrailDao extends JpaRepository<Trail, String> {
 

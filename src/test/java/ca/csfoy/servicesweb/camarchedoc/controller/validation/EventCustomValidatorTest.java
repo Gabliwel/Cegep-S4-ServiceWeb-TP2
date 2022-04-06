@@ -8,10 +8,10 @@ import javax.validation.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import ca.csfoy.servicesweb.camarchedoc.api.EventDto;
-import ca.csfoy.servicesweb.camarchedoc.api.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.domain.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class EventCustomValidatorTest {
     

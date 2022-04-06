@@ -12,6 +12,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class RatingResourceTest {

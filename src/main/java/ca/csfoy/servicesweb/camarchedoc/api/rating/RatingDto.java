@@ -1,4 +1,4 @@
-package ca.csfoy.servicesweb.camarchedoc.api;
+package ca.csfoy.servicesweb.camarchedoc.api.rating;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 
 public class RatingDto {
