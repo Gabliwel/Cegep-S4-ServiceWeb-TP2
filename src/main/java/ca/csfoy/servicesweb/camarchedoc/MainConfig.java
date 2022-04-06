@@ -30,6 +30,8 @@ import ca.csfoy.servicesweb.camarchedoc.controller.validation.RatingCustomValida
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingService;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingServiceImpl;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 import ca.csfoy.servicesweb.camarchedoc.infra.EventDao;
@@ -126,7 +128,7 @@ public class MainConfig {
     
     @Bean
     public RatingConverter ratingConverter() {
-        return new RatingConverter(trailConverter());
+        return new RatingConverter(trailConverter(), userConverter());
     }
     
     @Bean
@@ -136,7 +138,12 @@ public class MainConfig {
 
     @Bean
     public RatingResource ratingController() {
-        return new RatingController(ratingRepository(), ratingConverter(), validatorFactory());
+        return new RatingController(ratingRepository(), ratingConverter(), validatorFactory(), ratingService());
+    }
+    
+    @Bean
+    public RatingService ratingService() {
+        return new RatingServiceImpl(userRepository(), trailRepository(), ratingRepository());
     }
     
     @Bean

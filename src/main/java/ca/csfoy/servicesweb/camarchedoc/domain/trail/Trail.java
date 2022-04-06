@@ -28,23 +28,24 @@ public class Trail {
     private LocalDate lastMaintenanceDate;
     @Enumerated
     private TrailStatus status;
+    private Double averageScore;
 
     public Trail() {}
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty) {
-        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now(), TrailStatus.IN_PREPARATION);
+        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, LocalDate.now(), LocalDate.now(), TrailStatus.IN_PREPARATION, 0.0);
     }
 
     public Trail(String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, LocalDate lastMaintenanceDate) {
-        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, openingDate, lastMaintenanceDate, TrailStatus.IN_PREPARATION);
+        this(IdentifiantGenerator.getNextIdAsString(), name, description, city, difficulty, openingDate, lastMaintenanceDate, TrailStatus.IN_PREPARATION, 0.0);
     }
 
-    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, TrailStatus status) {
-        this(id, name, description, city, difficulty, LocalDate.now(), LocalDate.now(), status);
+    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, TrailStatus status, Double averageScore) {
+        this(id, name, description, city, difficulty, LocalDate.now(), LocalDate.now(), status, averageScore);
     }    
 
     public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
-            LocalDate lastMaintenanceDate, TrailStatus status) {
+            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,6 +54,7 @@ public class Trail {
         this.openingDate = openingDate;
         this.lastMaintenanceDate = lastMaintenanceDate;
         this.status = status;
+        this.averageScore = averageScore;
     }
 
     public String getId() {
@@ -90,4 +92,13 @@ public class Trail {
     public void setTrailready() {
         this.status = TrailStatus.READY;
     }
+    
+    public Double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(Double newScore) {
+        this.averageScore = newScore;
+    }
+
 }

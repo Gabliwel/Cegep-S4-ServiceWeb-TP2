@@ -8,12 +8,19 @@ import javax.persistence.OneToOne;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
+import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 
 @Entity
 public class Rating {
+    
+    public static final Double MIN_NOTE = 1.0;
+    public static final Double MAX_NOTE = 5.0;
 
     @Id
     private String id;
+    @OneToOne
+    @JoinColumn(name = "USER") 
+    private User user;
     @OneToOne
     @JoinColumn(name = "TRAIL") 
     private Trail trail;
@@ -24,12 +31,13 @@ public class Rating {
     
     public Rating() {}
     
-    public Rating(Trail trail, Double note, String comment) {
-        this(IdentifiantGenerator.getNextIdAsString(), trail, note, comment);
+    public Rating(User user, Trail trail, Double note, String comment) {
+        this(IdentifiantGenerator.getNextIdAsString(), user, trail, note, comment);
     }
     
-    public Rating(String id, Trail trail, Double note, String comment) {
+    public Rating(String id, User user, Trail trail, Double note, String comment) {
         this.id = id;
+        this.user = user;
         this.trail = trail;
         this.note = note;
         this.comment = comment;
@@ -37,6 +45,10 @@ public class Rating {
     
     public String getId() {
         return id;
+    }
+    
+    public User getUser() {
+        return user;
     }
     
     public Trail getTrail() {

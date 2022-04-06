@@ -72,7 +72,7 @@ public class RatingResourceTest {
                   .andReturn();     
 
         String responseAsString = result.getResponse().getContentAsString();
-        Assertions.assertTrue(responseAsString.contains("bof....."));
+        Assertions.assertTrue(responseAsString.contains("ark!"));
     }
     
     @Test
@@ -101,7 +101,7 @@ public class RatingResourceTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + SEARCH_PATH + "/" + GET_BAD_ID_RATING)
                  .contentType("application/json")
-                 .content(objectMapper.writeValueAsString(new RatingDto("", null, 5.0, null))))
+                 .content(objectMapper.writeValueAsString(new RatingDto("", null, null, 5.0, null))))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
     }

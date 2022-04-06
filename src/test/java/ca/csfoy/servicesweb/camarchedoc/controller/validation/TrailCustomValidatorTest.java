@@ -20,7 +20,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithValidInputsThenValidationPass() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertDoesNotThrow(() -> validator.verify("test"));
@@ -29,7 +29,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullNameThenValidationFails() {
         TrailDto dto = new TrailDto("3", "", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -38,7 +38,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullDescriptionThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "", "Toronto", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -47,7 +47,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullCityThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -56,7 +56,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullDifficultyThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", null,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -65,7 +65,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullOpeningDateThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
-            null, LocalDate.now().minusYears(5), null);
+            null, LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -74,7 +74,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithNullLastMaintenanceDateThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), null, null);
+            LocalDate.now().minusYears(10), null, null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
@@ -83,7 +83,7 @@ public class TrailCustomValidatorTest {
     @Test
     void whenValidatingTrailDtoWithLastMaintenanceDateEarlierThanOpeningDateThenValidationFails() {
         TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(15), null);
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(15), null, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));

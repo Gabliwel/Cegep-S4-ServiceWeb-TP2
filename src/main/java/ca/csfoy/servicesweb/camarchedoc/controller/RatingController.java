@@ -9,17 +9,20 @@ import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingService;
 
 public class RatingController implements RatingResource {
     
     private final RatingRepository repository;
     private final RatingConverter converter;
     private final CustomValidatorFactory validatorFactory;
+    private final RatingService ratingService;
     
-    public RatingController(RatingRepository repository, RatingConverter converter, CustomValidatorFactory validatorFactory) {
+    public RatingController(RatingRepository repository, RatingConverter converter, CustomValidatorFactory validatorFactory, RatingService ratingService) {
         this.repository = repository;
         this.converter = converter;
         this.validatorFactory = validatorFactory;
+        this.ratingService = ratingService;
     }
 
     @Override
@@ -48,7 +51,7 @@ public class RatingController implements RatingResource {
         CustomValidator<RatingDto, String> validator = validatorFactory.getRatingValidator();
         validator.validate(dto);
         validator.verify("Rating cannot be created. Invalid format");
-        Rating rating = repository.create(converter.convertToRatingAtCreationFrom(dto));
+        Rating rating = ratingService.createRating(converter.convertToRatingAtCreationFrom(dto));
         return converter.convertToRatingDtoFrom(rating);
     }
 
