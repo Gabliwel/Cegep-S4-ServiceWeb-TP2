@@ -46,9 +46,10 @@ public class TrailDto {
     @Past (message = "Last maintenance date must be a past date.", groups = {Default.class, CreateGroupValidation.class})
     public final LocalDate lastMaintenanceDate;
     public final TrailStatus status;
+    public final Double averageScore;
 
     public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
-            LocalDate lastMaintenanceDate, TrailStatus status) {
+            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -57,5 +58,6 @@ public class TrailDto {
         this.openingDate = openingDate;
         this.lastMaintenanceDate = lastMaintenanceDate;
         this.status = status;
+        this.averageScore = averageScore;
     }
 }

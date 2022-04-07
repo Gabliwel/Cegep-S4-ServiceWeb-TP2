@@ -27,9 +27,9 @@ public class TrailResourceTest {
     private static final String BAD_PATH_TO_PUBLISH = PATH_TO_TEST + "/ready" + "/" + "2" + "/";
     
     private TrailDto dto1 = new TrailDto("1", "bonsoir1", "premier trail", "quebec", TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), 
-            LocalDate.of(2021, 12, 31), TrailStatus.IN_PREPARATION);
+            LocalDate.of(2021, 12, 31), TrailStatus.IN_PREPARATION, null);
     private TrailDto dto2 = new TrailDto("2", "bonsoir2", "deuxieme trail", "montreal", TrailDifficulty.FAMILY, LocalDate.of(1998, 12, 31), 
-            LocalDate.of(2021, 12, 30), TrailStatus.READY);
+            LocalDate.of(2021, 12, 30), TrailStatus.READY, null);
 
     @Autowired
     private MockMvc mockMvc;
@@ -55,7 +55,7 @@ public class TrailResourceTest {
                 .post(PATH_TO_TEST)
                   .contentType("application/json")
                   .content(objectMapper.writeValueAsString(new TrailDto("t3", "name3", "a", "city3", TrailDifficulty.FAMILY, 
-                          LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION))))
+                          LocalDate.of(2021, 12, 1), LocalDate.of(2021, 12, 1), TrailStatus.IN_PREPARATION, null))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();     
 
