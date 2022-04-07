@@ -28,6 +28,7 @@ public class RatingResourceTest {
     private static final String GET_ID_RATING = "1";
     private static final String GET_INVALID_ID_RATING = "999";
     private static final String GET_BAD_ID_RATING = "A";
+    private static final String CONTENT_TYPE = "application/json";
  
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +40,7 @@ public class RatingResourceTest {
     void validGetByRatingIdEventReturn200Ok() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + GET_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isOk())           
                   .andReturn();     
 
@@ -51,7 +52,7 @@ public class RatingResourceTest {
     void invalidGetByRatingIdEventReturn404NotFound() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + GET_INVALID_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
                   .andReturn();     
 
@@ -63,7 +64,7 @@ public class RatingResourceTest {
     void cantPassValidationGetByRatingIdEventReturn422UnprocessableEntity() throws Exception {        
         mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + GET_BAD_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
     }
@@ -72,7 +73,7 @@ public class RatingResourceTest {
     void validGetByTrailIdEventReturn200Ok() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + SEARCH_PATH + "/" + GET_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isOk())           
                   .andReturn();     
 
@@ -84,7 +85,7 @@ public class RatingResourceTest {
     void invalidGetByTrailIdEventReturn404NotFound() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + SEARCH_PATH + "/" + GET_INVALID_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
                   .andReturn();     
 
@@ -96,7 +97,7 @@ public class RatingResourceTest {
     void cantPassValidationGetByTrailIdEventReturn422UnprocessableEntity() throws Exception {        
         mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + SEARCH_PATH + "/" + GET_BAD_ID_RATING)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
     }
@@ -105,7 +106,7 @@ public class RatingResourceTest {
     void cantPassValidationCreateRatingEventReturn422UnprocessableEntity() throws Exception {        
         mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
-                 .contentType("application/json")
+                 .contentType(CONTENT_TYPE)
                  .content(objectMapper.writeValueAsString(new RatingDto("", null, null, 5.0, ""))))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
@@ -115,7 +116,7 @@ public class RatingResourceTest {
     void validCreateRatingEventReturn201Created() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
-                 .contentType("application/json")
+                 .contentType(CONTENT_TYPE)
                  .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of()), 
                          new TrailDto("1", "bonsoir1", null, null, null, null, null, null, null), 4.0, "WoooooooooooW"))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           

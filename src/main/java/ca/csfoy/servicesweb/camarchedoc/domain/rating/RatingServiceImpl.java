@@ -41,7 +41,8 @@ public class RatingServiceImpl implements RatingService {
             return ratingToCreate;
             
         } else {
-            throw new ObjectInvalidValueException("Rating note should be between " + Rating.MIN_NOTE.toString() + " and " + Rating.MAX_NOTE.toString());
+            throw new ObjectInvalidValueException("Rating note should be between " + Rating.MIN_NOTE.toString() + " and " + Rating.MAX_NOTE.toString()
+            + "your note" + ratingToCreate.getNote());
         }
     }
 

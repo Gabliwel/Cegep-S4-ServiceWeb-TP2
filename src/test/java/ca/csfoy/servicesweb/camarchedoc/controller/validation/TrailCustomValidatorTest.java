@@ -14,79 +14,95 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class TrailCustomValidatorTest {
     
+    private static final String ANY_ID = "3";
+    private static final String ANY_NAME = "Promenade des pommes";
+    private static final String ANY_DESCRIPTION = "Promenade en apprenant comment faire un backflip.";
+    private static final String ANY_CITY = "Toronto";
+    private static final TrailDifficulty ANY_DIFFICULTY = TrailDifficulty.BEGINNER;
+    private static final String ANY_MESSAGE = "test";
+    
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private TrailCustomValidator validator = new TrailCustomValidator(defaultValidator);
     
     @Test
     void whenValidatingTrailDtoWithValidInputsThenValidationPass() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertDoesNotThrow(() -> validator.verify("test"));
+        Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullNameThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, "", ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullDescriptionThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, "", ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullCityThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, "", TrailDifficulty.BEGINNER,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullDifficultyThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", null,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, null,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullOpeningDateThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             null, LocalDate.now().minusYears(5), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithNullLastMaintenanceDateThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), null, null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
     void whenValidatingTrailDtoWithLastMaintenanceDateEarlierThanOpeningDateThenValidationFails() {
-        TrailDto dto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", TrailDifficulty.BEGINNER,
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(15), null, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
+    }
+    
+    @Test
+    void whenValidatingTrailDtoWithValidStringDtoThenValidationPass() {
+        TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
+            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
+            validator.validate(dto);
+        
+        Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
     }
 
 }

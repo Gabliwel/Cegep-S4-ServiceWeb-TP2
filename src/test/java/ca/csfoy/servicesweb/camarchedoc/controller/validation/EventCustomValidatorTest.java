@@ -15,11 +15,13 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class EventCustomValidatorTest {
     
+    private static final String ANY_MESSAGE = "test";
+    
+    private static final TrailDto ANY_TRAIL_DTO = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
+            TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
+    
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private EventCustomValidator validator = new EventCustomValidator(defaultValidator);
-    
-    private final TrailDto ANY_TRAIL_DTO = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
-            TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
     
     @Test
     void whenValidatingEventDtoWithValidInputsThenValidationPass() {
@@ -27,7 +29,7 @@ public class EventCustomValidatorTest {
             LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
             validator.validate(dto);
         
-        Assertions.assertDoesNotThrow(() -> validator.verify("test"));
+        Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
@@ -36,7 +38,7 @@ public class EventCustomValidatorTest {
                 LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
@@ -45,7 +47,7 @@ public class EventCustomValidatorTest {
                 LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
@@ -54,7 +56,7 @@ public class EventCustomValidatorTest {
                 null, ANY_TRAIL_DTO, "René Deschamps");
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
@@ -63,7 +65,7 @@ public class EventCustomValidatorTest {
                 LocalDate.now().plusYears(1), null, "René Deschamps");
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
     
     @Test
@@ -72,7 +74,7 @@ public class EventCustomValidatorTest {
                 LocalDate.now().plusYears(1), ANY_TRAIL_DTO, null);
             validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify("test"));
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
     }
 
 }
