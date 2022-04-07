@@ -20,9 +20,10 @@ public class TrailMother {
     public static final LocalDate ANY_MAINTENANCE_DATE = LocalDate.now().minusDays(10);
     public static final String ANY_ORGANIZER = "Event Organizer " + ANY_ID;
     public static final TrailStatus ANY_STATUS = TrailStatus.IN_PREPARATION;
+    public static final Double ANY_AVERAGE_SCORE = 4.0;
     
     public static TrailDto getEventDtoWithId(String id) {
-        return new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY, ANY_OPENING_DATE, ANY_MAINTENANCE_DATE, ANY_STATUS);
+        return new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY, ANY_OPENING_DATE, ANY_MAINTENANCE_DATE, ANY_STATUS, ANY_AVERAGE_SCORE);
     }
     
     public static Trail getEventWithAutomaticId() {
