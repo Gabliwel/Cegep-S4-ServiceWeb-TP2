@@ -23,6 +23,9 @@ public class EventCustomValidatorTest {
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private EventCustomValidator validator = new EventCustomValidator(defaultValidator);
     
+    private final TrailDto ANY_TRAIL_DTO = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
+            TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
+    
     @Test
     void whenValidatingEventDtoWithValidInputsThenValidationPass() {
         EventDto dto = new EventDto("10", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",

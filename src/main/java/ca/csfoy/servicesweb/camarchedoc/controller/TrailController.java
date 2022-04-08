@@ -12,17 +12,20 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.SearchTrailCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
 
 public class TrailController implements TrailResource {
 
     private final TrailRepository repository;
     private final TrailConverter converter;
     private final CustomValidatorFactory validatorFactory;
+    private final TrailService service;
 
-    public TrailController(TrailRepository repository, TrailConverter converter, CustomValidatorFactory validatorFactory) {
+    public TrailController(TrailRepository repository, TrailConverter converter, CustomValidatorFactory validatorFactory, TrailService service) {
         this.repository = repository;
         this.converter = converter;
         this.validatorFactory = validatorFactory;
+        this.service = service;
     }
 
     @Override
@@ -73,6 +76,6 @@ public class TrailController implements TrailResource {
     
     @Override
     public void updateToReady(String id) {
-        repository.setTrailToReady(id);
+        service.verifyStatus(id);
     }
 }

@@ -4,11 +4,9 @@ import java.util.List;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
-import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.SearchTrailCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
-import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailRepositoryImpl implements TrailRepository {
 
@@ -81,12 +79,8 @@ public class TrailRepositoryImpl implements TrailRepository {
     public void setTrailToReady(String id) {
         if (trailDao.existsById(id)) {
             Trail trailToSetReady = trailDao.getById(id);
-            if (trailToSetReady.getStatus() == TrailStatus.IN_PREPARATION) {
-                trailToSetReady.setTrailready();
-                trailDao.save(trailToSetReady);
-            } else {
-                throw new ObjetAlreadySetToDesiredValue("The trail with id (" + id + ") is already set to ready.");
-            }
+            trailToSetReady.setTrailready();
+            trailDao.save(trailToSetReady);
         } else {
             throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist, and therefore cannot be modified.");
         }
