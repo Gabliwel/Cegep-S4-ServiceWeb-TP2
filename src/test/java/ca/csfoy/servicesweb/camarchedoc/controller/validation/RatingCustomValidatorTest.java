@@ -28,13 +28,6 @@ public class RatingCustomValidatorTest {
     
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private RatingCustomValidator validator = new RatingCustomValidator(defaultValidator);
-    
-    private final String VALID_ID = "999";
-    private final Double VALID_NOTE = 5.0;
-    private final String VALID_COMMENT = null;
-    
-    private final TrailDto VALID_TRAIL = new TrailDto("999", "Nom", "Desc", "City", TrailDifficulty.BEGINNER,
-            LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
 
     @Test
     void whenValidatingRatingDtoWithValidInputsThenValidationPass() {

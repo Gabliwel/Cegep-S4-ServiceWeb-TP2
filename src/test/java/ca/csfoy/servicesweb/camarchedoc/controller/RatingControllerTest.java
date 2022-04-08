@@ -16,13 +16,15 @@ import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFac
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.RatingCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingService;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)
 public class RatingControllerTest {
-    
-    private static final String ANY_ID = "1";
 
+    @Mock
+    private RatingService service;
+    
     @Mock
     private RatingRepository repository;
     

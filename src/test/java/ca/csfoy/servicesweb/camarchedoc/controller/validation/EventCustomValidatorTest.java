@@ -17,19 +17,16 @@ public class EventCustomValidatorTest {
     
     private static final String ANY_MESSAGE = "test";
     
-    private static final TrailDto ANY_TRAIL_DTO = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
-            TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
-    
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private EventCustomValidator validator = new EventCustomValidator(defaultValidator);
     
-    private final TrailDto ANY_TRAIL_DTO = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
+    private final TrailDto anyTrailDto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
             TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
     
     @Test
     void whenValidatingEventDtoWithValidInputsThenValidationPass() {
         EventDto dto = new EventDto("10", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
-            LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
+            LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
         Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
@@ -38,7 +35,7 @@ public class EventCustomValidatorTest {
     @Test
     void whenValidatingEventDtoWithNullNameThenValidationFails() {
         EventDto dto = new EventDto("3", "", "Promenade en apprenant comment faire un backflip.",
-                LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
+                LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -47,7 +44,7 @@ public class EventCustomValidatorTest {
     @Test
     void whenValidatingEventDtoWithNullDescriptionThenValidationFails() {
         EventDto dto = new EventDto("3", "Promenade des pommes", "",
-                LocalDate.now().plusYears(1), ANY_TRAIL_DTO, "René Deschamps");
+                LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -56,7 +53,7 @@ public class EventCustomValidatorTest {
     @Test
     void whenValidatingEventDtoWithNullStartingDateThenValidationFails() {
         EventDto dto = new EventDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
-                null, ANY_TRAIL_DTO, "René Deschamps");
+                null, anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -74,7 +71,7 @@ public class EventCustomValidatorTest {
     @Test
     void whenValidatingEventDtoWithNullOrganizerThenValidationFails() {
         EventDto dto = new EventDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
-                LocalDate.now().plusYears(1), ANY_TRAIL_DTO, null);
+                LocalDate.now().plusYears(1), anyTrailDto, null);
             validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));

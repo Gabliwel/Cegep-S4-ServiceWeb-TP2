@@ -100,7 +100,7 @@ public class TrailCustomValidatorTest {
     void whenValidatingTrailDtoWithValidStringDtoThenValidationPass() {
         TrailDto dto = new TrailDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION, ANY_CITY, ANY_DIFFICULTY,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
-            validator.validate(dto);
+            validator.validate(ANY_ID, dto);
         
         Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
     }
