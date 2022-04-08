@@ -43,21 +43,20 @@ public class RatingControllerTest {
     @Test
     void whenCreateWithValidRatingThenRatingIsReturnedAsDto() {
         RatingDto dto = Mockito.mock(RatingDto.class);
-        RatingDto returned = Mockito.mock(RatingDto.class);
         Rating rating = Mockito.mock(Rating.class);
-        Mockito.when(repository.create(rating)).thenReturn(rating);
         Mockito.when(converter.convertToRatingAtCreationFrom(dto)).thenReturn(rating);
-        Mockito.when(converter.convertToRatingDtoFrom(rating)).thenReturn(returned);
-        
+        Mockito.when(service.createRating(rating)).thenReturn(rating);
+        Mockito.when(converter.convertToRatingDtoFrom(rating)).thenReturn(dto);
+
         RatingCustomValidator eventValidator = Mockito.mock(RatingCustomValidator.class);
-        
+
         Mockito.when(validatorFactory.getRatingValidator()).thenReturn(eventValidator);
-        
+
         RatingDto dtoCreated = controller.create(dto);
-        
-        Mockito.verify(repository).create(rating);
+
+        Mockito.verify(service).createRating(rating);
         Mockito.verify(converter).convertToRatingAtCreationFrom(dto);
-        Assertions.assertSame(returned, dtoCreated);        
+        Assertions.assertSame(dto, dtoCreated);
     }
     
 }
