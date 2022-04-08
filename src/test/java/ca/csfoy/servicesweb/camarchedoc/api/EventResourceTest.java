@@ -28,6 +28,7 @@ public class EventResourceTest {
     private static final String GET_ID = "2";
     private static final String DELETE_ID = "1";
     private static final String ANY_INVALID_ID = "9";
+    private static final String CONTENT_TYPE = "application/json";
     
     private TrailDto trailDto = new TrailDto("1", "bonsoir1", "premier trail", "quebec", 
             TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY, null);
@@ -46,7 +47,7 @@ public class EventResourceTest {
     void validGetByIdEventReturn200Ok() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + GET_ID)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isOk())           
                   .andReturn();     
 
@@ -58,7 +59,7 @@ public class EventResourceTest {
     void validGetByIdEventReturn404NotFound() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + ANY_INVALID_ID)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
                   .andReturn();     
 
@@ -70,7 +71,7 @@ public class EventResourceTest {
     void validUpdateEventReturn204NoContent() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put(PATH_TO_TEST + "/" + UPDATE_ID)
-                  .contentType("application/json")
+                  .contentType(CONTENT_TYPE)
                   .content(objectMapper.writeValueAsString(dto1)))
                   .andExpect(MockMvcResultMatchers.status().isNoContent())           
                   .andReturn();     
@@ -83,7 +84,7 @@ public class EventResourceTest {
     void invalidUpdateEventReturn404NotFoundAndErrorMessage() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put(PATH_TO_TEST + "/" + ANY_INVALID_ID)
-                  .contentType("application/json")
+                  .contentType(CONTENT_TYPE)
                   .content(objectMapper.writeValueAsString(new EventDto("abcd", "event de bob1", "un endroit magnifiiiiique", 
                           LocalDate.of(2022, 01, 02), trailDto, "bob1"))))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
@@ -97,7 +98,7 @@ public class EventResourceTest {
     void validDeleteEventReturn204NoContent() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .delete(PATH_TO_TEST + "/" + DELETE_ID)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isNoContent())           
                   .andReturn();     
 
@@ -109,7 +110,7 @@ public class EventResourceTest {
     void invalidDeleteEventReturn404NotFoundAndErrorMessage() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .delete(PATH_TO_TEST + "/" + ANY_INVALID_ID)
-                  .contentType("application/json"))
+                  .contentType(CONTENT_TYPE))
                   .andExpect(MockMvcResultMatchers.status().isNotFound())           
                   .andReturn();     
 

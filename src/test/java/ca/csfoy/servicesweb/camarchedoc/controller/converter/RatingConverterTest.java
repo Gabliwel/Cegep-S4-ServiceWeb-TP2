@@ -1,21 +1,24 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
+import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 
 public class RatingConverterTest {
     
     public static final RatingConverter CONVERTER = 
-            new RatingConverter(new TrailConverter());
+            new RatingConverter(new TrailConverter(), new UserConverter(new TrailConverter()));
     
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenRatingCreatedWithGivenFieldsAndGeneratedId() {
@@ -27,6 +30,7 @@ public class RatingConverterTest {
         Rating result = CONVERTER.convertToRatingAtCreationFrom(dto);
 
         Assertions.assertEquals((nextId + 1) + "", result.getId());
+        Assertions.assertEquals(dto.user.id, result.getUser().getId());
         Assertions.assertEquals(dto.trail.id, result.getTrail().getId());
         Assertions.assertEquals(dto.note, result.getNote());
         Assertions.assertEquals(dto.comment, result.getComment());
@@ -41,6 +45,7 @@ public class RatingConverterTest {
         RatingDto result = CONVERTER.convertToRatingDtoFrom(rating);
 
         Assertions.assertEquals(result.id, rating.getId());
+        Assertions.assertEquals(result.user.id, rating.getUser().getId());
         Assertions.assertEquals(result.trail.id, rating.getTrail().getId());
         Assertions.assertEquals(result.note, rating.getNote());
         Assertions.assertEquals(result.comment, rating.getComment());

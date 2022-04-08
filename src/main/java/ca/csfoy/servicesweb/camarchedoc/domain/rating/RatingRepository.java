@@ -8,6 +8,8 @@ public interface RatingRepository {
     List<Rating> getAll();
     
     List<Rating> searchByTrailId(String id);
+    
+    List<Rating> getByTrailId(String id);
 
     Rating create(Rating event);
 

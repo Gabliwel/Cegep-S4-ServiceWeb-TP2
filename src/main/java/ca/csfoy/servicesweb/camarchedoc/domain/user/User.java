@@ -1,5 +1,6 @@
 package ca.csfoy.servicesweb.camarchedoc.domain.user;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -70,6 +71,13 @@ public class User {
 
     public Set<Trail> getTrailsToTry() {
         return trailsToTry;
+    }
+
+    public void addFavoriteTrail(Trail trail) {
+        if (this.favoritesTrails == null) {
+            favoritesTrails = new HashSet<Trail>();
+        }
+        this.favoritesTrails.add(trail);
     }
 }
 
