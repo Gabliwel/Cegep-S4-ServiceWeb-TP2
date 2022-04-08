@@ -15,6 +15,7 @@ import ca.csfoy.servicesweb.camarchedoc.api.ErrorMessageDto;
 import ca.csfoy.servicesweb.camarchedoc.api.MutipleErrorMessageDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectInvalidValueException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
@@ -58,6 +59,17 @@ public class ErrorHandler {
                 + ex.getMessage() 
                 + ExceptionUtils.getStackTrace(ex));
         return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.BAD_REQUEST.toString(), errorIdentifier.toString(), ex.getMessage());
+    }
+    
+    @ExceptionHandler(ObjectInvalidValueException.class)
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
+    public ErrorMessageDto resourceInvalidValueException(ObjectInvalidValueException ex) {
+        String errorIdentifier = ex.hashCode() + "";
+        logger.error(LocalDateTime.now().toString() 
+                + " [" + errorIdentifier + "]: " 
+                + ex.getMessage() 
+                + ExceptionUtils.getStackTrace(ex));
+        return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.UNPROCESSABLE_ENTITY.toString(), errorIdentifier.toString(), ex.getMessage());
     }
     
     @ExceptionHandler(ObjectAlreadyExistsException.class)

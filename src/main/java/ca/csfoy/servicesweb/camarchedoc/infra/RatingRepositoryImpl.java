@@ -50,4 +50,13 @@ public class RatingRepositoryImpl implements RatingRepository {
     public Rating create(Rating event) {
         return ratingDao.save(event);
     }
+
+    @Override
+    public List<Rating> getByTrailId(String id) {
+        if (trailDao.findById(id).isPresent()) {
+            return ratingDao.searchByTrailId(id);
+        } else {
+            throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist");
+        }
+    }
 }

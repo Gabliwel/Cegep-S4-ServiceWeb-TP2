@@ -28,7 +28,6 @@ public class Trail {
     private LocalDate lastMaintenanceDate;
     @Enumerated
     private TrailStatus status;
-    
     private Double averageScore;
 
     public Trail() {}
@@ -93,8 +92,13 @@ public class Trail {
     public void setTrailready() {
         this.status = TrailStatus.READY;
     }
-
+    
     public Double getAverageScore() {
         return averageScore;
     }
+
+    public void setAverageScore(Double newScore) {
+        this.averageScore = newScore;
+    }
+
 }
