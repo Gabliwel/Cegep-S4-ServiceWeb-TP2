@@ -19,9 +19,11 @@ public class Rating {
     @Id
     private String id;
     @OneToOne
+    //FIXME: 'USER' pas le meilleur nom de colonne, vu que c'est l'ID qui est stocké!
     @JoinColumn(name = "USER") 
     private User user;
     @OneToOne
+    //FIXME: 'TRAIL' pas le meilleur nom de colonne, vu que c'est l'ID qui est stocké!
     @JoinColumn(name = "TRAIL") 
     private Trail trail;
     @Column(length = 50, nullable = false)

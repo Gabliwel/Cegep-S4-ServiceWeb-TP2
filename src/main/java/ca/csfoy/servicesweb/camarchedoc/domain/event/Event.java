@@ -24,6 +24,7 @@ public class Event {
     @Column(nullable = false)
     private LocalDate startDate;
     @OneToOne
+    //FIXME: 'TRAIL' n'est pas le meilleur nom de colonne, vu que c'est l'id qui est stocké!
     @JoinColumn(name = "TRAIL") 
     private Trail trail;
     @Column(length = 50, nullable = false)

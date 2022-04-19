@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ca.csfoy.servicesweb.camarchedoc.api.HealthResource;
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingResource;
