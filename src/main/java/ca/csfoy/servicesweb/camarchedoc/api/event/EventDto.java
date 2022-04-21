@@ -20,8 +20,10 @@ public class EventDto {
     public static final String ID_VALID_PATTERN = "[0-9]+";
     public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 
+    //FIXME: Vos validations sur le UPDATE (default) ne fonctionnent pas!
     @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
+    //FIXME: NotBlank inclut NotNull et NotEmpty
     @NotNull (message = "Name must not be null.", groups = {Default.class, CreateGroupValidation.class})
     @NotEmpty (message = "Name must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Name must not be blank.", groups = {Default.class, CreateGroupValidation.class})

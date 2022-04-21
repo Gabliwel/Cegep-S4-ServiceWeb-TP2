@@ -18,11 +18,14 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailDto {
     
+	//FIXME: Le pattern de validation de l'ID est le même partout, mais il est défini dans chaque classe.  À généraliser à un seul endroit.
     public static final String ID_VALID_PATTERN = "[0-9]+";
     public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 
+    //FIXME: Vos validations sur le UPDATE (default) ne fonctionnent pas!
     @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
+    //FIXME: NotBlank inclut NotNull et NotEmpty
     @NotNull (message = "Name must not be null.", groups = {Default.class, CreateGroupValidation.class})
     @NotEmpty (message = "Name must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Name must not be blank.", groups = {Default.class, CreateGroupValidation.class})
@@ -45,6 +48,7 @@ public class TrailDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past (message = "Last maintenance date must be a past date.", groups = {Default.class, CreateGroupValidation.class})
     public final LocalDate lastMaintenanceDate;
+    //FIXME: Le statut n'est pas supposé être visible par l'utilisateur (c'est un indicateur interne)
     public final TrailStatus status;
     public final Double averageScore;
 

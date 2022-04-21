@@ -24,6 +24,7 @@ public interface RatingResource {
 
     String RESOURCE_PATH = "/ratings";
     String PATH_VARIABLE_ID = "id";
+    //FIXME: Idéalement, le chemin de la ressource utilise des noms (par exemple /ratings/trails/:id), tous en minuscule
     String SEARCH_PATH = "/trailSearch";
     String PATH_WITH_ID = "/{" + PATH_VARIABLE_ID + "}";
     
@@ -54,11 +55,11 @@ public interface RatingResource {
     List<RatingDto> search(@PathVariable(RatingResource.PATH_VARIABLE_ID) String id);
 
     @Operation(summary = "Crée une nouvelle appreciation de marche avec les informations données.")
-    @ApiResponses(value = { @ApiResponse(responseCode = "201",
-            description = "appreciation créé",
-            content = { @Content(mediaType = "application/json", schema = @Schema(implementation = RatingDto.class)) }), @ApiResponse(responseCode = "400",
-                    description = "appreciation invalide",
-                    content = @Content), @ApiResponse(responseCode = "415", description = "appreciation déjà existant", content = @Content) })
+    @ApiResponses(value = { 
+			@ApiResponse(responseCode = "201", description = "appreciation créé", content = {
+					@Content(mediaType = "application/json", schema = @Schema(implementation = RatingDto.class)) }),
+			@ApiResponse(responseCode = "400", description = "appreciation invalide", content = @Content), 
+			@ApiResponse(responseCode = "415", description = "appreciation déjà existant", content = @Content) })
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     RatingDto create(@RequestBody RatingDto dto);

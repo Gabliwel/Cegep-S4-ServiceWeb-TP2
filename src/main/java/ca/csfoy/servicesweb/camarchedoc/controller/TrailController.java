@@ -36,6 +36,7 @@ public class TrailController implements TrailResource {
         return converter.convertToTrailDtoFrom(repository.getById(id));
     }
 
+    //FIXME: Le GetAll (trail) n'est pas supposé retourné des sentiers qui ne sont pas 'PRET/READY'
     @Override
     public List<TrailDto> getAll() {
         return converter.convertTrailListFrom(repository.getAll());
@@ -61,6 +62,7 @@ public class TrailController implements TrailResource {
         
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validate(id, dto);
+        //FIXME: Votre message d'erreur est erroné, cette méthode n,est pas pour la création
         validator.verify("Trail cannot be created. Invalid information");
         
         repository.modify(id, converter.convertToTrailFrom(dto));
@@ -70,6 +72,7 @@ public class TrailController implements TrailResource {
     public void delete(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
+        //FIXME: Votre message est erroné, cette méthode n'est pas pour l'obtention
         validator.verify("Trail cannot be obtained. Invalid ID format");
         repository.delete(id);
     }
