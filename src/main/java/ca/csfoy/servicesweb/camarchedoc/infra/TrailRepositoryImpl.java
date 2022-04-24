@@ -77,9 +77,12 @@ public class TrailRepositoryImpl implements TrailRepository {
 
     @Override
     public void setTrailToReady(String id) {
+    	//FIXME: Vous allez déjà chercher votre trail dans votre service, la vérification de l'existance devrait se faire là.
         if (trailDao.existsById(id)) {
             Trail trailToSetReady = trailDao.getById(id);
+            //FIXME: Ceci est définitivement à mettre dans le service, le repo n'est pas supposé modifié les objets de domaine.
             trailToSetReady.setTrailready();
+            //FIXME: Vous faites un simple 'save' comme dans la méthode 'modify', pourquoi ne pas appeler cette méthode dans votre service à la place et deleter cette fonction-ci au complet?
             trailDao.save(trailToSetReady);
         } else {
             throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist, and therefore cannot be modified.");

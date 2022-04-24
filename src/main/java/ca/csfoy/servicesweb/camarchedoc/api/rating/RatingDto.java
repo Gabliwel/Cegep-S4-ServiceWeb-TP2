@@ -23,6 +23,7 @@ public class RatingDto {
     public final UserDto user;
     @NotNull (message = "User must not be null.", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDto trail;
+    //FIXME: Vous devez valider que votre note est entre 1 et 5
     public final Double note;
     @Size(max = 140, message = "Comment must have less than 140 caracters.", groups = {Default.class, CreateGroupValidation.class})
     public final String comment;

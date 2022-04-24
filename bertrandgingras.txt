@@ -1,0 +1,1060 @@
+FIXME (23):
+Description	Resource	Path	Location	Type
+FIXME: 'TRAIL' n'est pas le meilleur nom de colonne, vu que c'est l'id qui est stocké!	Event.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/event	line 27	Java Task
+FIXME: 'TRAIL' pas le meilleur nom de colonne, vu que c'est l'ID qui est stocké!	Rating.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 26	Java Task
+FIXME: 'USER' pas le meilleur nom de colonne, vu que c'est l'ID qui est stocké!	Rating.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 22	Java Task
+FIXME: C'est un bris du Tell Don't Ask de faire le calcul à la place de l'objet et ensuite de lui dire, voici le résultat!	RatingServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 32	Java Task
+FIXME: Ceci est définitivement à mettre dans le service, le repo n'est pas supposé modifié les objets de domaine.	TrailRepositoryImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/infra	line 83	Java Task
+FIXME: ce n'est pas le rôle du service de faire des calculs, c'est son rôle de le déleguer au bon objet (ici Trail)	RatingServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 31	Java Task
+FIXME: Cette validation va dans votre DTO!	RatingServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 27	Java Task
+FIXME: Idéalement, le chemin de la ressource utilise des noms (par exemple /ratings/trails/:id), tous en minuscule	RatingResource.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/rating	line 27	Java Task
+FIXME: il existe une lambda pour calculer la moyenne sur une Collection: collection.stream().average().	RatingServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 34	Java Task
+FIXME: Le GetAll (trail) n'est pas supposé retourné des sentiers qui ne sont pas 'PRET/READY'	TrailController.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/controller	line 39	Java Task
+FIXME: Le pattern de validation de l'ID est le même partout, mais il est défini dans chaque classe.  À généraliser à un seul endroit.	TrailDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/trail	line 21	Java Task
+FIXME: Le statut n'est pas supposé être visible par l'utilisateur (c'est un indicateur interne)	TrailDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/trail	line 51	Java Task
+FIXME: Même chose ici, déléguez la responsabilité de déterminer si il faut ajouter la trail aux favoris en donnant le rating.  Votre méthode addFavorite déterminera elle-même si elle fait l'ajout ou non!	RatingServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/rating	line 41	Java Task
+FIXME: NotBlank inclut NotNull et NotEmpty	EventDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/event	line 26	Java Task
+FIXME: NotBlank inclut NotNull et NotEmpty	TrailDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/trail	line 28	Java Task
+FIXME: Vos validations sur le UPDATE (default) ne fonctionnent pas!	EventDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/event	line 23	Java Task
+FIXME: Vos validations sur le UPDATE (default) ne fonctionnent pas!	TrailDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/trail	line 25	Java Task
+FIXME: Votre message d'erreur est erroné, cette méthode n,est pas pour la création	TrailController.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/controller	line 65	Java Task
+FIXME: Votre message est erroné, cette méthode n'est pas pour l'obtention	TrailController.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/controller	line 75	Java Task
+FIXME: Vous allez déjà chercher votre trail dans votre service, la vérification de l'existance devrait se faire là.	TrailRepositoryImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/infra	line 80	Java Task
+FIXME: Vous brisez le Tell Don't ASK ici, en demandant de l'info à votre trail et en prenant la décision pour elle.	TrailServiceImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/domain/trail	line 19	Java Task
+FIXME: Vous devez valider que votre note est entre 1 et 5	RatingDto.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/api/rating	line 26	Java Task
+FIXME: Vous faites un simple 'save' comme dans la méthode 'modify', pourquoi ne pas appeler cette méthode dans votre service à la place et deleter cette fonction-ci au complet?	TrailRepositoryImpl.java	/camarchedoc_bertrand_gingras/src/main/java/ca/csfoy/servicesweb/camarchedoc/infra	line 85	Java Task
+
+Validations pour Trails:
+INFO - US5: [Validations] Invalid format id returned 422
+INFO - US5: [Validations] -> Error Message(s): [ID must be numbers only.]
+INFO - US5: [Validations] Invalid format id returned 422
+INFO - US5: [Validations] -> Error Message(s): [ID must be numbers only.]
+INFO - US5: [Validation] OnCreateTrail, Validation Null name -> Error Message(s): Trail cannot be created. Invalid Informations List: [Name must not be null., Name must not be blank., Name must not be empty.]
+INFO - US5: [Validation] OnCreateTrail, Validation Empty name -> Error Message(s): Trail cannot be created. Invalid Informations List: [Name must not be blank., Name must not be empty.]
+INFO - US5: [Validation] OnCreateTrail, Validation Blank name -> Error Message(s): Trail cannot be created. Invalid Informations List: [Name must not be blank.]
+INFO - US5: [Validation] OnCreateTrail, Validation Null description -> Error Message(s): Trail cannot be created. Invalid Informations List: [Description must not be empty., Description must not be blank., Description must not be null.]
+INFO - US5: [Validation] OnCreateTrail, Validation Empty description -> Error Message(s): Trail cannot be created. Invalid Informations List: [Description must not be blank., Description must not be empty.]
+INFO - US5: [Validation] OnCreateTrail, Validation Blank description -> Error Message(s): Trail cannot be created. Invalid Informations List: [Description must not be blank.]
+INFO - US5: [Validation] OnCreateTrail, Validation Null city -> Error Message(s): Trail cannot be created. Invalid Informations List: [City must not be blank., City must not be empty., City must not be null.]
+INFO - US5: [Validation] OnCreateTrail, Validation Empty city -> Error Message(s): Trail cannot be created. Invalid Informations List: [City must not be empty., City must not be blank.]
+INFO - US5: [Validation] OnCreateTrail, Validation Blank city -> Error Message(s): Trail cannot be created. Invalid Informations List: [City must not be blank.]
+INFO - US5: [Validation] OnCreateTrail, Validation Null difficulty -> Error Message(s): Trail cannot be created. Invalid Informations List: [Difficulty must not be null.]
+INFO - US5: [Validation] OnCreateTrail, Validation Opening Date in future -> Error Message(s): Trail cannot be created. Invalid Informations List: [Opening date must be a past date., Last maintenance date cannot be before opening date]
+INFO - US5: [Validation] OnCreateTrail, Validation Maintenance Date in future -> Error Message(s): Trail cannot be created. Invalid Informations List: [Last maintenance date must be a past date.]
+INFO - US5: [Validation] OnCreateTrail, Validation Maintenance Date before opening -> Error Message(s): Trail cannot be created. Invalid Informations List: [Last maintenance date cannot be before opening date]
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "Name21",
+    "description": "Description1",
+    "city": "City1",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:10.4720917",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "169258397",
+    "errorMessage": "ids for this class must be manually assigned before calling save(): ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail"
+}
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.vmplugin.v9.Java9 (file:/C:/Users/usager/.m2/repository/org/codehaus/groovy/groovy/3.0.9/groovy-3.0.9.jar) to constructor java.lang.AssertionError(java.lang.String)
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.vmplugin.v9.Java9
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "",
+    "name": "Name22",
+    "description": "Description2",
+    "city": "City2",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "  ",
+    "name": "Name23",
+    "description": "Description3",
+    "city": "City3",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "A1",
+    "name": "Name24",
+    "description": "Description3",
+    "city": "City3",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "11",
+    "description": "Description1",
+    "city": "City1",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:10.6915048",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "1627058445",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "21",
+    "name": "",
+    "description": "Description2",
+    "city": "City2",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "31",
+    "name": "  ",
+    "description": "Description3",
+    "city": "City3",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "41",
+    "name": "Name1",
+    "city": "City4",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:10.7872488",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "909703745",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "51",
+    "name": "Name2",
+    "description": "",
+    "city": "City5",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "61",
+    "name": "Name3",
+    "description": "     ",
+    "city": "City6",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "71",
+    "name": "Name4",
+    "description": "Description4",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:10.8740183",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "293978791",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "81",
+    "name": "Name5",
+    "description": "Description5",
+    "city": "",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:09 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "91",
+    "name": "Name6",
+    "description": "Description6",
+    "city": "    ",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:10 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "92",
+    "name": "Name7",
+    "description": "Description7",
+    "city": "City7",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-04-19"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:10 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+INFO - US5: [Validation] OnUpdateTrail, for Opening Date in future -> Error Message(s): Trail cannot be created. Invalid Informations List: [Last maintenance date cannot be before opening date]
+Request method:	PUT
+Request URI:	http://localhost:8080/trails/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "94",
+    "name": "Name9",
+    "description": "Description9",
+    "city": "City9",
+    "difficulty": "FAMILY",
+    "openingDate": "2022-04-10",
+    "lastMaintenanceDate": "2022-05-01"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:10 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+INFO - US5: [Validation] OnCreateTrail, for Maintenance Date before opening -> Error Message(s): Trail cannot be created. Invalid Informations List: [Last maintenance date cannot be before opening date]
+
+
+Validations pour Events:
+INFO - US5: [Validation] On GetEventById, with wrongly formatted id, validation exception is raised.
+INFO - US5: [Validation] On GetEventById, with wrongly formatted id, error Message(s): Event cannot be created. Invalid Informations  [ID must be numbers only.]
+INFO - US5: [Validation] On UpdateEvent, with wrongly formatted id, validation exception is raised
+INFO - US5: [Validation] On UpdateEvent, with wrongly formatted id, error Message(s): Event cannot be created. Invalid Informations  [ID must be numbers only.]
+INFO - US5: [Validation] On DeleteEvent, with wrongly formatted id, validation exception is raised
+INFO - US5: [Validation] On UpdateEvent, with wrongly formatted id, error Message(s): Event cannot be created. Invalid Informations  [ID must be numbers only.]
+INFO - US5: [Validation] OnCreateEvent, with Null name error message for Validation is: [Name must not be null., Name must not be blank., Name must not be empty.]
+INFO - US5: [Validation] OnCreateEvent, with Empty name error message for Validation is: [Name must not be empty., Name must not be blank.]
+INFO - US5: [Validation] OnCreateEvent, with Blank name error message for Validation is: [Name must not be blank.]
+INFO - US5: [Validation] OnCreateEvent, with Null description error message for Validation is: [Description must not be blank., Description must not be empty., Description must not be null.]
+INFO - US5: [Validation] OnCreateEvent, with Empty description error message for Validation is: [Description must not be blank., Description must not be empty.]
+INFO - US5: [Validation] OnCreateEvent, with Blank description error message for Validation is: [Description must not be blank.]
+INFO - US5: [Validation] OnCreateEvent, with Null organizer error message for Validation is: [Organizer must not be null., Organizer must not be blank., Organizer must not be empty.]
+INFO - US5: [Validation] OnCreateEvent, with Empty organizer error message for Validation is: [Organizer must not be blank., Organizer must not be empty.]
+INFO - US5: [Validation] OnCreateEvent, with Blank organizer error message for Validation is: [Organizer must not be blank.]
+INFO - US5: [Validation] OnCreateEvent, with StartDate null error message for Validation is: [Starting date must not be null.]
+INFO - US5: [Validation] OnCreateEvent, with StartDate in past error message for Validation is: [Starting date must be a future date.]
+INFO - US5: [Validation] OnCreateEvent, with Trail null error message for Validation is: [Trail must not be null.]
+INFO - US5: [Validation] OnCreateEvent, with Null id: Event is created
+INFO - US5: [Validation] OnCreateEvent, with Empty id: Event is created
+INFO - US5: [Validation] OnCreateEvent, with Blank id: Event is created
+INFO - US5: [Validation] OnCreateEvent, with Non-numeric id: Event is created
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "name": "Name11",
+    "description": "Desc1",
+    "startDate": "2022-06-05",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City1"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:41.7353941",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "677798037",
+    "errorMessage": "ids for this class must be manually assigned before calling save(): ca.csfoy.servicesweb.camarchedoc.domain.event.Event; nested exception is org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): ca.csfoy.servicesweb.camarchedoc.domain.event.Event"
+}
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.codehaus.groovy.vmplugin.v9.Java9 (file:/C:/Users/usager/.m2/repository/org/codehaus/groovy/groovy/3.0.9/groovy-3.0.9.jar) to constructor java.lang.AssertionError(java.lang.String)
+WARNING: Please consider reporting this to the maintainers of org.codehaus.groovy.vmplugin.v9.Java9
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "",
+    "name": "Name12",
+    "description": "Description2",
+    "startDate": "2022-06-06",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City2"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "  ",
+    "name": "Name13",
+    "description": "Description3",
+    "startDate": "2022-06-07",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City3"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "TY&&",
+    "name": "Name14",
+    "description": "Desc4",
+    "startDate": "2022-06-07",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City4"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "description": "Description5",
+    "startDate": "2022-06-09",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City5"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:41.8500872",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "665852378",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "",
+    "description": "Description6",
+    "startDate": "2022-06-10",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City6"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "  ",
+    "description": "Description7",
+    "startDate": "2022-06-11",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City7"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name1",
+    "startDate": "2022-06-12",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City8"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:41.9029477",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "1897993183",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name2",
+    "description": "",
+    "startDate": "2022-06-13",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City9"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name3",
+    "description": "     ",
+    "startDate": "2022-06-14",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City10"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name4",
+    "description": "Description8",
+    "startDate": "2022-06-15",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    }
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:41.9747538",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "1435914849",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name5",
+    "description": "Description9",
+    "startDate": "2022-06-16",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": ""
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name6",
+    "description": "Desc10",
+    "startDate": "2022-06-17",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "    "
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name7",
+    "description": "Description11",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City11"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:42.0575325",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "1794445475",
+    "errorMessage": "could not execute statement; SQL [n/a]; constraint [null]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement"
+}
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name8",
+    "description": "Desc12",
+    "startDate": "2022-02-20",
+    "trail": {
+        "id": "101",
+        "name": "Le sentier des Padawan #1",
+        "description": "Le sentier le plus difficule du Nord",
+        "city": "Lévis",
+        "difficulty": "INTERMEDIATE",
+        "openingDate": "2022-04-16",
+        "lastMaintenanceDate": "2022-04-19"
+    },
+    "organizer": "City12"
+}
+
+HTTP/1.1 204 
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+Request method:	PUT
+Request URI:	http://localhost:8080/events/1
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+    "id": "1",
+    "name": "Name7",
+    "description": "Description11",
+    "startDate": "2022-06-19",
+    "organizer": "City11"
+}
+
+HTTP/1.1 500 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Wed, 20 Apr 2022 20:10:41 GMT
+Connection: close
+
+{
+    "timestamp": "2022-04-20T16:10:42.1044073",
+    "statusCode": "500 INTERNAL_SERVER_ERROR",
+    "errorIdentifier": "522788855",
+    "errorMessage": "Cannot read field \"id\" because \"dto\" is null"
+}
