@@ -9,6 +9,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
@@ -37,7 +38,7 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
             this.errorMessages.add("ID must not be null.");
         }
         
-        if (Objects.isNull(id) || !id.matches(TrailDto.ID_VALID_PATTERN)) {
+        if (Objects.isNull(id) || !id.matches(Const.ID_VALID_PATTERN)) {
             this.errorMessages.add("ID must be numbers only.");
         }
         

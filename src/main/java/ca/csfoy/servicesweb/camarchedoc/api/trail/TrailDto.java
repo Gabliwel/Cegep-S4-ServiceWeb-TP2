@@ -7,32 +7,23 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+import javax.validation.groups.Default;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 public class TrailDto {
-    
-    public static final String ID_VALID_PATTERN = "[0-9]+";
-    public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 
-    @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
+    @Pattern(regexp = Const.ID_VALID_PATTERN, message = Const.INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
-    @NotNull (message = "Name must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "Name must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Name must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String name;
-    @NotNull (message = "Description must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "Description must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Description must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String description;
-    @NotNull (message = "City must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "City must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "City must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String city;
     @NotNull (message = "Difficulty must not be null.", groups = {Default.class, CreateGroupValidation.class})

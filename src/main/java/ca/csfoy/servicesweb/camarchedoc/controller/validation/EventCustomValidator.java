@@ -10,6 +10,7 @@ import javax.validation.Validator;
 import javax.validation.groups.Default;
 
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
@@ -37,7 +38,7 @@ public class EventCustomValidator implements CustomValidator<EventDto, String> {
             this.errorMessages.add("ID must not be null.");
         }
         
-        if (Objects.isNull(id) || !id.matches(EventDto.ID_VALID_PATTERN)) {
+        if (Objects.isNull(id) || !id.matches(Const.ID_VALID_PATTERN)) {
             this.errorMessages.add("ID must be numbers only.");
         }
         
@@ -54,9 +55,12 @@ public class EventCustomValidator implements CustomValidator<EventDto, String> {
 
     @Override
     public void validate(String id, EventDto dto) {
-        validateId(id);
         Set<ConstraintViolation<EventDto>> violations = defaultHibernateValidator.validate(dto, Default.class);
-        
+        validateId(id);
+        validate(dto);
+        if (dto.id != id) {
+            this.errorMessages.add("IDs must be equals.");
+        }
         if (!violations.isEmpty()) {
             violations.forEach(v -> this.errorMessages.add(v.getMessage()));
         }

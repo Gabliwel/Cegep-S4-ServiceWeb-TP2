@@ -3,8 +3,7 @@ package ca.csfoy.servicesweb.camarchedoc.api.user;
 import java.util.Set;
 
 import javax.validation.constraints.Pattern;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+import javax.validation.groups.Default;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
