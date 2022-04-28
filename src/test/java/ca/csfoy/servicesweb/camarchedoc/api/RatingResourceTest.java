@@ -24,7 +24,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 public class RatingResourceTest {
     
     private static final String PATH_TO_TEST = "/ratings";
-    private static final String SEARCH_PATH = "/trailSearch";
+    private static final String SEARCH_PATH = "/trails";
     private static final String GET_ID_RATING = "1";
     private static final String GET_INVALID_ID_RATING = "999";
     private static final String GET_BAD_ID_RATING = "A";

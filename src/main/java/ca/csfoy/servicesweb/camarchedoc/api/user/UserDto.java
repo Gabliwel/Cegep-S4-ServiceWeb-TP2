@@ -5,15 +5,13 @@ import java.util.Set;
 import javax.validation.constraints.Pattern;
 import javax.validation.groups.Default;
 
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class UserDto {
     
-    public static final String ID_VALID_PATTERN = "[0-9]+";
-    public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
-    
-    @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
+    @Pattern(regexp = Const.ID_VALID_PATTERN, message = Const.INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
     public final String firstname;
     public final String lastname;

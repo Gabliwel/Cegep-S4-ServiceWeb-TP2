@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 
 import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserDtoForCreate;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 
 public class UserConverter {
@@ -19,12 +20,12 @@ public class UserConverter {
                 trailConverter.convertTrailSetFrom(user.getTrailsToTry()));
     }
 
-    public User toUserForCreation(UserDto user) {
+    public User toUserForCreation(UserDtoForCreate user) {
         return new User(user.firstname,
                 user.lastname,
-                user.averageDifficulty,
-                trailConverter.convertTrailDtosSetFrom(user.favoritesTrails),
-                trailConverter.convertTrailDtosSetFrom(user.trailsToTry));
+                user.email,
+                user.password,
+                user.averageDifficulty);
     }
 
     public User toUser(UserDto user) {

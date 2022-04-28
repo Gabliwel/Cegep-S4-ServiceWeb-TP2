@@ -44,7 +44,7 @@ public class TrailResourceTest {
                   .andReturn();     
 
         String responseAsString = result.getResponse().getContentAsString();
-        Assertions.assertTrue(responseAsString.contains("bonsoir1"));
+        Assertions.assertTrue(responseAsString.contains("bonsoir2"));
     }
 
     @Test

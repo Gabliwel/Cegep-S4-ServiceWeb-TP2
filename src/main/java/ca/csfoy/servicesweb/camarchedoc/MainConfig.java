@@ -28,6 +28,7 @@ import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFac
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.RatingCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.UserCreateCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingService;
@@ -91,6 +92,12 @@ public class MainConfig {
     @Scope("prototype")
     public RatingCustomValidator ratingValidator() {
         return new RatingCustomValidator(validator());
+    }
+    
+    @Bean
+    @Scope("prototype")
+    public UserCreateCustomValidator userForCreateValidator() {
+        return new UserCreateCustomValidator(validator());
     }
 
     @Bean
@@ -165,6 +172,6 @@ public class MainConfig {
 
     @Bean
     public UserResource userController() {
-        return new UserController(userRepository(), userConverter());
+        return new UserController(userRepository(), userConverter(), validatorFactory());
     }
 }

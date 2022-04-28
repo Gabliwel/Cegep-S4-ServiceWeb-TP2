@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
@@ -25,6 +26,13 @@ public class User {
     public String firstname;
     @Column(length = 50, nullable = false)
     public String lastname;
+    @Column(length = 100, nullable = false)
+    public String email;
+    @Column(length = 100, nullable = false)
+    public String password;
+    @OneToOne
+    @JoinColumn(name = "ROLE_ID") 
+    public Role role;
     @Enumerated
     public TrailDifficulty preferredDifficulty;
     @ManyToMany(targetEntity = Trail.class, fetch = FetchType.EAGER)
@@ -36,14 +44,27 @@ public class User {
 
     public User() {}
     
-    public User(String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
-        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, preferredDifficulty, favoritesTrails, trailsToTry);
+    public User(String firstname, String lastname, String email, String password, TrailDifficulty preferredDifficulty) {
+        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, email, password, new Role("2", "USER"), preferredDifficulty, Set.of(), Set.of());
     }
     
     public User(String id, String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.preferredDifficulty = preferredDifficulty;
+        this.favoritesTrails = favoritesTrails;
+        this.trailsToTry = trailsToTry;
+    }
+    
+    public User(String id, String firstname, String lastname, String email, String password, Role role, TrailDifficulty preferredDifficulty, 
+            Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
         this.preferredDifficulty = preferredDifficulty;
         this.favoritesTrails = favoritesTrails;
         this.trailsToTry = trailsToTry;
@@ -61,6 +82,22 @@ public class User {
         return lastname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public Role getRole() {
+        return role;
+    }
+    
+    public boolean isAdmin() {
+        return role.getRoleName().equals("ADMIN");
+    }
+    
     public TrailDifficulty getPreferredDifficulty() {
         return this.preferredDifficulty;
     }

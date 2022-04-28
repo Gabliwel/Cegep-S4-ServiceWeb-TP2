@@ -58,7 +58,7 @@ public class EventCustomValidator implements CustomValidator<EventDto, String> {
         Set<ConstraintViolation<EventDto>> violations = defaultHibernateValidator.validate(dto, Default.class);
         validateId(id);
         validate(dto);
-        if (dto.id != id) {
+        if (!dto.id.equals(id)) {
             this.errorMessages.add("IDs must be equals.");
         }
         if (!violations.isEmpty()) {

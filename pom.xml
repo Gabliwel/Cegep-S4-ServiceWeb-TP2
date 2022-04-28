@@ -69,6 +69,11 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+  			<groupId>com.nulab-inc</groupId>
+  				<artifactId>zxcvbn</artifactId>
+  				<version>1.7.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

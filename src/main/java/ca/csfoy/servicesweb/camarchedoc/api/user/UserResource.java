@@ -23,7 +23,7 @@ public interface UserResource {
     String PATH_FOR_SUGGESTED = PATH_WITH_ID + "/suggested";
 
     @PostMapping
-    void createUser(@RequestBody UserDto user);
+    void createUser(@RequestBody UserDtoForCreate user);
 
     @GetMapping(PATH_WITH_ID)
     UserDto getUser(@PathVariable(PATH_VARIABLE_ID) String id);

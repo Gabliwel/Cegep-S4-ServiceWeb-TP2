@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserDtoForCreate;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
@@ -17,8 +18,7 @@ public class UserConverterTest {
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenUserCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
-        Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null, null));
-        UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
+        UserDtoForCreate dto = new UserDtoForCreate("firstName", "lastName", "email", "password", TrailDifficulty.BEGINNER);
         UserConverter converter = new UserConverter(new TrailConverter());
 
         User user = converter.toUserForCreation(dto);
@@ -26,9 +26,10 @@ public class UserConverterTest {
         Assertions.assertEquals((nextId + 1) + "", user.getId());
         Assertions.assertEquals(dto.firstname, user.getFirstname());
         Assertions.assertEquals(dto.lastname, user.getLastname());
+        Assertions.assertEquals(dto.email, user.getEmail());
+        Assertions.assertEquals(dto.password, user.getPassword());
         Assertions.assertEquals(dto.averageDifficulty, user.getPreferredDifficulty());
-        Assertions.assertEquals(dto.favoritesTrails.iterator().next().id, user.getFavoritesTrails().iterator().next().getId());
-        Assertions.assertEquals(dto.trailsToTry.iterator().next().id, user.getTrailsToTry().iterator().next().getId());
+        Assertions.assertFalse(user.isAdmin());
     }
     
     @Test
