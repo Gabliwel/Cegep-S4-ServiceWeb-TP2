@@ -79,7 +79,7 @@ public class RatingServiceImplTest {
         Mockito.when(rating.getTrail()).thenReturn(trail);
         Mockito.when(trailRepo.getById(trail.getId())).thenReturn(trail);
         Mockito.when(rating.getNote()).thenReturn(5.0);
-        Mockito.doNothing().when(user).addFavoriteTrail(trail);
+        Mockito.doNothing().when(user).addFavoriteTrail(trail, rating);
         
         Rating result = service.createRating(rating);
         

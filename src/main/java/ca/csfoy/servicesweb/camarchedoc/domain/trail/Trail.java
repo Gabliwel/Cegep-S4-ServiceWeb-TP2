@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
 
 @Entity
 public class Trail {
@@ -90,7 +91,11 @@ public class Trail {
     }
     
     public void setTrailready() {
-        this.status = TrailStatus.READY;
+        if (this.status == TrailStatus.IN_PREPARATION) {
+            this.status = TrailStatus.READY;
+        } else {
+                throw new ObjetAlreadySetToDesiredValue("The trail with id (" + id + ") is already set to ready.");
+        }
     }
     
     public Double getAverageScore() {
