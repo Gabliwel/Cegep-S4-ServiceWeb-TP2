@@ -30,7 +30,7 @@ public class FullUserDto {
     public final String password;
     @NotNull(message = "Average difficulty shouldn't be null", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDifficulty averageDifficulty;
-    // We allow these lists to be null, so no validation is done 
+    // We allow these lists to be null/empty, so no validation is done 
     public final Set<TrailDto> favoritesTrails;
     public final Set<TrailDto> trailsToTry;
 

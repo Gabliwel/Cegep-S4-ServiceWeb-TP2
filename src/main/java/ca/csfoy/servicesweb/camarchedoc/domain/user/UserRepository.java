@@ -4,7 +4,7 @@ public interface UserRepository {
     
     void create(User user);
 
-    void save(User user);
+    void save(String id, User user);
 
     User get(String id);
     

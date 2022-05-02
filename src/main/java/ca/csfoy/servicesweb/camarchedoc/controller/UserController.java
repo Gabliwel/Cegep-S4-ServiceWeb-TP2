@@ -3,6 +3,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,7 @@ public class UserController implements UserResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_USER')")
     public void createUser(FullUserDto user) {
         CustomValidator<FullUserDto, String> validator = validatorFactory.getUserDtoForCreateValidator();
         validator.validate(user);
@@ -57,6 +59,7 @@ public class UserController implements UserResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public UserDto getUser(String id) {
         return converter.fromUser(repo.get(id));
     }
@@ -65,19 +68,23 @@ public class UserController implements UserResource {
     @PreAuthorize("hasRole('ROLE_USER')")
     public void modifyUser(FullUserDto user, String userId) {
         CustomValidator<FullUserDto, String> validator = validatorFactory.getUserDtoForCreateValidator();
-        System.out.println(user.id);
-        System.out.println(userId);
         validator.validate(userId, user);
         validator.verify("User cannot be modified.");
-        User userDetails = repo.getByEmail(user.email);
-        if (userDetails == null || userDetails.email == user.email) {
-            repo.save(converter.toUser(user));
+        User userByEmail = repo.getByEmail(user.email);
+        if (Objects.isNull(userByEmail)) {
+            repo.save(userId, converter.toUser(user));
         } else {
-            throw new ObjectAlreadyExistsException("Email(" + user.email + ") has already been taken");
+            User userById = repo.get(userId);
+            if (!Objects.isNull(userById) && userById.getId().equals(userId) && userById.getEmail().equals(user.email)) {
+                repo.save(userId, converter.toUser(user));
+            } else {
+                throw new ObjectAlreadyExistsException("Email(" + user.email + ") has already been taken");
+            }
         }
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<TrailDto> getSuggestedTrails(String userId) {
         
         Set<TrailDto> trails = converter.fromUser(repo.get(userId)).favoritesTrails;

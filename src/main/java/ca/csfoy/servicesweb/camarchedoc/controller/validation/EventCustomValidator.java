@@ -9,14 +9,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
-import org.springframework.stereotype.Component;
-
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
-@Component
 public class EventCustomValidator implements CustomValidator<EventDto, String> {
     
     private final Validator defaultHibernateValidator;

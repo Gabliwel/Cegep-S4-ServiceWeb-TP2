@@ -2,6 +2,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
@@ -29,6 +30,7 @@ public class RatingController implements RatingResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public RatingDto getById(String id) {
         CustomValidator<RatingDto, String> validator = validatorFactory.getRatingValidator();
         validator.validateId(id);
@@ -37,11 +39,13 @@ public class RatingController implements RatingResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<RatingDto> getAll() {
         return converter.convertToRatingDtoListFrom(repository.getAll());
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<RatingDto> search(String id) {
         CustomValidator<RatingDto, String> validator = validatorFactory.getRatingValidator();
         validator.validateId(id);
@@ -50,6 +54,7 @@ public class RatingController implements RatingResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public RatingDto create(RatingDto dto) {
         CustomValidator<RatingDto, String> validator = validatorFactory.getRatingValidator();
         validator.validate(dto);

@@ -39,7 +39,7 @@ public class RatingServiceImpl implements RatingService {
             trailRepo.modify(trail.getId(), trail);
             if (ratingToCreate.getNote().equals(Rating.MAX_NOTE)) {
                 user.addFavoriteTrail(trail);
-                userRepo.save(user);
+                userRepo.save(user.getId(), user);
             }
             return ratingToCreate;
             

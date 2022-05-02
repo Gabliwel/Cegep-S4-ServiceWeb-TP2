@@ -22,11 +22,13 @@ values ('1', 'ADMIN');
 insert into ROLE (ID, ROLE_NAME)
 values ('2', 'USER');
 
+--Le mot de passe est "admin"
 INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
-VALUES('1', 'Bob', 'JSP', 'a@bc.de', 'mdp1', 0, '1');
+VALUES('1', 'Bob', 'JSP', 'a@bc.de', '$2a$10$FF7aPyru4XeO2vUdz0rvZulO7dPWVPuEzux7FiPm3XuPCkzF9UgrG', 0, '1');
 
+--Le mot de passe est "test"
 INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
-VALUES('2', 'Bob2', 'JSP encore', 'z@a.ca', 'qwerty', 1, '2');
+VALUES('2', 'Bob2', 'JSP encore', 'z@a.ca', '$2a$10$qe5.ImGIOuqlJ24LSDE/2OnEiiIM0vtvDABaalo3UTRiK3OBScrvW', 1, '2');
 
 INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL, USER)
 VALUES('1', 'ark!', 1, '1', '2');
@@ -36,3 +38,9 @@ VALUES('2', 'bof.....', 2, '2', '1');
 
 INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL, USER)
 VALUES('3', 'Incroyable!!!!!!!!!!!!!!!!!!!', 4, '3', '1');
+
+INSERT INTO USER_FAVORITE_TRAILS(USER_ID, TRAIL_ID)
+VALUES('2', '2');
+
+INSERT INTO USER_TRAILS_TO_TRY(USER_ID, TRAIL_ID)
+VALUES('2', '1');

@@ -10,8 +10,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
-import org.springframework.stereotype.Component;
-
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 
@@ -20,7 +18,6 @@ import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
-@Component
 public class FullUserCustomValidator implements CustomValidator<FullUserDto, String> {
 
     private final Validator defaultHibernateValidator;
@@ -56,26 +53,29 @@ public class FullUserCustomValidator implements CustomValidator<FullUserDto, Str
         if (!violations.isEmpty()) {
             violations.forEach(v -> this.errorMessages.add(v.getMessage()));
         }
-        
+        validateCommonAttributes(object);
+    }
+
+    @Override
+    public void validate(String id, FullUserDto object) {
+        validateId(id);
+        Set<ConstraintViolation<FullUserDto>> violations = defaultHibernateValidator.validate(object, Default.class);
+        validateCommonAttributes(object);
+        if (!violations.isEmpty()) {
+            violations.forEach(v -> this.errorMessages.add(v.getMessage()));
+        }
+        if (!object.id.equals(id)) {
+            this.errorMessages.add("IDs must be equals.");
+        }
+    }
+
+    private void validateCommonAttributes(FullUserDto object) {
         if (object.password != null && object.password.trim().length() > 0) {
             Zxcvbn zxcvbn = new Zxcvbn();
             Strength strength = zxcvbn.measure(object.password);
             if (strength.getScore() < 3) {
                 this.errorMessages.add("Password isn't strong enough.");
             }
-        }
-    }
-
-    @Override
-    public void validate(String id, FullUserDto object) {
-        validateId(id);
-        validate(object);
-        Set<ConstraintViolation<FullUserDto>> violations = defaultHibernateValidator.validate(object, Default.class);
-        if (!violations.isEmpty()) {
-            violations.forEach(v -> this.errorMessages.add(v.getMessage()));
-        }
-        if (!object.id.equals(id)) {
-            this.errorMessages.add("IDs must be equals." + id + object.id);
         }
     }
 }

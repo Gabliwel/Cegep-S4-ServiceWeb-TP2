@@ -23,6 +23,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 public class RatingServiceImplTest {
     
     public static final String ANY_TRAIL_ID = "3";
+    public static final String ANY_ID = "1";
     
     public static final Double ANY_NOTE = 1.0;
     
@@ -85,7 +86,7 @@ public class RatingServiceImplTest {
         
         Mockito.verify(repo).create(rating);
         Mockito.verify(trailRepo).modify(trail.getId(), trail);
-        Mockito.verify(userRepo).save(user);
+        Mockito.verify(userRepo).save(user.getId(), user);
         Assertions.assertSame(rating, result);
     }
     
