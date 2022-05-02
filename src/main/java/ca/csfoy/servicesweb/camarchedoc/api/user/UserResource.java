@@ -22,8 +22,8 @@ public interface UserResource {
     String PATH_WITH_ID = "/{" + PATH_VARIABLE_ID + "}";
     String PATH_FOR_SUGGESTED = PATH_WITH_ID + "/suggested";
 
-    @PostMapping
-    void createUser(@RequestBody UserDtoForCreate user);
+    @PostMapping("/create")
+    void createUser(@RequestBody FullUserDto user);
 
     @GetMapping(PATH_WITH_ID)
     UserDto getUser(@PathVariable(PATH_VARIABLE_ID) String id);
@@ -31,6 +31,9 @@ public interface UserResource {
     @GetMapping(PATH_FOR_SUGGESTED)
     List<TrailDto> getSuggestedTrails(@PathVariable(PATH_VARIABLE_ID) String userId);
 
-    @PutMapping
-    void modifyUser(@RequestBody UserDto user);
+    @PutMapping(PATH_WITH_ID)
+    void modifyUser(@RequestBody FullUserDto user, @PathVariable(PATH_VARIABLE_ID) String userId);
+    
+    @PostMapping("/login")
+    TokenDto loginUser(@RequestBody UserCredentialsDto credentials);
 }

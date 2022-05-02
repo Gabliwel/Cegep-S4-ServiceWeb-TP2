@@ -2,12 +2,15 @@ package ca.csfoy.servicesweb.camarchedoc.domain.rating;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectInvalidValueException;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 
+@Service
 public class RatingServiceImpl implements RatingService {
     
     private final UserRepository userRepo;

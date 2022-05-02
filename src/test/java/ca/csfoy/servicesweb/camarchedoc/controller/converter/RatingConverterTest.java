@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
@@ -18,7 +19,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 public class RatingConverterTest {
     
     public static final RatingConverter CONVERTER = 
-            new RatingConverter(new TrailConverter(), new UserConverter(new TrailConverter()));
+            new RatingConverter(new TrailConverter(), new UserConverter(new TrailConverter(), new BCryptPasswordEncoder()));
     
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenRatingCreatedWithGivenFieldsAndGeneratedId() {
@@ -40,7 +41,7 @@ public class RatingConverterTest {
     @Test
     void whenConvertingDomainObjectThenDtoCreatedWithGivenFieldsIncludingId() {
         Rating rating = new Rating( 
-                new User("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User("1", "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
                 new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
@@ -56,11 +57,11 @@ public class RatingConverterTest {
     @Test
     void whenConvertingListOfDomainObjetsThenListOfDtosIsReturned() {
         Rating rating1 = new Rating(null, 
-                new User("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User("1", "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
                 new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
         Rating rating2 = new Rating(null, 
-                new User("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User("1", "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
                 new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 

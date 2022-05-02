@@ -3,6 +3,8 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RestController;
+
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
@@ -16,6 +18,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
+@RestController
 public class TrailController implements TrailResource {
 
     private final TrailRepository repository;

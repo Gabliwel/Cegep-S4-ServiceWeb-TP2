@@ -2,6 +2,8 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RestController;
+
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.RatingConverter;
@@ -11,6 +13,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingService;
 
+@RestController
 public class RatingController implements RatingResource {
     
     private final RatingRepository repository;

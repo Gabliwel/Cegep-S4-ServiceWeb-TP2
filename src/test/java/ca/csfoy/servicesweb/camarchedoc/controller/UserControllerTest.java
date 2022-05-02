@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
-import ca.csfoy.servicesweb.camarchedoc.api.user.UserDtoForCreate;
+import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.UserConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
@@ -38,14 +38,14 @@ public class UserControllerTest {
     private CustomValidatorFactory validatorFactory;
     
     @Mock
-    private CustomValidator<UserDtoForCreate, String> validator;
+    private CustomValidator<FullUserDto, String> validator;
     
     @InjectMocks
     private UserController controller;
     
     @Test
     void whenCreatedWithValidObjectThenDomainObjectCreated() {
-        UserDtoForCreate dto = Mockito.mock(UserDtoForCreate.class);
+        FullUserDto dto = Mockito.mock(FullUserDto.class);
         User user = Mockito.mock(User.class);
         Mockito.when(validatorFactory.getUserDtoForCreateValidator()).thenReturn(validator);
         Mockito.when(converter.toUserForCreation(dto)).thenReturn(user);
@@ -70,11 +70,11 @@ public class UserControllerTest {
     
     @Test
     void whenModifyWithValidObjectThenDomainObjectIsModified() {
-        UserDto dto = Mockito.mock(UserDto.class);
+        FullUserDto dto = Mockito.mock(FullUserDto.class);
         User user = Mockito.mock(User.class);
         Mockito.when(converter.toUser(dto)).thenReturn(user);
         
-        controller.modifyUser(dto);
+        controller.modifyUser(dto, "");
         
         Mockito.verify(repo).save(user);
     }

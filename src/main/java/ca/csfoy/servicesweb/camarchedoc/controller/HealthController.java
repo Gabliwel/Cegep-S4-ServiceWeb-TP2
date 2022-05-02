@@ -1,7 +1,10 @@
 package ca.csfoy.servicesweb.camarchedoc.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
 import ca.csfoy.servicesweb.camarchedoc.api.HealthResource;
 
+@RestController
 public class HealthController implements HealthResource {
 
     @Override

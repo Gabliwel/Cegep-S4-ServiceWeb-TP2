@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.domain.user;
 
 import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
@@ -43,19 +43,6 @@ public class User {
     public Set<Trail> trailsToTry;
 
     public User() {}
-    
-    public User(String firstname, String lastname, String email, String password, TrailDifficulty preferredDifficulty) {
-        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, email, password, new Role("2", "USER"), preferredDifficulty, Set.of(), Set.of());
-    }
-    
-    public User(String id, String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.preferredDifficulty = preferredDifficulty;
-        this.favoritesTrails = favoritesTrails;
-        this.trailsToTry = trailsToTry;
-    }
     
     public User(String id, String firstname, String lastname, String email, String password, Role role, TrailDifficulty preferredDifficulty, 
             Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {

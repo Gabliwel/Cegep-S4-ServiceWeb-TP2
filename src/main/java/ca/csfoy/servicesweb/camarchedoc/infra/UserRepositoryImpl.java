@@ -3,11 +3,14 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserDao dao;
@@ -58,5 +61,10 @@ public class UserRepositoryImpl implements UserRepository {
             } 
         }
         return true;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return dao.getByEmail(email);
     }
 }

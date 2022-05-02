@@ -4,10 +4,12 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
-import ca.csfoy.servicesweb.camarchedoc.api.user.UserDtoForCreate;
+import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
@@ -18,8 +20,9 @@ public class UserConverterTest {
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenUserCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
-        UserDtoForCreate dto = new UserDtoForCreate("firstName", "lastName", "email", "password", TrailDifficulty.BEGINNER);
-        UserConverter converter = new UserConverter(new TrailConverter());
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        FullUserDto dto = new FullUserDto("id", "firstName", "lastName", "email", "password", TrailDifficulty.BEGINNER, Set.of(), Set.of());
+        UserConverter converter = new UserConverter(new TrailConverter(), passwordEncoder);
 
         User user = converter.toUserForCreation(dto);
 
@@ -27,7 +30,7 @@ public class UserConverterTest {
         Assertions.assertEquals(dto.firstname, user.getFirstname());
         Assertions.assertEquals(dto.lastname, user.getLastname());
         Assertions.assertEquals(dto.email, user.getEmail());
-        Assertions.assertEquals(dto.password, user.getPassword());
+        Assertions.assertTrue(passwordEncoder.matches(dto.password, user.getPassword()));
         Assertions.assertEquals(dto.averageDifficulty, user.getPreferredDifficulty());
         Assertions.assertFalse(user.isAdmin());
     }
@@ -36,7 +39,7 @@ public class UserConverterTest {
     void whenConvertingDtoWithIdThenUserCreatedWithGivenFields() {
         Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null, null));
         UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
-        UserConverter converter = new UserConverter(new TrailConverter());
+        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder());
 
         User user = converter.toUser(dto);
 
@@ -51,8 +54,8 @@ public class UserConverterTest {
     @Test
     void whenConvertingUserThenzDtoCreatedWithGivenFields() {
         Set<Trail> set = Set.of(new Trail("5", null, null, null, null, null, null, null, null));
-        User user = new User("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
-        UserConverter converter = new UserConverter(new TrailConverter());
+        User user = new User("id", "firstName", "lastName", "", "", null, TrailDifficulty.BEGINNER, set, set);
+        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder());
 
         UserDto dto = converter.fromUser(user);
 

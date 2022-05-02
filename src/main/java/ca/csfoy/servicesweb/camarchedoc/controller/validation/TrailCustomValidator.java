@@ -9,11 +9,14 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import org.springframework.stereotype.Component;
+
 import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
 
+@Component
 public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
     
     private final Validator defaultHibernateValidator;
@@ -28,7 +31,7 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
     public void verify(String genericStringMessage) {
         
         if (!errorMessages.isEmpty()) {
-            throw new InputValidationException("Trail cannot be created. Invalid Informations", this.errorMessages);
+            throw new InputValidationException(genericStringMessage, this.errorMessages);
         }
     }
 
@@ -57,9 +60,12 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
 
     @Override
     public void validate(String id, TrailDto dto) {
-        validateId(id);
         Set<ConstraintViolation<TrailDto>> violations = defaultHibernateValidator.validate(dto, Default.class);
-        
+        validateId(id);
+        validate(dto);
+        if (!dto.id.equals(id)) {
+            this.errorMessages.add("IDs must be equals.");
+        }
         if (!violations.isEmpty()) {
             violations.forEach(v -> this.errorMessages.add(v.getMessage()));
         }
