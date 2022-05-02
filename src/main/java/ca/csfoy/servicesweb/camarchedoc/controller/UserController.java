@@ -57,6 +57,7 @@ public class UserController implements UserResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public UserDto getUser(String id) {
         return converter.fromUser(repo.get(id));
     }
@@ -78,6 +79,7 @@ public class UserController implements UserResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<TrailDto> getSuggestedTrails(String userId) {
         
         Set<TrailDto> trails = converter.fromUser(repo.get(userId)).favoritesTrails;
