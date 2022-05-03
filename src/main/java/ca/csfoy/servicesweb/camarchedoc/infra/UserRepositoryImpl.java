@@ -31,8 +31,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
-        if (!dao.findById(user.id).isEmpty()) {
+    public void save(String id, User user) {
+        if (!dao.findById(id).isEmpty()) {
             if (!trailDoesExist(user.getFavoritesTrails()) || !trailDoesExist(user.getTrailsToTry())) {
                 throw new ObjectNotFoundException("Favorite(s) trail(s) dont exist for the user with id (" + user.id + "), and therefore cannot be modified.");
             } else {

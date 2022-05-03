@@ -31,8 +31,8 @@ public class UserResourceTest {
     private static final String CONTENT_TYPE = "application/json";
     
     private UserCredentialsDto credentialsDto1 = new UserCredentialsDto("Jean", "123allo");
-    private FullUserDto userDto1 = new FullUserDto("10", "Jean", "Paul", "jeanpaul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
-    private FullUserDto userDto2 = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
+    private FullUserDto userDto1 = new FullUserDto("10", "Jean", "Paul", "jeanpaul@gmail2.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
+    private FullUserDto userDto2 = new FullUserDto("1", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
     
     @Autowired
     private MockMvc mockMvc;
@@ -54,6 +54,7 @@ public class UserResourceTest {
     }
     
     @Test
+    @WithMockUser(roles = "USER")
     void createRouteAccessibleWithoutLogin() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_CREATE)
@@ -65,10 +66,34 @@ public class UserResourceTest {
         String responseAsString = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseAsString.isEmpty());
     }
+    
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void createRouteNotAccessibleIfAdmin() throws Exception {        
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .post(PATH_TO_CREATE)
+                  .contentType("application/json")
+                  .content(objectMapper.writeValueAsString(userDto1)))
+                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                  .andReturn();
+    }
           
     @Test
     @WithMockUser(roles = "ADMIN")
     void getUserAccessibleWithAdmin() throws Exception {        
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                    .get(PATH_TO_TEST + "/" + GET_ID)
+                      .contentType(CONTENT_TYPE))
+                      .andExpect(MockMvcResultMatchers.status().isOk())           
+                      .andReturn();     
+
+            String responseAsString = result.getResponse().getContentAsString();
+            Assertions.assertTrue(responseAsString.contains("Bob2"));
+    }
+    
+    @Test
+    @WithMockUser(roles = "USER")
+    void getUserAccessibleWithUser() throws Exception {        
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                     .get(PATH_TO_TEST + "/" + GET_ID)
                       .contentType(CONTENT_TYPE))
@@ -113,10 +138,7 @@ public class UserResourceTest {
                     .contentType(CONTENT_TYPE)
                     .content(objectMapper.writeValueAsString(userDto2)))
                     .andExpect(MockMvcResultMatchers.status().isOk())           
-                    .andReturn();      
-
-            String responseAsString = result.getResponse().getContentAsString();
-            Assertions.assertTrue(responseAsString.contains("Bob2"));
+                    .andReturn();
     }
     
     @Test

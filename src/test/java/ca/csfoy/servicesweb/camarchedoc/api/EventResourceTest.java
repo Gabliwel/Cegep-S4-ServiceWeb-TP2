@@ -22,7 +22,6 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@WithMockUser(roles = "ADMIN")
 public class EventResourceTest {
     
     private static final String PATH_TO_TEST = "/events";
@@ -43,6 +42,7 @@ public class EventResourceTest {
     private ObjectMapper objectMapper;
     
     @Test
+    @WithMockUser(roles = "ADMIN")
     void validGetByIdEventReturn200Ok() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + GET_ID)
@@ -55,6 +55,7 @@ public class EventResourceTest {
     }
     
     @Test
+    @WithMockUser(roles = "ADMIN")
     void validGetByIdEventReturn404NotFound() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + ANY_INVALID_ID)
@@ -67,6 +68,7 @@ public class EventResourceTest {
     }
 
     @Test
+    @WithMockUser(roles = "ADMIN")
     void validUpdateEventReturn204NoContent() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put(PATH_TO_TEST + "/" + UPDATE_ID)
@@ -80,6 +82,21 @@ public class EventResourceTest {
     }
     
     @Test
+    @WithMockUser(roles = "USER")
+    void validUpdateEventAsUserReturn403Forbidden() throws Exception {        
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .put(PATH_TO_TEST + "/" + UPDATE_ID)
+                  .contentType(CONTENT_TYPE)
+                  .content(objectMapper.writeValueAsString(dto1)))
+                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                  .andReturn();     
+
+        String responseAsString = result.getResponse().getContentAsString();
+        Assertions.assertTrue(responseAsString.contains("Access Denied"));
+    }
+    
+    @Test
+    @WithMockUser(roles = "ADMIN")
     void invalidUpdateEventReturn404NotFoundAndErrorMessage() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .put(PATH_TO_TEST + "/" + ANY_INVALID_ID)
@@ -94,6 +111,7 @@ public class EventResourceTest {
     }
     
     @Test
+    @WithMockUser(roles = "ADMIN")
     void validDeleteEventReturn204NoContent() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .delete(PATH_TO_TEST + "/" + DELETE_ID)
@@ -106,6 +124,20 @@ public class EventResourceTest {
     }
     
     @Test
+    @WithMockUser(roles = "USER")
+    void validDeleteEventAsUserReturn403Unauthorized() throws Exception {        
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                .delete(PATH_TO_TEST + "/" + DELETE_ID)
+                  .contentType(CONTENT_TYPE))
+                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                  .andReturn();     
+
+        String responseAsString = result.getResponse().getContentAsString();
+        Assertions.assertTrue(responseAsString.contains("Access Denied"));
+    }
+    
+    @Test
+    @WithMockUser(roles = "ADMIN")
     void invalidDeleteEventReturn404NotFoundAndErrorMessage() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .delete(PATH_TO_TEST + "/" + ANY_INVALID_ID)

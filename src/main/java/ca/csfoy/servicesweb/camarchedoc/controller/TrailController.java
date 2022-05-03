@@ -93,6 +93,7 @@ public class TrailController implements TrailResource {
     }
     
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateToReady(String id) {
         service.verifyStatus(id);
     }

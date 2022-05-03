@@ -72,7 +72,7 @@ public class UserController implements UserResource {
         validator.verify("User cannot be modified.");
         User userDetails = repo.getByEmail(user.email);
         if (userDetails == null || userDetails.email == user.email) {
-            repo.save(converter.toUser(user));
+            repo.save(userId, converter.toUser(user));
         } else {
             throw new ObjectAlreadyExistsException("Email(" + user.email + ") has already been taken");
         }

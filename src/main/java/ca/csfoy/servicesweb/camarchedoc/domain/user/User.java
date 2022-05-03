@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
@@ -97,11 +98,15 @@ public class User {
         return trailsToTry;
     }
 
-    public void addFavoriteTrail(Trail trail) {
-        if (this.favoritesTrails == null) {
-            favoritesTrails = new HashSet<Trail>();
+    public void addFavoriteTrail(Trail trail, Rating rating) {
+        if (rating.getNote().equals(Rating.MAX_NOTE)) {
+            if (this.favoritesTrails == null) {
+                favoritesTrails = new HashSet<Trail>();
+            }
+            this.favoritesTrails.add(trail);
         }
-        this.favoritesTrails.add(trail);
+
     }
+
 }
 

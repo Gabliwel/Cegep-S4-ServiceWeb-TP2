@@ -2,7 +2,7 @@ INSERT INTO TRAIL(ID, CITY, DESCRIPTION, DIFFICULTY, LAST_MAINTENANCE_DATE, NAME
 VALUES('1', 'quebec', 'premier trail', 1, parseDatetime('2021-12-31', 'yyyy-MM-dd'), 'bonsoir1', parseDatetime('1999-12-31', 'yyyy-MM-dd'), 1, 1.0);
 
 INSERT INTO TRAIL(ID, CITY, DESCRIPTION, DIFFICULTY, LAST_MAINTENANCE_DATE, NAME, OPENING_DATE, STATUS, AVERAGE_SCORE)
-VALUES('2', 'montreal', 'deuxieme trail', 1, parseDatetime('2021-12-30', 'yyyy-MM-dd'), 'bonsoir2', parseDatetime('1998-12-31', 'yyyy-MM-dd'), 0, 2.0);
+VALUES('2', 'montreal', 'deuxieme trail', 1, parseDatetime('2021-12-30', 'yyyy-MM-dd'), 'bonsoir2', parseDatetime('2025-12-31', 'yyyy-MM-dd'), 0, 2.0);
 
 INSERT INTO TRAIL(ID, CITY, DESCRIPTION, DIFFICULTY, LAST_MAINTENANCE_DATE, NAME, OPENING_DATE, STATUS, AVERAGE_SCORE)
 VALUES('3', 'jsp', 'troisieme trail', 1, parseDatetime('2021-12-29', 'yyyy-MM-dd'), 'bonsoir3', parseDatetime('1997-12-31', 'yyyy-MM-dd'), 1, 4);
@@ -36,3 +36,9 @@ VALUES('2', 'bof.....', 2, '2', '1');
 
 INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL, USER)
 VALUES('3', 'Incroyable!!!!!!!!!!!!!!!!!!!', 4, '3', '1');
+
+INSERT INTO USER_FAVORITE_TRAILS(USER_ID, TRAIL_ID)
+VALUES('2', '2');
+
+INSERT INTO USER_TRAILS_TO_TRY(USER_ID, TRAIL_ID)
+VALUES('2', '1');
