@@ -66,17 +66,6 @@ public class UserResourceTest {
         String responseAsString = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseAsString.isEmpty());
     }
-    
-    @Test
-    @WithMockUser(roles = "ADMIN")
-    void createRouteNotAccessibleIfAdmin() throws Exception {        
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                .post(PATH_TO_CREATE)
-                  .contentType("application/json")
-                  .content(objectMapper.writeValueAsString(userDto1)))
-                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
-                  .andReturn();
-    }
           
     @Test
     @WithMockUser(roles = "ADMIN")

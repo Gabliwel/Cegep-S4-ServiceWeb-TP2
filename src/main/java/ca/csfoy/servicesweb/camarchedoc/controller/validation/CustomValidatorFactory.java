@@ -1,14 +1,12 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.validation;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 
-@Component
 public class CustomValidatorFactory {
 
     private final ApplicationContext applicationContext;

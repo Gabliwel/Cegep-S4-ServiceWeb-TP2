@@ -56,7 +56,7 @@ public class EventResourceTest {
     
     @Test
     @WithMockUser(roles = "ADMIN")
-    void validGetByIdEventReturn404NotFound() throws Exception {        
+    void invalidGetByIdEventReturn404NotFound() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .get(PATH_TO_TEST + "/" + ANY_INVALID_ID)
                   .contentType(CONTENT_TYPE))
