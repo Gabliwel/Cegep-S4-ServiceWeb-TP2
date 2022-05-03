@@ -3,10 +3,13 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.RatingRepository;
 
+@Repository
 public class RatingRepositoryImpl implements RatingRepository {
 
     private final RatingDao ratingDao;

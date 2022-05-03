@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.SearchEventCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 
+@Repository
 public class EventRepositoryImpl implements EventRepository {
 
     private final EventDao eventDao;

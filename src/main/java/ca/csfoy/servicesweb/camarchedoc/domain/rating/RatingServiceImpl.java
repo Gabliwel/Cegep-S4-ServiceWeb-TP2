@@ -2,12 +2,15 @@ package ca.csfoy.servicesweb.camarchedoc.domain.rating;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectInvalidValueException;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 
+@Service
 public class RatingServiceImpl implements RatingService {
     
     private final UserRepository userRepo;
@@ -34,16 +37,15 @@ public class RatingServiceImpl implements RatingService {
             Double score = (total + trail.getAverageScore()) / (ratings.size() + 1);
             trail.setAverageScore(score);
             trailRepo.modify(trail.getId(), trail);
-            if (ratingToCreate.getNote().equals(Rating.MAX_NOTE)) {
-                user.addFavoriteTrail(trail);
-                userRepo.save(user);
-            }
-            return ratingToCreate;
             
+            user.addFavoriteTrail(trail, ratingToCreate);
+            userRepo.save(user.getId(), user);
+
         } else {
             throw new ObjectInvalidValueException("Rating note should be between " + Rating.MIN_NOTE.toString() + " and " + Rating.MAX_NOTE.toString()
             + "your note" + ratingToCreate.getNote());
         }
+            return ratingToCreate;
     }
 
 }

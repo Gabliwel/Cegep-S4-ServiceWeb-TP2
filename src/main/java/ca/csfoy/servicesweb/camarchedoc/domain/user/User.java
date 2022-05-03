@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.domain.user;
 
 import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,8 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
+import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
@@ -25,6 +27,13 @@ public class User {
     public String firstname;
     @Column(length = 50, nullable = false)
     public String lastname;
+    @Column(length = 100, nullable = false)
+    public String email;
+    @Column(length = 100, nullable = false)
+    public String password;
+    @OneToOne
+    @JoinColumn(name = "ROLE_ID") 
+    public Role role;
     @Enumerated
     public TrailDifficulty preferredDifficulty;
     @ManyToMany(targetEntity = Trail.class, fetch = FetchType.EAGER)
@@ -36,14 +45,14 @@ public class User {
 
     public User() {}
     
-    public User(String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
-        this(IdentifiantGenerator.getNextIdAsString(), firstname, lastname, preferredDifficulty, favoritesTrails, trailsToTry);
-    }
-    
-    public User(String id, String firstname, String lastname, TrailDifficulty preferredDifficulty, Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
+    public User(String id, String firstname, String lastname, String email, String password, Role role, TrailDifficulty preferredDifficulty, 
+            Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.role = role;
         this.preferredDifficulty = preferredDifficulty;
         this.favoritesTrails = favoritesTrails;
         this.trailsToTry = trailsToTry;
@@ -61,6 +70,22 @@ public class User {
         return lastname;
     }
 
+    public String getEmail() {
+        return email;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public Role getRole() {
+        return role;
+    }
+    
+    public boolean isAdmin() {
+        return role.getRoleName().equals("ADMIN");
+    }
+    
     public TrailDifficulty getPreferredDifficulty() {
         return this.preferredDifficulty;
     }
@@ -73,11 +98,15 @@ public class User {
         return trailsToTry;
     }
 
-    public void addFavoriteTrail(Trail trail) {
-        if (this.favoritesTrails == null) {
-            favoritesTrails = new HashSet<Trail>();
+    public void addFavoriteTrail(Trail trail, Rating rating) {
+        if (rating.getNote().equals(Rating.MAX_NOTE)) {
+            if (this.favoritesTrails == null) {
+                favoritesTrails = new HashSet<Trail>();
+            }
+            this.favoritesTrails.add(trail);
         }
-        this.favoritesTrails.add(trail);
+
     }
+
 }
 

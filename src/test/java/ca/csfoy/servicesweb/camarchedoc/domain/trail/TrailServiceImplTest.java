@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)
@@ -27,20 +27,16 @@ public class TrailServiceImplTest {
     public void verifyStatusifTrailExisttrailIsInPreparationthenVerifySuccessfull() {
         Trail trail = Mockito.mock(Trail.class);
         Mockito.when(repo.getById(ANY_TRAIL_ID)).thenReturn(trail);
-        Mockito.when(trail.getStatus()).thenReturn(TrailStatus.IN_PREPARATION);
         
         service.verifyStatus(ANY_TRAIL_ID);
         
-        Mockito.verify(repo).setTrailToReady(ANY_TRAIL_ID);
     }
     
     @Test
     public void verifyStatusifTrailExisttrailIsInReadythenVerifyFail() {
-        Trail trail = Mockito.mock(Trail.class);
-        Mockito.when(repo.getById(ANY_TRAIL_ID)).thenReturn(trail);
-        Mockito.when(trail.getStatus()).thenReturn(TrailStatus.READY);
+        Mockito.when(repo.getById(ANY_TRAIL_ID)).thenReturn(null);
         
-        Assertions.assertThrows(ObjetAlreadySetToDesiredValue.class, () -> service.verifyStatus(ANY_TRAIL_ID));
+        Assertions.assertThrows(ObjectNotFoundException.class, () -> service.verifyStatus(ANY_TRAIL_ID));
     }
     
 }

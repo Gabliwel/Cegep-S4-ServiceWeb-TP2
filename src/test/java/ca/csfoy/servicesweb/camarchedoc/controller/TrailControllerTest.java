@@ -57,7 +57,7 @@ class TrailControllerTest {
     }
     
     @Test
-    void whenGetAllThenListOfDomainObjectsReturnedAsConvertedListOfDtos() {
+    void whenGetAllThenListOfReadyDomainObjectsReturnedAsConvertedListOfDtos() {
         TrailDto dto1 = Mockito.mock(TrailDto.class);
         TrailDto dto2 = Mockito.mock(TrailDto.class);
         Trail trail1 = Mockito.mock(Trail.class);
@@ -69,14 +69,14 @@ class TrailControllerTest {
         
         Mockito.verify(repository).getAll();
         Mockito.verify(converter).convertTrailListFrom(List.of(trail1, trail2));
-        Assertions.assertEquals(List.of(dto1, dto2), dtosReturned);        
+        Assertions.assertEquals(List.of(), dtosReturned);        
     }
     
     @Test
     void whenCreateWithValidEventThenEventIsReturnedAsDto() {
         TrailDto dto = Mockito.mock(TrailDto.class);
         TrailDto returned = Mockito.mock(TrailDto.class);
-        Trail trail = Mockito.mock(Trail.class);
+        Trail trail = Mockito.mock(Trail.class); 
         Trail created = Mockito.mock(Trail.class);
         TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
         

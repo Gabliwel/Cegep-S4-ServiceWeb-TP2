@@ -2,7 +2,7 @@ package ca.csfoy.servicesweb.camarchedoc.domain.trail;
 
 import org.springframework.stereotype.Service;
 
-import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
+import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 
 @Service
 public class TrailServiceImpl implements TrailService {
@@ -15,11 +15,12 @@ public class TrailServiceImpl implements TrailService {
 
     @Override
     public void verifyStatus(String id) {
-        Trail trailToSetReady = repository.getById(id);
-        if (trailToSetReady.getStatus() == TrailStatus.IN_PREPARATION) {
-            repository.setTrailToReady(id);
+        if (repository.getById(id) != null) {
+            Trail trailToSetReady = repository.getById(id);
+            trailToSetReady.setTrailready();
+            repository.modify(id, trailToSetReady);
         } else {
-            throw new ObjetAlreadySetToDesiredValue("The trail with id (" + id + ") is already set to ready.");
+            throw new ObjectNotFoundException("The trail with id (" + id + ") does not exist, and therefore cannot be modified.");
         }
     }
 

@@ -3,6 +3,9 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RestController;
+
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.EventConverter;
@@ -12,6 +15,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.EventRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.SearchEventCriteria;
 
+@RestController
 public class EventController implements EventResource {
 
     private final EventRepository repository;
@@ -25,6 +29,7 @@ public class EventController implements EventResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public EventDto getById(String id) {
         CustomValidator<EventDto, String> validator = validatorFactory.getEventValidator();
         validator.validateId(id);
@@ -33,11 +38,13 @@ public class EventController implements EventResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<EventDto> getAll() {
         return converter.convertEventListFrom(repository.getAll());
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public EventDto create(EventDto dto) {
         CustomValidator<EventDto, String> validator = validatorFactory.getEventValidator();
         validator.validate(dto);
@@ -48,6 +55,7 @@ public class EventController implements EventResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void update(String id, EventDto dto) {
         CustomValidator<EventDto, String> validator = validatorFactory.getEventValidator();
         validator.validate(id, dto);
@@ -57,6 +65,7 @@ public class EventController implements EventResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(String id) {
         
         CustomValidator<EventDto, String> validator = validatorFactory.getEventValidator();
@@ -67,6 +76,7 @@ public class EventController implements EventResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<EventDto> search(String trailId, LocalDate startDate) {
         return converter.convertEventListFrom(repository.getBySearchCriteria(new SearchEventCriteria(trailId, startDate)));
     }

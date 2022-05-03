@@ -3,9 +3,12 @@ package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.event.Event;
 
+@Component
 public class EventConverter {
     
     private final TrailConverter trailConverter;

@@ -2,12 +2,15 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.SearchTrailCriteria;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 
+@Repository
 public class TrailRepositoryImpl implements TrailRepository {
 
     private final TrailDao trailDao;
