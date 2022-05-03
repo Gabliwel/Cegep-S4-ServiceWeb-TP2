@@ -1,5 +1,8 @@
 package ca.csfoy.servicesweb.camarchedoc.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class IdentifiantGenerator {
 
     private static int nextId = 100;

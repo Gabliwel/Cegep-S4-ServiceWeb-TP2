@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.validation;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -28,7 +29,7 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
     public void verify(String genericStringMessage) {
         
         if (!errorMessages.isEmpty()) {
-            throw new InputValidationException("Trail cannot be created. Invalid Informations", this.errorMessages);
+            throw new InputValidationException(genericStringMessage, this.errorMessages);
         }
     }
 
@@ -57,9 +58,12 @@ public class TrailCustomValidator implements CustomValidator<TrailDto, String> {
 
     @Override
     public void validate(String id, TrailDto dto) {
-        validateId(id);
         Set<ConstraintViolation<TrailDto>> violations = defaultHibernateValidator.validate(dto, Default.class);
-        
+        validateId(id);
+        validate(dto);
+        if (!dto.id.equals(id)) {
+            this.errorMessages.add("IDs must be equals.");
+        }
         if (!violations.isEmpty()) {
             violations.forEach(v -> this.errorMessages.add(v.getMessage()));
         }

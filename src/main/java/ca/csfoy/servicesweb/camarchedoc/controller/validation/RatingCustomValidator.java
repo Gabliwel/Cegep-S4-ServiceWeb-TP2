@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.validation;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -8,6 +9,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationException;
@@ -34,7 +36,7 @@ public class RatingCustomValidator implements CustomValidator<RatingDto, String>
         if (Objects.isNull(id)) {
             this.errorMessages.add("ID must not be null.");
         } else {
-            if (!id.matches(RatingDto.ID_VALID_PATTERN)) {
+            if (!id.matches(Const.ID_VALID_PATTERN)) {
                 this.errorMessages.add("ID must be numbers only.");
             }
         }

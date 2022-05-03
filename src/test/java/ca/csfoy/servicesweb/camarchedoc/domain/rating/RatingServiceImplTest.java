@@ -1,7 +1,5 @@
 package ca.csfoy.servicesweb.camarchedoc.domain.rating;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,6 +21,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 public class RatingServiceImplTest {
     
     public static final String ANY_TRAIL_ID = "3";
+    public static final String ANY_ID = "1";
     
     public static final Double ANY_NOTE = 1.0;
     
@@ -51,21 +50,22 @@ public class RatingServiceImplTest {
     }
     
     @Test
-    public void saveRatingAndTrailIfValid() {
+    public void saveRatingTrailAndUserIfValidRating() {
         Trail trail = Mockito.mock(Trail.class);
         User user = Mockito.mock(User.class);
         Rating rating = Mockito.mock(Rating.class);
-        List<Rating> lst = List.of();
         Mockito.when(rating.getUser()).thenReturn(user);
-        Mockito.when(rating.getTrail()).thenReturn(trail);
+        Mockito.when(userRepo.get(user.getId())).thenReturn(user);
         Mockito.when(rating.getTrail()).thenReturn(trail);
         Mockito.when(trailRepo.getById(trail.getId())).thenReturn(trail);
         Mockito.when(rating.getNote()).thenReturn(1.0);
+        Mockito.doNothing().when(user).addFavoriteTrail(trail, rating);
         
         Rating result = service.createRating(rating);
         
         Mockito.verify(repo).create(rating);
         Mockito.verify(trailRepo).modify(trail.getId(), trail);
+        Mockito.verify(userRepo).save(user.getId(), user);
         Assertions.assertSame(rating, result);
     }
     
@@ -79,13 +79,13 @@ public class RatingServiceImplTest {
         Mockito.when(rating.getTrail()).thenReturn(trail);
         Mockito.when(trailRepo.getById(trail.getId())).thenReturn(trail);
         Mockito.when(rating.getNote()).thenReturn(5.0);
-        Mockito.doNothing().when(user).addFavoriteTrail(trail);
+        Mockito.doNothing().when(user).addFavoriteTrail(trail, rating);
         
         Rating result = service.createRating(rating);
         
         Mockito.verify(repo).create(rating);
         Mockito.verify(trailRepo).modify(trail.getId(), trail);
-        Mockito.verify(userRepo).save(user);
+        Mockito.verify(userRepo).save(user.getId(), user);
         Assertions.assertSame(rating, result);
     }
     

@@ -3,6 +3,9 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RestController;
+
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
@@ -16,6 +19,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
+@RestController
 public class TrailController implements TrailResource {
 
     private final TrailRepository repository;
@@ -31,6 +35,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public TrailDto getById(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
@@ -39,6 +44,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<TrailDto> getAll() {
         List<TrailDto> lst = converter.convertTrailListFrom(repository.getAll());
         List<TrailDto> finalLst = new ArrayList<TrailDto>();
@@ -56,6 +62,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public TrailDto create(TrailDto dto) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validate(dto);
@@ -66,6 +73,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void update(String id, TrailDto dto) {
         
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
@@ -76,6 +84,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
@@ -84,6 +93,7 @@ public class TrailController implements TrailResource {
     }
     
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateToReady(String id) {
         service.verifyStatus(id);
     }

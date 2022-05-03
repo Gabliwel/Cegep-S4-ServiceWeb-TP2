@@ -6,6 +6,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,30 @@ import ca.csfoy.servicesweb.camarchedoc.domain.exception.InputValidationExceptio
 public class ErrorHandler {
 
     private Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
+    
+    @ExceptionHandler(BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public ErrorMessageDto badCredentialsException(BadCredentialsException ex) {
+        String errorIdentifier = ex.hashCode() + "";
+        logger.error(LocalDateTime.now().toString() 
+                + " [" + errorIdentifier + "]: " 
+                + ex.getMessage() 
+                + ExceptionUtils.getStackTrace(ex));
+        return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.FORBIDDEN.toString(), errorIdentifier.toString(), 
+                "Connection error: Invalid credentials.");
+    }
+    
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
+    public ErrorMessageDto accessDeniedException(AccessDeniedException ex) {
+        String errorIdentifier = ex.hashCode() + "";
+        logger.error(LocalDateTime.now().toString() 
+                + " [" + errorIdentifier + "]: " 
+                + ex.getMessage() 
+                + ExceptionUtils.getStackTrace(ex));
+        return new ErrorMessageDto(LocalDateTime.now(), HttpStatus.FORBIDDEN.toString(), errorIdentifier.toString(), 
+                "Access Denied: User does not have sufficient permission to access this route.");
+    }
 
     @ExceptionHandler(ObjectNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
