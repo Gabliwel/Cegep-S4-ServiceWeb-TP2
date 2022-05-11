@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailWeatherInfoDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjetAlreadySetToDesiredValue;
 
@@ -30,6 +31,8 @@ public class Trail {
     @Enumerated
     private TrailStatus status;
     private Double averageScore;
+    @javax.persistence.Transient
+    private TrailWeatherInfoDto weatherInfoDto;
 
     public Trail() {}
 
@@ -56,6 +59,20 @@ public class Trail {
         this.lastMaintenanceDate = lastMaintenanceDate;
         this.status = status;
         this.averageScore = averageScore;
+    }
+    
+    public Trail(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
+            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore, TrailWeatherInfoDto weatherInfo) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.city = city;
+        this.difficulty = difficulty;
+        this.openingDate = openingDate;
+        this.lastMaintenanceDate = lastMaintenanceDate;
+        this.status = status;
+        this.averageScore = averageScore;
+        this.weatherInfoDto = weatherInfo;
     }
 
     public String getId() {
@@ -100,6 +117,10 @@ public class Trail {
     
     public Double getAverageScore() {
         return averageScore;
+    }
+    
+    public TrailWeatherInfoDto getWeather() {
+        return weatherInfoDto;
     }
 
     public void setAverageScore(Double newScore) {

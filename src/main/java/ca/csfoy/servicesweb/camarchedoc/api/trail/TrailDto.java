@@ -37,6 +37,7 @@ public class TrailDto {
     public final LocalDate lastMaintenanceDate;
     public final TrailStatus status;
     public final Double averageScore;
+    public TrailWeatherInfoDto weatherInfo;
 
     public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
             LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore) {
@@ -49,5 +50,19 @@ public class TrailDto {
         this.lastMaintenanceDate = lastMaintenanceDate;
         this.status = status;
         this.averageScore = averageScore;
+    }
+    
+    public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
+            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore, TrailWeatherInfoDto weatherInfoDto) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.city = city;
+        this.difficulty = difficulty;
+        this.openingDate = openingDate;
+        this.lastMaintenanceDate = lastMaintenanceDate;
+        this.status = status;
+        this.averageScore = averageScore;
+        this.weatherInfo = weatherInfoDto;
     }
 }

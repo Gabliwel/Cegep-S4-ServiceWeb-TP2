@@ -23,7 +23,8 @@ public class TrailConverter {
 
     public TrailDto convertToTrailDtoFrom(Trail trail) {
         return new TrailDto(trail.getId(), trail.getName(), trail.getDescription(), 
-                trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail.getLastMaintenanceDate(), trail.getStatus(), trail.getAverageScore());
+                trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail
+                .getLastMaintenanceDate(), trail.getStatus(), trail.getAverageScore(), trail.getWeather());
     }
     
     public SearchTrailDto convertToSearchTrailDtoFrom(Trail trail) {
