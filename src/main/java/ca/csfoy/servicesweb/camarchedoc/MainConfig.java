@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.BadgeCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.FullUserCustomValidator;
@@ -59,6 +60,12 @@ public class MainConfig {
     @Scope("prototype")
     public FullUserCustomValidator userForCreateValidator() {
         return new FullUserCustomValidator(validator());
+    }
+    
+    @Bean
+    @Scope("prototype")
+    public BadgeCustomValidator badgeValidator() {
+        return new BadgeCustomValidator(validator());
     }
     
     /*

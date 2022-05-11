@@ -12,6 +12,7 @@ import javax.validation.groups.Default;
 import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
+import ca.csfoy.servicesweb.camarchedoc.domain.badge.Badge;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 public class FullUserDto {
@@ -30,12 +31,13 @@ public class FullUserDto {
     public final String password;
     @NotNull(message = "Average difficulty shouldn't be null", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDifficulty averageDifficulty;
-    // We allow these lists to be null, so no validation is done 
+    // We allow these lists to be null/empty, so no validation is done 
     public final Set<TrailDto> favoritesTrails;
     public final Set<TrailDto> trailsToTry;
+    public final Set<Badge> badges;
 
     public FullUserDto(String id, String firstname, String lastname, String email, String password, TrailDifficulty averageDifficulty,
-            Set<TrailDto> favoritesTrails, Set<TrailDto> trailsToTry) {
+            Set<TrailDto> favoritesTrails, Set<TrailDto> trailsToTry, Set<Badge> badges) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -44,5 +46,6 @@ public class FullUserDto {
         this.averageDifficulty = averageDifficulty;
         this.favoritesTrails = favoritesTrails;
         this.trailsToTry = trailsToTry;
+        this.badges = badges;
     }
 }

@@ -119,7 +119,7 @@ public class RatingResourceTest {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                  .contentType(CONTENT_TYPE)
-                 .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of()), 
+                 .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of(), Set.of()), 
                          new TrailDto("1", "bonsoir1", null, null, null, null, null, null, null), 4.0, "WoooooooooooW"))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();

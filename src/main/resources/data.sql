@@ -48,3 +48,27 @@ VALUES('2', '2');
 
 INSERT INTO USER_TRAILS_TO_TRY(USER_ID, TRAIL_ID)
 VALUES('2', '1');
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('1', 'Thor God of Thunder', 'Complete an event in raining conditions', 'thor_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('2', 'Windy Darling', 'Complete an event where the wind is at least 10km/h', 'wind_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('3', 'Frozen', 'Complete an event in a winterstorm', 'snow_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('4', 'The Social Network', 'Complete three events in the same week', 'social_icon.jpg', 1);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('5', 'The Busy Weekend', 'Complete two events in a weekend', 'weekend_icon.jpg', 1);
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('2', '1');
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('2', '2');
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('1', '4');

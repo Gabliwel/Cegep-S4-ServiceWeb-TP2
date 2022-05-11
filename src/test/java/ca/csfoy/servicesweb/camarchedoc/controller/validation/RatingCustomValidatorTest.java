@@ -20,7 +20,7 @@ public class RatingCustomValidatorTest {
     private static final TrailDto VALID_TRAIL = new TrailDto("999", "Nom", "Desc", "City", TrailDifficulty.BEGINNER,
             LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
     private static final UserDto VALID_USER = new UserDto("999", "Nom", "Nom2", TrailDifficulty.BEGINNER,
-            Set.of(), Set.of());
+            Set.of(), Set.of(), Set.of());
     private static final String VALID_ID = "999";
     private static final Double VALID_NOTE = 5.0;
     private static final String VALID_COMMENT = null;

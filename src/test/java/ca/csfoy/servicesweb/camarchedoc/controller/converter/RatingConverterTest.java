@@ -21,13 +21,13 @@ public class RatingConverterTest {
     public static final String ANY_ID = "1";
     
     public static final RatingConverter CONVERTER = 
-            new RatingConverter(new TrailConverter(), new UserConverter(new TrailConverter(), new BCryptPasswordEncoder()));
+            new RatingConverter(new TrailConverter(), new UserConverter(new TrailConverter(), new BCryptPasswordEncoder(), new BadgeConverter()));
     
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenRatingCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
         RatingDto dto = new RatingDto(null,
-                new UserDto("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new UserDto("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of()),
                 new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
@@ -43,7 +43,7 @@ public class RatingConverterTest {
     @Test
     void whenConvertingDomainObjectThenDtoCreatedWithGivenFieldsIncludingId() {
         Rating rating = new Rating( 
-                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of()),
                 new Trail(ANY_ID, "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
@@ -59,11 +59,11 @@ public class RatingConverterTest {
     @Test
     void whenConvertingListOfDomainObjetsThenListOfDtosIsReturned() {
         Rating rating1 = new Rating(null, 
-                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of()),
                 new Trail("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
         Rating rating2 = new Rating(null, 
-                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of()),
+                new User(ANY_ID, "Bob", "JSP", "", "", null, TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of()),
                 new Trail(ANY_ID, "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 

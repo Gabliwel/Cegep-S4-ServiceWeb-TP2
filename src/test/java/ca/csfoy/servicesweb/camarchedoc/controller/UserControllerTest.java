@@ -122,7 +122,7 @@ public class UserControllerTest {
     void whenGetSuggestedTrailsFromUserWithSuggestedTrailsThenRetunsList() {
         Set<TrailDto> set = new HashSet<TrailDto>();
         set.add(Mockito.mock(TrailDto.class));
-        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null);
+        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null, null);
         User user = Mockito.mock(User.class);
         
         Mockito.when(repo.get(ANY_ID)).thenReturn(user);
@@ -137,7 +137,7 @@ public class UserControllerTest {
     @Test
     void whenGetSuggestedTrailsFromUserWithNoSuggestedTrailsThenRetunsEmptyList() {
         Set<TrailDto> set = new HashSet<TrailDto>();
-        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null);
+        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null, null);
         User user = Mockito.mock(User.class);
         
         Mockito.when(repo.get(ANY_ID)).thenReturn(user);
