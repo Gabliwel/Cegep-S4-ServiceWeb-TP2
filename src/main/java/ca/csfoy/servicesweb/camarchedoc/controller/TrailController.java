@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDtoWithMeteo;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
@@ -40,11 +41,11 @@ public class TrailController implements TrailResource {
 
     @Override
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-    public TrailDto getById(String id) {
+    public TrailDtoWithMeteo getById(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
         validator.verify("Trail cannot be obtained. Invalid ID format");
-        TrailDto dto = converter.convertToTrailDtoFrom(repository.getById(id));
+        TrailDtoWithMeteo dto = converter.convertToTrailDtoWithMeteoFrom(repository.getById(id));
         dto.weatherInfo = weatherService.getWeatherInfo(dto.city);
         return dto;
     }

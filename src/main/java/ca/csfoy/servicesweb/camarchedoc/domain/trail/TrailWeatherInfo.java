@@ -45,10 +45,11 @@ public class TrailWeatherInfo {
             JsonNode feelsLike = jsonNode.at("/main/feels_like");
             JsonNode speed = jsonNode.at("/wind/speed");
             JsonNode weather = jsonNode.at("/weather");
+            JsonNode weatherDesc = weather.findValue("description");
             
             double tempDouble = Math.round(temp.asDouble() - 273.15);
             double feelsLikeDouble = Math.round(feelsLike.asDouble() - 273.15);
-            return new TrailWeatherInfoDto(tempDouble, feelsLikeDouble, speed.asDouble(), weather.at("description").asText());
+            return new TrailWeatherInfoDto(tempDouble, feelsLikeDouble, speed.asDouble(), weatherDesc.asText());
         } catch (Throwable e) {
             e.printStackTrace();
             return new TrailWeatherInfoDto(0.0, 0.0, 0.0, "Non-disponible");

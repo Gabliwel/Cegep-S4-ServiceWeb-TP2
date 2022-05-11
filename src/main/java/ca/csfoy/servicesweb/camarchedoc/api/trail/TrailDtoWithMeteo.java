@@ -15,7 +15,7 @@ import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
-public class TrailDto {
+public class TrailDtoWithMeteo {
 
     @Pattern(regexp = Const.ID_VALID_PATTERN, message = Const.INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
@@ -37,9 +37,10 @@ public class TrailDto {
     public final LocalDate lastMaintenanceDate;
     public final TrailStatus status;
     public final Double averageScore;
-
-    public TrailDto(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
-            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore) {
+    public TrailWeatherInfoDto weatherInfo;
+    
+    public TrailDtoWithMeteo(String id, String name, String description, String city, TrailDifficulty difficulty, LocalDate openingDate, 
+            LocalDate lastMaintenanceDate, TrailStatus status, Double averageScore, TrailWeatherInfoDto weatherInfoDto) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,5 +50,7 @@ public class TrailDto {
         this.lastMaintenanceDate = lastMaintenanceDate;
         this.status = status;
         this.averageScore = averageScore;
+        this.weatherInfo = weatherInfoDto;
     }
 }
+

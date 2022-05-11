@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDtoWithMeteo;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
 @Component
@@ -23,6 +24,12 @@ public class TrailConverter {
 
     public TrailDto convertToTrailDtoFrom(Trail trail) {
         return new TrailDto(trail.getId(), trail.getName(), trail.getDescription(), 
+                trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail
+                .getLastMaintenanceDate(), trail.getStatus(), trail.getAverageScore());
+    }
+    
+    public TrailDtoWithMeteo convertToTrailDtoWithMeteoFrom(Trail trail) {
+        return new TrailDtoWithMeteo(trail.getId(), trail.getName(), trail.getDescription(), 
                 trail.getCity(), trail.getDifficulty(), trail.getOpeningDate(), trail
                 .getLastMaintenanceDate(), trail.getStatus(), trail.getAverageScore(), trail.getWeather());
     }
