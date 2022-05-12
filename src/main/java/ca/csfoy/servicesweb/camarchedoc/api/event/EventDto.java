@@ -4,32 +4,23 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.groups.Default;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
+import ca.csfoy.servicesweb.camarchedoc.api.global.Const;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.validation.CreateGroupValidation;
 
 public class EventDto {
 
-    public static final String ID_VALID_PATTERN = "[0-9]+";
-    public static final String INVALID_ID_MESSAGE = "Id must be numbers only.";
 
-    //FIXME: Vos validations sur le UPDATE (default) ne fonctionnent pas!
-    @Pattern(regexp = ID_VALID_PATTERN, message = INVALID_ID_MESSAGE, groups = {Default.class})
+    @Pattern(regexp = Const.ID_VALID_PATTERN, message = Const.INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
-    //FIXME: NotBlank inclut NotNull et NotEmpty
-    @NotNull (message = "Name must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "Name must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Name must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String name;
-    @NotNull (message = "Description must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "Description must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Description must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,8 +29,6 @@ public class EventDto {
     public final LocalDate startDate;
     @NotNull (message = "Trail must not be null.", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDto trail;
-    @NotNull (message = "Organizer must not be null.", groups = {Default.class, CreateGroupValidation.class})
-    @NotEmpty (message = "Organizer must not be empty.", groups = {Default.class, CreateGroupValidation.class})
     @NotBlank (message = "Organizer must not be blank.", groups = {Default.class, CreateGroupValidation.class})
     public final String organizer;
 

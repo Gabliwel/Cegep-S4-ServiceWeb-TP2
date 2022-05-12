@@ -16,16 +16,19 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 public class EventCustomValidatorTest {
     
     private static final String ANY_MESSAGE = "test";
+    private static final String ANY_ID = "3";
+    private static final String ANY_NAME = "Promenade des pommes";
+    private static final String ANY_DESCRIPTION = "Promenade en apprenant comment faire un backflip.";
     
     private Validator defaultValidator = Validation.buildDefaultValidatorFactory().getValidator();
     private EventCustomValidator validator = new EventCustomValidator(defaultValidator);
     
-    private final TrailDto anyTrailDto = new TrailDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.", "Toronto", 
+    private final TrailDto anyTrailDto = new TrailDto("ANY_ID", ANY_NAME, ANY_DESCRIPTION, "Toronto", 
             TrailDifficulty.BEGINNER, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), null, null);
     
     @Test
     void whenValidatingEventDtoWithValidInputsThenValidationPass() {
-        EventDto dto = new EventDto("10", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
+        EventDto dto = new EventDto("10", ANY_NAME, ANY_DESCRIPTION,
             LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
@@ -33,8 +36,29 @@ public class EventCustomValidatorTest {
     }
     
     @Test
+    void whenValidatingEventIdWithNullIdThenValidationFails() {
+        validator.validateId(null);
+        
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
+    }
+    
+    @Test
+    void whenValidatingEventIdWithEmptyIdThenValidationFails() {
+        validator.validateId("");
+        
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
+    }
+    
+    @Test
+    void whenValidatingEventIdWithBlankIdThenValidationFails() {
+        validator.validateId("   ");
+        
+        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
+    }
+    
+    @Test
     void whenValidatingEventDtoWithNullNameThenValidationFails() {
-        EventDto dto = new EventDto("3", "", "Promenade en apprenant comment faire un backflip.",
+        EventDto dto = new EventDto(ANY_ID, "", ANY_DESCRIPTION,
                 LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
@@ -43,7 +67,7 @@ public class EventCustomValidatorTest {
     
     @Test
     void whenValidatingEventDtoWithNullDescriptionThenValidationFails() {
-        EventDto dto = new EventDto("3", "Promenade des pommes", "",
+        EventDto dto = new EventDto(ANY_ID, ANY_NAME, "",
                 LocalDate.now().plusYears(1), anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
@@ -52,7 +76,7 @@ public class EventCustomValidatorTest {
     
     @Test
     void whenValidatingEventDtoWithNullStartingDateThenValidationFails() {
-        EventDto dto = new EventDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
+        EventDto dto = new EventDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION,
                 null, anyTrailDto, "René Deschamps");
             validator.validate(dto);
         
@@ -61,7 +85,7 @@ public class EventCustomValidatorTest {
     
     @Test
     void whenValidatingEventDtoWithNullAssociatedTrailThenValidationFails() {
-        EventDto dto = new EventDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
+        EventDto dto = new EventDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION,
                 LocalDate.now().plusYears(1), null, "René Deschamps");
             validator.validate(dto);
         
@@ -70,7 +94,7 @@ public class EventCustomValidatorTest {
     
     @Test
     void whenValidatingEventDtoWithNullOrganizerThenValidationFails() {
-        EventDto dto = new EventDto("3", "Promenade des pommes", "Promenade en apprenant comment faire un backflip.",
+        EventDto dto = new EventDto(ANY_ID, ANY_NAME, ANY_DESCRIPTION,
                 LocalDate.now().plusYears(1), anyTrailDto, null);
             validator.validate(dto);
         

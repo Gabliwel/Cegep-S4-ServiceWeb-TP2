@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,10 +22,11 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@WithMockUser(roles = "USER")
 public class RatingResourceTest {
     
     private static final String PATH_TO_TEST = "/ratings";
-    private static final String SEARCH_PATH = "/trailSearch";
+    private static final String SEARCH_PATH = "/trails";
     private static final String GET_ID_RATING = "1";
     private static final String GET_INVALID_ID_RATING = "999";
     private static final String GET_BAD_ID_RATING = "A";

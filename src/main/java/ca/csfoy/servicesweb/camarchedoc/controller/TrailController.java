@@ -1,6 +1,10 @@
 package ca.csfoy.servicesweb.camarchedoc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RestController;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
@@ -13,7 +17,9 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
+@RestController
 public class TrailController implements TrailResource {
 
     private final TrailRepository repository;
@@ -29,6 +35,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public TrailDto getById(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
@@ -38,8 +45,16 @@ public class TrailController implements TrailResource {
 
     //FIXME: Le GetAll (trail) n'est pas supposé retourné des sentiers qui ne sont pas 'PRET/READY'
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<TrailDto> getAll() {
-        return converter.convertTrailListFrom(repository.getAll());
+        List<TrailDto> lst = converter.convertTrailListFrom(repository.getAll());
+        List<TrailDto> finalLst = new ArrayList<TrailDto>();
+        for (TrailDto trail : lst) {
+            if (trail.status == TrailStatus.READY) {
+                finalLst.add(trail);
+            }
+        }
+        return finalLst;
     }
 
     @Override
@@ -48,6 +63,7 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public TrailDto create(TrailDto dto) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validate(dto);
@@ -58,26 +74,28 @@ public class TrailController implements TrailResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void update(String id, TrailDto dto) {
         
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validate(id, dto);
-        //FIXME: Votre message d'erreur est erroné, cette méthode n,est pas pour la création
-        validator.verify("Trail cannot be created. Invalid information");
+        validator.verify("Trail cannot be updated. Invalid information");
         
         repository.modify(id, converter.convertToTrailFrom(dto));
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void delete(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
-        //FIXME: Votre message est erroné, cette méthode n'est pas pour l'obtention
-        validator.verify("Trail cannot be obtained. Invalid ID format");
+        validator.verify("Trail cannot be deleted. Invalid ID format");
+        
         repository.delete(id);
     }
     
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateToReady(String id) {
         service.verifyStatus(id);
     }

@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 
 public class CustomValidatorFactory {
 
@@ -24,5 +25,9 @@ public class CustomValidatorFactory {
     
     public CustomValidator<RatingDto, String> getRatingValidator() {
         return (CustomValidator<RatingDto, String>) applicationContext.getBean(RatingCustomValidator.class);
+    }
+    
+    public CustomValidator<FullUserDto, String> getUserDtoForCreateValidator() {
+        return (CustomValidator<FullUserDto, String>) applicationContext.getBean(FullUserCustomValidator.class);
     }
 }

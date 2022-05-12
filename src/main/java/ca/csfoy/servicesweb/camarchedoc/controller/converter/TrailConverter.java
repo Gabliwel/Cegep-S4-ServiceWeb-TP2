@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 
+@Component
 public class TrailConverter {
 
     public Trail convertToTrailAtCreationFrom(TrailDto dto) {

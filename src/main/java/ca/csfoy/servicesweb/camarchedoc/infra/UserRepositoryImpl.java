@@ -3,11 +3,14 @@ package ca.csfoy.servicesweb.camarchedoc.infra;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectNotFoundException;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
     private final UserDao dao;
@@ -28,8 +31,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
-        if (!dao.findById(user.id).isEmpty()) {
+    public void save(String id, User user) {
+        if (!dao.findById(id).isEmpty()) {
             if (!trailDoesExist(user.getFavoritesTrails()) || !trailDoesExist(user.getTrailsToTry())) {
                 throw new ObjectNotFoundException("Favorite(s) trail(s) dont exist for the user with id (" + user.id + "), and therefore cannot be modified.");
             } else {
@@ -58,5 +61,10 @@ public class UserRepositoryImpl implements UserRepository {
             } 
         }
         return true;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return dao.getByEmail(email);
     }
 }

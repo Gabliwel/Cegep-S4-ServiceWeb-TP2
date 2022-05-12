@@ -71,11 +71,11 @@ public class UserRepositoryImplTest {
         Set<Trail> lst = Set.of(trail1);
         Optional<Trail> optional = Optional.empty();
         Optional<User> optionalUser = Optional.of(user);
-        Mockito.when(dao.findById(user.id)).thenReturn(optionalUser);
+        Mockito.when(dao.findById(ANY_ID)).thenReturn(optionalUser);
         Mockito.when(user.getFavoritesTrails()).thenReturn(lst);
         Mockito.when(trail1.getId()).thenReturn(ANY_ID);
         Mockito.when(trailDao.findById(ANY_ID)).thenReturn(optional);
-        Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.save(user));
+        Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.save(ANY_ID, user));
         
         Mockito.verify(user).getFavoritesTrails();
     }
@@ -84,11 +84,11 @@ public class UserRepositoryImplTest {
     void whenModifyUserWithNonExistingUserThenUserIsNotModified() {
         User user = Mockito.mock(User.class);
         Optional<User> optionalUser = Optional.empty();
-        Mockito.when(dao.findById(user.id)).thenReturn(optionalUser);
+        Mockito.when(dao.findById(ANY_ID)).thenReturn(optionalUser);
 
-        Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.save(user));
+        Assertions.assertThrows(ObjectNotFoundException.class, () -> repo.save(ANY_ID, user));
         
-        Mockito.verify(dao).findById(user.id);
+        Mockito.verify(dao).findById(ANY_ID);
     }
     
     @Test
@@ -98,13 +98,13 @@ public class UserRepositoryImplTest {
         Set<Trail> lst = Set.of(trail1);
         Optional<Trail> optional = Optional.of(Mockito.mock(Trail.class));
         Optional<User> optionalUser = Optional.of(user);
-        Mockito.when(dao.findById(user.id)).thenReturn(optionalUser);
+        Mockito.when(dao.findById(ANY_ID)).thenReturn(optionalUser);
         Mockito.when(user.getFavoritesTrails()).thenReturn(lst);
         Mockito.when(user.getTrailsToTry()).thenReturn(lst);
         Mockito.when(trail1.getId()).thenReturn(ANY_ID);
         Mockito.when(trailDao.findById(ANY_ID)).thenReturn(optional);
         
-        repo.save(user);
+        repo.save(ANY_ID, user);
         
         Mockito.verify(user).getFavoritesTrails();
         Mockito.verify(user).getTrailsToTry();
