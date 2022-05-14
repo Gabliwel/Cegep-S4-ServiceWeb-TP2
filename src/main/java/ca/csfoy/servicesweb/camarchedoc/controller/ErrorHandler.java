@@ -28,6 +28,7 @@ public class ErrorHandler {
     private Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
     
     @ExceptionHandler(BadCredentialsException.class)
+    //FIXME: Sur un BadCredentials, c'est un statut 401 - Unauthorized qu'il faudrait retourner
     @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public ErrorMessageDto badCredentialsException(BadCredentialsException ex) {
         String errorIdentifier = ex.hashCode() + "";

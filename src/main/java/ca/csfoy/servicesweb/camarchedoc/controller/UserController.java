@@ -50,6 +50,7 @@ public class UserController implements UserResource {
         validator.validate(user);
         validator.verify("User cannot be created.");
         User userDetails = repo.getByEmail(user.email);
+        //FIXME: Cette exception est à gérer dans le repository (comme les autres ObjectAlreadyExistException), pas dans le controller.
         if (userDetails == null) {
             repo.create(converter.toUserForCreation(user));
         } else {
@@ -70,6 +71,7 @@ public class UserController implements UserResource {
         CustomValidator<FullUserDto, String> validator = validatorFactory.getUserDtoForCreateValidator();
         validator.validate(userId, user);
         validator.verify("User cannot be modified.");
+        //FIXME: Les lignes suivantes gèrent des détails de persistance, c'est la responsabilité du repo!
         User userByEmail = repo.getByEmail(user.email);
         if (Objects.isNull(userByEmail)) {
             repo.save(userId, converter.toUser(user));

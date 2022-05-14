@@ -22,6 +22,7 @@ import ca.csfoy.servicesweb.camarchedoc.api.ErrorMessageDto;
 public class CustomAuthentificationEntryPoint extends BasicAuthenticationEntryPoint {
     
     //Non utilisé désormais
+	//FIXME: Alors SUPPRIMEZ-MOI ÇA!! :)
 
     private final ObjectMapper objectMapper;
     private Logger logger = LoggerFactory.getLogger(CustomAuthentificationEntryPoint.class);
