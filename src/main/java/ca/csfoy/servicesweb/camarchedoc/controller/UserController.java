@@ -58,7 +58,6 @@ public class UserController implements UserResource {
         } else {
             throw new ObjectAlreadyExistsException("Email(" + user.email + ") has already been taken");
         }
-
     }
 
     @Override
@@ -68,7 +67,7 @@ public class UserController implements UserResource {
     }
 
     @Override
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_USER') and #userId == authentication.principal.id")
     public void modifyUser(FullUserDto user, String userId) {
         CustomValidator<FullUserDto, String> validator = validatorFactory.getUserDtoForCreateValidator();
         validator.validate(userId, user);
@@ -106,7 +105,7 @@ public class UserController implements UserResource {
     public TokenDto loginUser(UserCredentialsDto credentials) {
         authManager.authenticate(new UsernamePasswordAuthenticationToken(credentials.emailAdress, credentials.password));
         User userDetails = repo.getByEmail(credentials.emailAdress);
-        String token = tokenProvider.createToken(userDetails.getEmail(), userDetails.getRole());
+        String token = tokenProvider.createToken(userDetails.getEmail(), userDetails.getRole(), userDetails.getId());
         return new TokenDto(token);
     }
 }

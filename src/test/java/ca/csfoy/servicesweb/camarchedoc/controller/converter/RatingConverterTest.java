@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 
 import java.util.List;
+
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
@@ -9,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
@@ -26,15 +26,16 @@ public class RatingConverterTest {
     @Test
     void whenConvertingDtoWithoutIdOnCreationThenRatingCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
+        User user = new User("1", "Bob", "JSP", "String", "Allllooo", null, TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of());
         RatingDto dto = new RatingDto(null,
-                new UserDto("1", "Bob", "JSP", TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of()),
+                null,
                 new TrailDto("1", "name", "description", "city", TrailDifficulty.BEGINNER, null, null, null, null),
                 5.0, "comment");
 
-        Rating result = CONVERTER.convertToRatingAtCreationFrom(dto);
+        Rating result = CONVERTER.convertToRatingAtCreationFrom(dto, user);
 
         Assertions.assertEquals((nextId + 1) + "", result.getId());
-        Assertions.assertEquals(dto.user.id, result.getUser().getId());
+        Assertions.assertEquals(user.getId(), result.getUser().getId());
         Assertions.assertEquals(dto.trail.id, result.getTrail().getId());
         Assertions.assertEquals(dto.note, result.getNote());
         Assertions.assertEquals(dto.comment, result.getComment());

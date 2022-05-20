@@ -34,6 +34,10 @@ VALUES('2', 'Bob2', 'JSP encore', 'z@a.ca', '$2a$10$qe5.ImGIOuqlJ24LSDE/2OnEiiIM
 INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
 VALUES('3', 'Bob3', 'JSP encore', 'john.smith@invalidemail.com', '$2y$12$IZoojYcMZkgcST/CUBTQaO0sfPGcBjUsq4U7U8KcKK16eAH7ZgbUC', 1, '2');
 
+--Le mot de passe est "test"
+INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
+VALUES('4', 'Bob4', 'JSP encore', 'abc@de.fg', '$2a$10$qe5.ImGIOuqlJ24LSDE/2OnEiiIM0vtvDABaalo3UTRiK3OBScrvW', 2, '2');
+
 INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL, USER)
 VALUES('1', 'ark!', 1, '1', '2');
 

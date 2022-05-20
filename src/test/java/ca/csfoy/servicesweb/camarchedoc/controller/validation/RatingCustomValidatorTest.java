@@ -67,11 +67,11 @@ public class RatingCustomValidatorTest {
     }
     
     @Test
-    void whenValidatingRatingDtoWithNullUserThenValidationFails() {
+    void whenValidatingRatingDtoWithNullUserThenValidationDoesNotFails() {
         RatingDto dto = new RatingDto(VALID_ID, null, VALID_TRAIL, VALID_NOTE, VALID_COMMENT);
         validator.validate(dto);
         
-        Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
+        Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
     }
     
     @Test

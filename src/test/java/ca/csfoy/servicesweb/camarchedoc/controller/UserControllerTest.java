@@ -24,6 +24,7 @@ import ca.csfoy.servicesweb.camarchedoc.api.user.UserCredentialsDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.UserConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
+import ca.csfoy.servicesweb.camarchedoc.domain.badge.Badge;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
@@ -97,8 +98,11 @@ public class UserControllerTest {
     void whenModifyWithValidObjectThenDomainObjectIsModified() {
         FullUserDto dto = Mockito.mock(FullUserDto.class);
         User user = Mockito.mock(User.class);
+        User byId = Mockito.mock(User.class);
+        Set<Badge> badges = Set.of(Mockito.mock(Badge.class));
         Mockito.when(converter.toUser(dto)).thenReturn(user);
         Mockito.when(validatorFactory.getUserDtoForCreateValidator()).thenReturn(validator);
+        Mockito.when(repo.get(ANY_ID)).thenReturn(byId);
         
         controller.modifyUser(dto, ANY_ID);
         

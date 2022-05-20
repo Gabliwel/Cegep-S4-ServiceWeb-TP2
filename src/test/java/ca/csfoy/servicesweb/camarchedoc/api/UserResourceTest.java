@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
 import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -121,6 +122,8 @@ public class UserResourceTest {
             Assertions.assertTrue(responseAsString.contains("bonsoir2"));
     }
     
+    //NON OBLIGATOIRE APRES MODIF AVEC AUTORISATION COMPLEXE
+    /*
     @Test
     @WithMockUser(roles = "USER")
     void canModifyUserAsUser() throws Exception {        
@@ -141,6 +144,16 @@ public class UserResourceTest {
                       .content(objectMapper.writeValueAsString(userDto2)))
                       .andExpect(MockMvcResultMatchers.status().isForbidden())           
                       .andReturn();     
+    }*/
+    
+    @Test
+    void cannotModifyUserWithoutTokenId() throws Exception {        
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                    .put(PATH_TO_TEST + "/" + PUT_ID)
+                      .contentType(CONTENT_TYPE)
+                      .content(objectMapper.writeValueAsString(userDto2)))
+                      .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                      .andReturn();  
     }
 
 }

@@ -17,9 +17,9 @@ public class RatingDto {
 
     @Pattern(regexp = Const.ID_VALID_PATTERN, message = Const.INVALID_ID_MESSAGE, groups = {Default.class})
     public final String id;
-    @NotNull (message = "Trail must not be null.", groups = {Default.class, CreateGroupValidation.class})
+    // pas de validation
     public final UserDto user;
-    @NotNull (message = "User must not be null.", groups = {Default.class, CreateGroupValidation.class})
+    @NotNull (message = "Trail must not be null.", groups = {Default.class, CreateGroupValidation.class})
     public final TrailDto trail;
     public final Double note;
     @Size(max = 140, message = "Comment must have less than 140 caracters.", groups = {Default.class, CreateGroupValidation.class})
@@ -31,5 +31,13 @@ public class RatingDto {
         this.trail = trail;
         this.note = note;
         this.comment = comment;
+    }
+    
+    public TrailDto getTrail() {
+        return trail;
+    }
+    
+    public String getTrailId() {
+        return trail.id;
     }
 }

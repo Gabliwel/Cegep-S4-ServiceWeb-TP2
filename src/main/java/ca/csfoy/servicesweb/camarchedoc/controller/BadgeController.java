@@ -2,6 +2,7 @@ package ca.csfoy.servicesweb.camarchedoc.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.csfoy.servicesweb.camarchedoc.api.badge.BadgeDto;
@@ -33,6 +34,7 @@ public class BadgeController implements BadgeResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public BadgeDtoWithoutDesc getById(String id) {
         CustomValidator<BadgeDto, String> validator = validatorFactory.getBadgeValidator();
         validator.validateId(id);
@@ -41,11 +43,13 @@ public class BadgeController implements BadgeResource {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     public List<SmallBadgeDto> getAll() {
         return badgeConverter.badgeListToDtoList(badgeRepo.getAll());
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void giveBadge(String id, String userId) {
         CustomValidator<BadgeDto, String> validator = validatorFactory.getBadgeValidator();
         validator.validateId(id);
