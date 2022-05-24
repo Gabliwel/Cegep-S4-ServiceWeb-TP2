@@ -28,7 +28,7 @@ public class ErrorHandler {
     private Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
     
     @ExceptionHandler(BadCredentialsException.class)
-    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(value = HttpStatus.FORBIDDEN)
     public ErrorMessageDto badCredentialsException(BadCredentialsException ex) {
         String errorIdentifier = ex.hashCode() + "";
         logger.error(LocalDateTime.now().toString() 
