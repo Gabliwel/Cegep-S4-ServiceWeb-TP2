@@ -49,12 +49,7 @@ public class UserController implements UserResource {
         CustomValidator<FullUserDto, String> validator = validatorFactory.getUserDtoForCreateValidator();
         validator.validate(user);
         validator.verify("User cannot be created.");
-        User userDetails = repo.getByEmail(user.email);
-        if (userDetails == null) {
-            repo.create(converter.toUserForCreation(user));
-        } else {
-            throw new ObjectAlreadyExistsException("Email(" + user.email + ") has already been taken");
-        }
+        repo.create(converter.toUserForCreation(user));
 
     }
 
