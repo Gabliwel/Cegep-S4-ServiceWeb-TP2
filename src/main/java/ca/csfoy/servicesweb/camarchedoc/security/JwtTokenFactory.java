@@ -25,10 +25,9 @@ public class JwtTokenFactory {
         return secretKey;
     }
     
-    public String createToken(String email, Role role, String id) {
+    public String createToken(String email, Role role) {
         Claims claims = Jwts.claims().setSubject(email);
         claims.put("auth", role);
-        claims.put("userId", id);
         Date now = new Date();
         
         return Jwts.builder()

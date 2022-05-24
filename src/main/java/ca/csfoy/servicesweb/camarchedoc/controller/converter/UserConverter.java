@@ -1,7 +1,5 @@
 package ca.csfoy.servicesweb.camarchedoc.controller.converter;
 
-import java.util.Set;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -15,12 +13,10 @@ import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 public class UserConverter {
     private final TrailConverter trailConverter;
     private final PasswordEncoder passwordEncoder;
-    private final BadgeConverter badgeConverter;
 
-    public UserConverter(TrailConverter trailConverter, PasswordEncoder passwordEncoder, BadgeConverter badgeConverter) {
+    public UserConverter(TrailConverter trailConverter, PasswordEncoder passwordEncoder) {
         this.trailConverter = trailConverter;
         this.passwordEncoder = passwordEncoder;
-        this.badgeConverter = badgeConverter;
     }
 
     public UserDto fromUser(User user) {
@@ -29,8 +25,7 @@ public class UserConverter {
                 user.getLastname(),
                 user.getPreferredDifficulty(),
                 trailConverter.convertTrailSetFrom(user.getFavoritesTrails()),
-                trailConverter.convertTrailSetFrom(user.getTrailsToTry()),
-                badgeConverter.convertBadgeDtoSetFrom(user.getBadges()));
+                trailConverter.convertTrailSetFrom(user.getTrailsToTry()));
     }
 
     public User toUserForCreation(FullUserDto user) {
@@ -42,8 +37,7 @@ public class UserConverter {
                 new Role("2", "USER"),
                 user.averageDifficulty,
                 trailConverter.convertTrailDtosSetFrom(user.favoritesTrails),
-                trailConverter.convertTrailDtosSetFrom(user.trailsToTry),
-                Set.of());
+                trailConverter.convertTrailDtosSetFrom(user.trailsToTry));
     }
 
     public User toUser(FullUserDto user) {
@@ -55,8 +49,7 @@ public class UserConverter {
                 new Role("2", "USER"),
                 user.averageDifficulty,
                 trailConverter.convertTrailDtosSetFrom(user.favoritesTrails),
-                trailConverter.convertTrailDtosSetFrom(user.trailsToTry),
-                Set.of());
+                trailConverter.convertTrailDtosSetFrom(user.trailsToTry));
     }
     
     public User toUser(UserDto user) {
@@ -68,7 +61,6 @@ public class UserConverter {
                 new Role("2", "USER"),
                 user.averageDifficulty,
                 trailConverter.convertTrailDtosSetFrom(user.favoritesTrails),
-                trailConverter.convertTrailDtosSetFrom(user.trailsToTry),
-                Set.of());
+                trailConverter.convertTrailDtosSetFrom(user.trailsToTry));
     }
 }

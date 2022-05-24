@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import ca.csfoy.servicesweb.camarchedoc.api.badge.BadgeDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
 import ca.csfoy.servicesweb.camarchedoc.api.user.FullUserDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.IdentifiantGenerator;
-import ca.csfoy.servicesweb.camarchedoc.domain.badge.Badge;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
@@ -23,8 +21,8 @@ public class UserConverterTest {
     void whenConvertingDtoWithoutIdOnCreationThenUserCreatedWithGivenFieldsAndGeneratedId() {
         Integer nextId = IdentifiantGenerator.getNextId();
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        FullUserDto dto = new FullUserDto("id", "firstName", "lastName", "email", "password", TrailDifficulty.BEGINNER, Set.of(), Set.of(), Set.of());
-        UserConverter converter = new UserConverter(new TrailConverter(), passwordEncoder, new BadgeConverter());
+        FullUserDto dto = new FullUserDto("id", "firstName", "lastName", "email", "password", TrailDifficulty.BEGINNER, Set.of(), Set.of());
+        UserConverter converter = new UserConverter(new TrailConverter(), passwordEncoder);
 
         User user = converter.toUserForCreation(dto);
 
@@ -40,9 +38,8 @@ public class UserConverterTest {
     @Test
     void whenConvertingDtoWithIdThenUserCreatedWithGivenFields() {
         Set<TrailDto> set = Set.of(new TrailDto("5", null, null, null, null, null, null, null, null));
-        Set<BadgeDto> set2 = Set.of(new BadgeDto("5", null, null, null, null));
-        UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set, set2);
-        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder(), new BadgeConverter());
+        UserDto dto = new UserDto("id", "firstName", "lastName", TrailDifficulty.BEGINNER, set, set);
+        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder());
 
         User user = converter.toUser(dto);
 
@@ -52,15 +49,13 @@ public class UserConverterTest {
         Assertions.assertEquals(dto.averageDifficulty, user.getPreferredDifficulty());
         Assertions.assertEquals(dto.favoritesTrails.iterator().next().id, user.getFavoritesTrails().iterator().next().getId());
         Assertions.assertEquals(dto.trailsToTry.iterator().next().id, user.getTrailsToTry().iterator().next().getId());
-        Assertions.assertEquals(null, user.getBadges());
     }
     
     @Test
-    void whenConvertingUserThenDtoCreatedWithGivenFields() {
+    void whenConvertingUserThenzDtoCreatedWithGivenFields() {
         Set<Trail> set = Set.of(new Trail("5", null, null, null, null, null, null, null, null));
-        Set<Badge> set2 = Set.of(new Badge("5", null, null, null, null));
-        User user = new User("id", "firstName", "lastName", "", "", null, TrailDifficulty.BEGINNER, set, set, set2);
-        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder(), new BadgeConverter());
+        User user = new User("id", "firstName", "lastName", "", "", null, TrailDifficulty.BEGINNER, set, set);
+        UserConverter converter = new UserConverter(new TrailConverter(), new BCryptPasswordEncoder());
 
         UserDto dto = converter.fromUser(user);
 
@@ -70,6 +65,5 @@ public class UserConverterTest {
         Assertions.assertEquals(dto.averageDifficulty, user.getPreferredDifficulty());
         Assertions.assertEquals(dto.favoritesTrails.iterator().next().id, user.getFavoritesTrails().iterator().next().getId());
         Assertions.assertEquals(dto.trailsToTry.iterator().next().id, user.getTrailsToTry().iterator().next().getId());
-        Assertions.assertEquals(dto.badges, user.getBadges());
     }
 }

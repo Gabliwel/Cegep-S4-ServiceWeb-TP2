@@ -24,7 +24,6 @@ import ca.csfoy.servicesweb.camarchedoc.api.user.UserCredentialsDto;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.UserConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
-import ca.csfoy.servicesweb.camarchedoc.domain.badge.Badge;
 import ca.csfoy.servicesweb.camarchedoc.domain.exception.ObjectAlreadyExistsException;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 import ca.csfoy.servicesweb.camarchedoc.domain.user.UserRepository;
@@ -87,11 +86,8 @@ public class UserControllerTest {
     void whenModifyWithValidObjectThenDomainObjectIsModified() {
         FullUserDto dto = Mockito.mock(FullUserDto.class);
         User user = Mockito.mock(User.class);
-        User byId = Mockito.mock(User.class);
-        Set<Badge> badges = Set.of(Mockito.mock(Badge.class));
         Mockito.when(converter.toUser(dto)).thenReturn(user);
         Mockito.when(validatorFactory.getUserDtoForCreateValidator()).thenReturn(validator);
-        Mockito.when(repo.get(ANY_ID)).thenReturn(byId);
         
         controller.modifyUser(dto, ANY_ID);
         
@@ -115,7 +111,7 @@ public class UserControllerTest {
     void whenGetSuggestedTrailsFromUserWithSuggestedTrailsThenRetunsList() {
         Set<TrailDto> set = new HashSet<TrailDto>();
         set.add(Mockito.mock(TrailDto.class));
-        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null, null);
+        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null);
         User user = Mockito.mock(User.class);
         
         Mockito.when(repo.get(ANY_ID)).thenReturn(user);
@@ -130,7 +126,7 @@ public class UserControllerTest {
     @Test
     void whenGetSuggestedTrailsFromUserWithNoSuggestedTrailsThenRetunsEmptyList() {
         Set<TrailDto> set = new HashSet<TrailDto>();
-        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null, null);
+        UserDto dto = new UserDto(ANY_ID, null, null, null, set, null);
         User user = Mockito.mock(User.class);
         
         Mockito.when(repo.get(ANY_ID)).thenReturn(user);

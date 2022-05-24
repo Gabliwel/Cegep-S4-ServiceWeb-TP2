@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
-import ca.csfoy.servicesweb.camarchedoc.domain.user.User;
 
 @Component
 public class RatingConverter {
@@ -29,8 +28,8 @@ public class RatingConverter {
         return all.stream().map(this::convertToRatingDtoFrom).collect(Collectors.toList());
     }
 
-    public Rating convertToRatingAtCreationFrom(RatingDto dto, User user) {
-        return new Rating(user, trailConverter.convertToTrailFrom(dto.trail), dto.note, dto.comment);
+    public Rating convertToRatingAtCreationFrom(RatingDto dto) {
+        return new Rating(userConverter.toUser(dto.user), trailConverter.convertToTrailFrom(dto.trail), dto.note, dto.comment);
     }
 
 }
