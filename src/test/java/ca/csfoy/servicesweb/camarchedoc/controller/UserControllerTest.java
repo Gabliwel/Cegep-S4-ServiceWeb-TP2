@@ -64,21 +64,10 @@ public class UserControllerTest {
         User user = Mockito.mock(User.class);
         Mockito.when(validatorFactory.getUserDtoForCreateValidator()).thenReturn(validator);
         Mockito.when(converter.toUserForCreation(dto)).thenReturn(user);
-        Mockito.when(repo.getByEmail(user.email)).thenReturn(null);
         
         controller.createUser(dto);
         
         Mockito.verify(repo).create(user);
-    }
-    
-    @Test
-    void whenCreatedWithValidObjectWithEmailAlreadyUsedThenDomainObjectNotCreated() {
-        FullUserDto dto = Mockito.mock(FullUserDto.class);
-        User user = Mockito.mock(User.class);
-        Mockito.when(validatorFactory.getUserDtoForCreateValidator()).thenReturn(validator);
-        Mockito.when(repo.getByEmail(user.email)).thenReturn(user);
-        
-        Assertions.assertThrows(ObjectAlreadyExistsException.class, () -> controller.createUser(dto));
     }
     
     @Test
