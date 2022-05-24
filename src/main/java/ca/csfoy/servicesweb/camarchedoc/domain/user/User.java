@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import ca.csfoy.servicesweb.camarchedoc.domain.badge.Badge;
 import ca.csfoy.servicesweb.camarchedoc.domain.rating.Rating;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
@@ -42,11 +43,14 @@ public class User {
     @ManyToMany(targetEntity = Trail.class, fetch = FetchType.EAGER)
     @JoinTable(name = "USER_TRAILS_TO_TRY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "TRAIL_ID"))
     public Set<Trail> trailsToTry;
+    @ManyToMany(targetEntity = Badge.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_BADGES", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "BADGE_ID"))
+    public Set<Badge> badges;
 
     public User() {}
     
     public User(String id, String firstname, String lastname, String email, String password, Role role, TrailDifficulty preferredDifficulty, 
-            Set<Trail> favoritesTrails, Set<Trail> trailsToTry) {
+            Set<Trail> favoritesTrails, Set<Trail> trailsToTry, Set<Badge> badges) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -97,6 +101,10 @@ public class User {
     public Set<Trail> getTrailsToTry() {
         return trailsToTry;
     }
+    
+    public Set<Badge> getBadges() {
+        return badges;
+    }
 
     public void addFavoriteTrail(Trail trail, Rating rating) {
         if (rating.getNote().equals(Rating.MAX_NOTE)) {
@@ -105,7 +113,19 @@ public class User {
             }
             this.favoritesTrails.add(trail);
         }
-
+    }
+    
+    public void addBagde(Badge badge) {
+        if (badges == null) {
+            this.badges = new HashSet<Badge>();
+        }
+        if (!badges.contains(badge)) {
+            badges.add(badge);
+        }
+    }
+    
+    public void setBadges(Set<Badge> badges) {
+        this.badges = new HashSet<Badge>(badges);
     }
 
 }
