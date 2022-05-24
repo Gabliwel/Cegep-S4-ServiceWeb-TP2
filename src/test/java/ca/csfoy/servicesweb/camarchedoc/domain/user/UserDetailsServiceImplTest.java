@@ -35,7 +35,7 @@ public class UserDetailsServiceImplTest {
     @Test
     void whenLoadByUsernamePassUserReturnsSpringUserDetails() {
         //Not using mockito to test/coverage cover the private method
-        User user = new User("", "", "", ANY_STRING, ANY_STRING2, new Role("1", "USER"), null, null, null, null);
+        User user = new User("", "", "", ANY_STRING, ANY_STRING2, new Role("1", "USER"), null, null, null);
         Mockito.when(repo.getByEmail(ANY_STRING)).thenReturn(user);
         
         UserDetails usersDetails = service.loadUserByUsername(ANY_STRING);
@@ -47,7 +47,7 @@ public class UserDetailsServiceImplTest {
     @Test
     void whenLoadByUsernamePassAdminReturnsSpringUserDetails() {
         //Not using mockito to test/coverage cover the private method
-        User user = new User("", "", "", ANY_STRING, ANY_STRING2, new Role("2", "ADMIN"), null, null, null, null);
+        User user = new User("", "", "", ANY_STRING, ANY_STRING2, new Role("2", "ADMIN"), null, null, null);
         Mockito.when(repo.getByEmail(ANY_STRING)).thenReturn(user);
         
         UserDetails usersDetails = service.loadUserByUsername(ANY_STRING);

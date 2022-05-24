@@ -19,7 +19,7 @@ public class FullUserCustomValidatorTest {
 
     @Test
     void whenValidatingFullUserDtoWithValidInputsThenValidationPass() {
-        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
         validator.validate(dto);
         
         Assertions.assertDoesNotThrow(() -> validator.verify(ANY_MESSAGE));
@@ -48,7 +48,7 @@ public class FullUserCustomValidatorTest {
     
     @Test
     void whenValidatingFullUserDtoWithNullFirstNameThenValidationFails() {
-        FullUserDto dto = new FullUserDto("14", "", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("14", "", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
         validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -56,7 +56,7 @@ public class FullUserCustomValidatorTest {
     
     @Test
     void whenValidatingFullUserDtoWithNullLastNameThenValidationFails() {
-        FullUserDto dto = new FullUserDto("15", "Jean", "", "jeanpaul@gmail.com", "allo1234testallo", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("15", "Jean", "", "jeanpaul@gmail.com", "allo1234testallo", TrailDifficulty.BEGINNER, null, null);
          validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -64,7 +64,7 @@ public class FullUserCustomValidatorTest {
     
     @Test
     void whenValidatingFullUserDtoWithNullEmailThenValidationFails() {
-        FullUserDto dto = new FullUserDto("15", "Jean", "Paul", "", "allo123testallo", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("15", "Jean", "Paul", "", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
         validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -72,7 +72,7 @@ public class FullUserCustomValidatorTest {
     
     @Test
     void whenValidatingFullUserDtoWithNullPasswordThenValidationFails() {
-        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "", TrailDifficulty.BEGINNER, null, null);
         validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
@@ -80,7 +80,7 @@ public class FullUserCustomValidatorTest {
     
     @Test
     void whenValidatingFullUserDtoWithShortPasswordThenValidationFails() {
-        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "alloalloall", TrailDifficulty.BEGINNER, null, null, null);
+        FullUserDto dto = new FullUserDto("15", "Jeassn", "Passul", "jeanpasul@gmail.com", "alloalloall", TrailDifficulty.BEGINNER, null, null);
          validator.validate(dto);
         
         Assertions.assertThrows(InputValidationException.class, () -> validator.verify(ANY_MESSAGE));
