@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ca.csfoy.servicesweb.camarchedoc.api.event.EventDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
-import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailWeatherInfoDto;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
 
@@ -32,11 +31,8 @@ public class EventResourceTest {
     private static final String ANY_INVALID_ID = "9";
     private static final String CONTENT_TYPE = "application/json";
     
-    private TrailWeatherInfoDto weatherInfoDto = new TrailWeatherInfoDto(0.0, 0.0, 0.0, "vraiment belle meteo");
-    
     private TrailDto trailDto = new TrailDto("1", "bonsoir1", "premier trail", "quebec", 
             TrailDifficulty.FAMILY, LocalDate.of(1999, 12, 31), LocalDate.of(2021, 12, 31), TrailStatus.READY, null);
-    
     private EventDto dto1 = new EventDto(UPDATE_ID, "event de bob1", "un endroit magnifiiiiique", LocalDate.now().plusDays(1), trailDto, "bob1");
     
     @Autowired

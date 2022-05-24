@@ -42,7 +42,7 @@ public interface TrailResource {
                     @ApiResponse(responseCode = "404", description = "Sentier introuvable", content = @Content) })
     @GetMapping(TrailResource.PATH_WITH_ID)
     @ResponseStatus(HttpStatus.OK)
-    TrailDtoWithMeteo getById(@PathVariable(TrailResource.PATH_VARIABLE_ID) String id);
+    TrailDto getById(@PathVariable(TrailResource.PATH_VARIABLE_ID) String id);
 
     @Operation(summary = "Obtient tous les sentiers de marche disponibles.")
     @ApiResponses(value = { 
