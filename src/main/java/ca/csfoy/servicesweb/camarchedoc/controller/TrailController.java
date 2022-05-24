@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.SearchTrailDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDtoWithMeteo;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailResource;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
@@ -18,6 +19,7 @@ import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailService;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailStatus;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailWeatherInfo;
 
 @RestController
 public class TrailController implements TrailResource {
@@ -26,21 +28,26 @@ public class TrailController implements TrailResource {
     private final TrailConverter converter;
     private final CustomValidatorFactory validatorFactory;
     private final TrailService service;
+    private final TrailWeatherInfo weatherService;
 
-    public TrailController(TrailRepository repository, TrailConverter converter, CustomValidatorFactory validatorFactory, TrailService service) {
+    public TrailController(TrailRepository repository, TrailConverter converter, CustomValidatorFactory validatorFactory, 
+            TrailService service, TrailWeatherInfo weatherService) {
         this.repository = repository;
         this.converter = converter;
         this.validatorFactory = validatorFactory;
         this.service = service;
+        this.weatherService = weatherService;
     }
 
     @Override
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-    public TrailDto getById(String id) {
+    public TrailDtoWithMeteo getById(String id) {
         CustomValidator<TrailDto, String> validator = validatorFactory.getTrailValidator();
         validator.validateId(id);
         validator.verify("Trail cannot be obtained. Invalid ID format");
-        return converter.convertToTrailDtoFrom(repository.getById(id));
+        TrailDtoWithMeteo dto = converter.convertToTrailDtoWithMeteoFrom(repository.getById(id));
+        dto.weatherInfo = weatherService.getWeatherInfo(dto.city);
+        return dto;
     }
 
     @Override

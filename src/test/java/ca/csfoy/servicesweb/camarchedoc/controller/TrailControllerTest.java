@@ -12,12 +12,14 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDtoWithMeteo;
 import ca.csfoy.servicesweb.camarchedoc.controller.converter.TrailConverter;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.TrailCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.Trail;
 import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailRepository;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailWeatherInfo;
 
 @Tag("Unitaire")
 @ExtendWith(MockitoExtension.class)
@@ -32,6 +34,9 @@ class TrailControllerTest {
     private TrailConverter converter;
     
     @Mock
+    private TrailWeatherInfo weatherInfo;
+    
+    @Mock
     private CustomValidatorFactory validatorFactory;
     
     @Mock
@@ -42,17 +47,17 @@ class TrailControllerTest {
 
     @Test
     void whenGetByIdWithValidIdThenDomainObjectReturnedAsConvertedDto() {
-        TrailDto dto = Mockito.mock(TrailDto.class);
+        TrailDtoWithMeteo dto = Mockito.mock(TrailDtoWithMeteo.class);
         Trail trail = Mockito.mock(Trail.class);
         TrailCustomValidator trailValidator = Mockito.mock(TrailCustomValidator.class);
         
         Mockito.when(validatorFactory.getTrailValidator()).thenReturn(trailValidator);
         Mockito.when(repository.getById(ANY_ID)).thenReturn(trail);
-        Mockito.when(converter.convertToTrailDtoFrom(trail)).thenReturn(dto);
-        TrailDto dtoReturned = controller.getById(ANY_ID);
+        Mockito.when(converter.convertToTrailDtoWithMeteoFrom(trail)).thenReturn(dto);
+        TrailDtoWithMeteo dtoReturned = controller.getById(ANY_ID);
         
         Mockito.verify(repository).getById(ANY_ID);
-        Mockito.verify(converter).convertToTrailDtoFrom(trail);
+        Mockito.verify(converter).convertToTrailDtoWithMeteoFrom(trail);
         Assertions.assertSame(dto, dtoReturned);
     }
     

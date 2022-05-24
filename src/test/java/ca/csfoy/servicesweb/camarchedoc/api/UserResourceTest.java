@@ -46,7 +46,7 @@ public class UserResourceTest {
                 .post(PATH_TO_LOGIN)
                   .contentType("application/json")
                   .content(objectMapper.writeValueAsString(credentialsDto1)))
-                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                  .andExpect(MockMvcResultMatchers.status().isUnauthorized())           
                   .andReturn();     
 
         String responseAsString = result.getResponse().getContentAsString();
