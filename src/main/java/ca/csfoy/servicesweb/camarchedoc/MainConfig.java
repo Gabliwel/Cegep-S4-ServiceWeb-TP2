@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.client.RestTemplate;
 
+import ca.csfoy.servicesweb.camarchedoc.controller.validation.BadgeCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.CustomValidatorFactory;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.EventCustomValidator;
 import ca.csfoy.servicesweb.camarchedoc.controller.validation.FullUserCustomValidator;
@@ -63,8 +64,9 @@ public class MainConfig {
     }
     
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
+    @Scope("prototype")
+    public BadgeCustomValidator badgeValidator() {
+        return new BadgeCustomValidator(validator());
     }
     
     /*

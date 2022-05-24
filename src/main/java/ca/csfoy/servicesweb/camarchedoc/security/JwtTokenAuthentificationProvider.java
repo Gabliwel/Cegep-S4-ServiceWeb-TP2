@@ -20,8 +20,8 @@ public class JwtTokenAuthentificationProvider {
         this.factory = factory;
     }
     
-    public String createToken(String email, Role role) {
-        return factory.createToken(email, role);
+    public String createToken(String email, Role role, String id) {
+        return factory.createToken(email, role, id);
     }
     
     public boolean validateToken(String token) {
@@ -35,8 +35,13 @@ public class JwtTokenAuthentificationProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+        String id = Jwts.parser()
+                .setSigningKey(factory.getSecretKey())
+                .parseClaimsJws(token)
+                .getBody().get("userId", String.class);
         UserDetails user = userDetails.loadUserByUsername(email);
-        return new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
+        SecurityPrincipal principal = new SecurityPrincipal(user.getUsername(), id);
+        return new UsernamePasswordAuthenticationToken(principal, user.getPassword(), user.getAuthorities());
     }
 
 }
