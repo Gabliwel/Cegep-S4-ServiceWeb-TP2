@@ -34,6 +34,10 @@ VALUES('2', 'Bob2', 'JSP encore', 'z@a.ca', '$2a$10$qe5.ImGIOuqlJ24LSDE/2OnEiiIM
 INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
 VALUES('3', 'Bob3', 'JSP encore', 'john.smith@invalidemail.com', '$2y$12$IZoojYcMZkgcST/CUBTQaO0sfPGcBjUsq4U7U8KcKK16eAH7ZgbUC', 1, '2');
 
+--Le mot de passe est "test"
+INSERT INTO USER(ID, FIRSTNAME, LASTNAME, EMAIL, PASSWORD, PREFERRED_DIFFICULTY, ROLE_ID)
+VALUES('4', 'Bob4', 'JSP encore', 'abc@de.fg', '$2a$10$qe5.ImGIOuqlJ24LSDE/2OnEiiIM0vtvDABaalo3UTRiK3OBScrvW', 2, '2');
+
 INSERT INTO RATING (ID, COMMENT, NOTE, TRAIL, USER)
 VALUES('1', 'ark!', 1, '1', '2');
 
@@ -48,3 +52,27 @@ VALUES('2', '2');
 
 INSERT INTO USER_TRAILS_TO_TRY(USER_ID, TRAIL_ID)
 VALUES('2', '1');
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('1', 'Thor God of Thunder', 'Complete an event in raining conditions', 'thor_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('2', 'Windy Darling', 'Complete an event where the wind is at least 10km/h', 'wind_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('3', 'Frozen', 'Complete an event in a winterstorm', 'snow_icon.jpg', 0);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('4', 'The Social Network', 'Complete three events in the same week', 'social_icon.jpg', 1);
+
+INSERT INTO BADGE(ID, NAME, DESCRIPTION, ICONE, CATEGORY)
+VALUES('5', 'The Busy Weekend', 'Complete two events in a weekend', 'weekend_icon.jpg', 1);
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('2', '1');
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('2', '2');
+
+INSERT INTO USER_BADGES(USER_ID, BADGE_ID)
+VALUES('1', '4');

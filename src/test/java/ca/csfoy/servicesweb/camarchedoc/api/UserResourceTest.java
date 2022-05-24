@@ -1,6 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
 import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,8 +32,10 @@ public class UserResourceTest {
     private static final String CONTENT_TYPE = "application/json";
     
     private UserCredentialsDto credentialsDto1 = new UserCredentialsDto("Jean", "123allo");
-    private FullUserDto userDto1 = new FullUserDto("10", "Jean", "Paul", "jeanpaul@gmail2.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
-    private FullUserDto userDto2 = new FullUserDto("1", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null);
+    private FullUserDto userDto1 = 
+            new FullUserDto("10", "Jean", "Paul", "jeanpaul@gmail2.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null, null);
+    private FullUserDto userDto2 = 
+            new FullUserDto("1", "Jeassn", "Passul", "jeanpasul@gmail.com", "allo123testallo", TrailDifficulty.BEGINNER, null, null, null);
     
     @Autowired
     private MockMvc mockMvc;
@@ -46,7 +49,7 @@ public class UserResourceTest {
                 .post(PATH_TO_LOGIN)
                   .contentType("application/json")
                   .content(objectMapper.writeValueAsString(credentialsDto1)))
-                  .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                  .andExpect(MockMvcResultMatchers.status().isUnauthorized())           
                   .andReturn();     
 
         String responseAsString = result.getResponse().getContentAsString();
@@ -119,6 +122,8 @@ public class UserResourceTest {
             Assertions.assertTrue(responseAsString.contains("bonsoir2"));
     }
     
+    //NON OBLIGATOIRE APRES MODIF AVEC AUTORISATION COMPLEXE
+    /*
     @Test
     @WithMockUser(roles = "USER")
     void canModifyUserAsUser() throws Exception {        
@@ -139,6 +144,16 @@ public class UserResourceTest {
                       .content(objectMapper.writeValueAsString(userDto2)))
                       .andExpect(MockMvcResultMatchers.status().isForbidden())           
                       .andReturn();     
+    }*/
+    
+    @Test
+    void cannotModifyUserWithoutTokenId() throws Exception {        
+            MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                    .put(PATH_TO_TEST + "/" + PUT_ID)
+                      .contentType(CONTENT_TYPE)
+                      .content(objectMapper.writeValueAsString(userDto2)))
+                      .andExpect(MockMvcResultMatchers.status().isForbidden())           
+                      .andReturn();  
     }
 
 }
