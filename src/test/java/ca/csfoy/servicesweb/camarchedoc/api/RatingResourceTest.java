@@ -1,5 +1,7 @@
 package ca.csfoy.servicesweb.camarchedoc.api;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ca.csfoy.servicesweb.camarchedoc.api.rating.RatingDto;
 import ca.csfoy.servicesweb.camarchedoc.api.trail.TrailDto;
+import ca.csfoy.servicesweb.camarchedoc.api.user.UserDto;
+import ca.csfoy.servicesweb.camarchedoc.domain.trail.TrailDifficulty;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -105,20 +109,17 @@ public class RatingResourceTest {
         mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                  .contentType(CONTENT_TYPE)
-                 .content(objectMapper.writeValueAsString(new RatingDto("", null, new TrailDto("", null, null, null, null, null, null, null, null), 5.0, ""))))
+                 .content(objectMapper.writeValueAsString(new RatingDto("", null, null, 5.0, ""))))
                   .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity())           
                   .andReturn();
     }
     
-    //NON OBLIGATOIRE APRES MODIF AVEC AUTORISATION COMPLEXE
-    /*
     @Test
     void validCreateRatingEventReturn201Created() throws Exception {        
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders
                 .post(PATH_TO_TEST)
                  .contentType(CONTENT_TYPE)
-                 .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", 
-                         TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of(), Set.of()), 
+                 .content(objectMapper.writeValueAsString(new RatingDto("1", new UserDto("1", "Bob", "JSP", TrailDifficulty.NOT_RATED_YET, Set.of(), Set.of()), 
                          new TrailDto("1", "bonsoir1", null, null, null, null, null, null, null), 4.0, "WoooooooooooW"))))
                   .andExpect(MockMvcResultMatchers.status().isCreated())           
                   .andReturn();
@@ -126,5 +127,4 @@ public class RatingResourceTest {
         String responseAsString = result.getResponse().getContentAsString();
         Assertions.assertTrue(responseAsString.contains("WoooooooooooW"));
     }
-    */
 }
