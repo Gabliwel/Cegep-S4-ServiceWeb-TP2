@@ -1,5 +1,11 @@
 # Travail pratique 2
 
+note: 92%
+
+objectif: réalisation d'une API spring avec gestion de droit, validation, et test avec utilisation de mockito.
+
+le projet est itératif selon des sprints et divisé par branche
+
 Ceci est le travail pratique 2 du cours de Services Web du Cégep de Sainte-Foy.
 
 # Coéquipiers
